@@ -1,0 +1,10 @@
+<view>
+  <view class="cover">
+    <image
+      src="miniprogram\images\logo.png"
+      mode="scaleToFill"
+      class="logo"
+    />
+  </view>
+  <view class="title">Hi</view>
+</view>

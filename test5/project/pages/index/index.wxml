@@ -1,0 +1,67 @@
+<xzs-header></xzs-header>
+
+<view class="banner">
+  <swiper previous-margin="30rpx" circular="true" autoplay="true" interval="2000" indicator-dots="true" indicator-color="rgba(255, 255, 255, 0.3)" indicator-active-color="#BDA066">
+    <swiper-item>
+      <image src="/static/images/banner0.jpg" mode="" />
+    </swiper-item>
+
+    <swiper-item>
+      <image src="/static/images/banner1.jpg" mode="" />
+    </swiper-item>
+
+    <swiper-item>
+      <image src="/static/images/banner2.jpg" mode="" />
+    </swiper-item>
+
+    <swiper-item>
+      <image src="/static/images/banner3.jpg" mode="" />
+    </swiper-item>
+  </swiper>
+</view>
+
+<view class="scrollNav">
+  <scroll-view scroll-x>
+    <navigator url="" class="item" wx:for="{{navArr}}" wx:key="_id">
+      <view class="pic">
+        <image src="{{item.icon}}" mode="" />
+      </view>
+
+      <view class="text">
+        {{item.classname}}
+      </view>
+    </navigator>
+
+  </scroll-view>
+</view>
+
+<view class="about">
+  <view class="publicTitle">
+    <view class="en">introduce</view>
+    <view class="cn">茶文化馆简介</view>
+    <view class="line"></view>
+  </view>
+
+  <view class="content">
+    <view class="row">adfsafasfasf</view>
+    <view class="row">asdfasfasf</view>
+    <view class="row">aesdfsadfsafsaf</view>
+  </view>
+</view>
+
+<view class="news">
+  <view class="publicTitle">
+    <view class="en">news</view>
+    <view class="cn">新闻资讯</view>
+    <view class="line"></view>
+  </view>
+
+  <view class="content">
+    <view class="box" wx:for="{{newsArr}}" wx:key="_id">
+      <xzs-news-item item="{{item}}"></xzs-news-item>
+    </view>
+  </view>
+
+</view>
+
+<xzs-footer></xzs-footer>

@@ -1,0 +1,17 @@
+<!--components/xzs-footer/xzs-footer.wxml-->
+
+<view class="footer">
+  <view class="row">解释权归aaa公司所有</view>
+  <view class="row">Copyright ©️ {{year}} 版权所有</view>
+  <view class="row">河南省信阳市中古大道B栋108a</view>
+</view>
+
+<view class="reciption">
+  <button class="button" open-type="contact">N</button>
+  <image
+    src="/static/images/kefu.png"
+    mode="aspectFill"
+    class="pic"
+  />
+  <view class="line"></view>
+</view>

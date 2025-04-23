@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/classify/classify",
+    "pages/news/news",
+    "pages/newsDetail/newsDetail"
+  ],
+  "window": {
+    "navigationBarTitleText": "巷子深茶美文化馆",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTextStyle": "white"
+  },
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "tabBar": {
+    "color": "#aaa",
+    "selectedColor": "#181441",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "index",
+      "iconPath": "/static/images/icon_Space_Client@4x.png",
+      "selectedIconPath": "/static/images/icon_Space_Active@4x.png"
+    },{
+      "pagePath": "pages/classify/classify",
+      "text": "classify",
+      "iconPath": "/static/images/icon_Product_Client@4x.png",
+      "selectedIconPath": "/static/images/icon_Product_Active@4x.png"
+    },{
+      "pagePath": "pages/news/news",
+      "text": "news",
+      "iconPath": "/static/images/icon_ZhiLian_Sclien@4x.png",
+      "selectedIconPath": "/static/images/icon_ZhiLian_Active@4x.png"
+    }]
+  },
+  "usingComponents": {
+    "xzs-header": "/components/xzs-header/xzs-header",
+    "xzs-news-item": "/components/xzs-news-item/xzs-news-item",
+    "van-icon": "@vant/weapp/icon/index",
+    "xzs-footer": "/components/xzs-footer/xzs-footer",
+    "van-loading": "@vant/weapp/loading/index"
+  }
+}

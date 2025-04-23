@@ -1,0 +1,24 @@
+<view class="detail">
+  <view class="title">文章标题文章标题文章标题文章标题文章标题文章标题文章标题</view>
+  <view class="info">
+    <view class="left">      
+      <text>2023-02-18 23:33</text> 
+      <text>咸虾米</text>
+      <text>5982阅读</text>
+    </view>
+    <view class="right">
+      <van-icon name="share-o" size="18" />
+      <text>分享</text>
+      <button open-type="share" class="share" size="mini">
+      享
+      </button>
+    </view>
+  </view>
+  <view class="content">
+    这里是新闻详情部分
+  </view>
+  <view class="copyright">
+    <view class="top">免责声明</view>
+    <view>本文来自网络新闻创作者，不代表巷子深小程序端的观点和立场，如有侵权请联系客服进行删除。</view>
+  </view>
+</view>

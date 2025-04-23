@@ -1,0 +1,33 @@
+<!--components/xzs-news-item/xzs-news-item.wxml-->
+
+<view class="newsitem">
+  <view class="pic">
+    <image
+      src="{{item.picurl}}"
+      mode="aspectFill"
+      class="img"
+    />
+  </view>
+
+  <view class="text">
+    <view class="title">
+      {{item.title}}
+    </view>
+
+    <view class="info">
+      <view class="block">
+        <van-icon name="clock-o" size="28rpx" class="vanicon" />
+        <text>{{item.publish_date}}</text>
+      </view>
+      <view class="block">
+        <van-icon name="eye-o" size="28rpx" class="vanicon" />
+        <text>{{item.view_count}}</text>
+      </view>
+      <view class="block">
+        <van-icon name="user-o" size="28rpx" class="vanicon" />
+        <text>{{item.author}}</text>
+      </view>
+    </view>
+
+  </view>
+</view>

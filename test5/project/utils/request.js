@@ -1,10 +1,11 @@
-const baseURL = 'https://tea.qingnian8.com';
+const baseURL = 'https://tea.qingnian8.com/xzs/';
 
 export function request(params){
   
   let dataObj = params.data || {};
   let headerObj = {			
-    'content-type': 'application/json'    
+    'content-type': 'application/json',
+    "access-key": "160535"
   }
   
   return new Promise((resolve,reject)=>{

@@ -1,66 +1,92 @@
-// pages/classify/classify.js
+import { listNav, queryProduct } from "../../api/apis"
+
+let navid
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    activeNavIdx: 0,
+    navArr: [],
+    proArr: [],
+    isLoading: false,
+    doesRemain: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-
+  async onLoad(options) {
+    await this.getNavList()
+    navid = this.data.navArr[0]._id
+    this.getProductList()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
+  // 获取分类导航
+  async getNavList() {
+    await listNav().then(res => {
+      console.log(res)
 
+      this.setData({
+        navArr: res.data
+      })
+
+      this.selectComponent("#myTabs").resize()
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
+  // get products list
+  getProductList(size=0) {
 
+    if(!this.data.doesRemain) return
+
+    this.setData({
+      isLoading: true
+    })
+
+    queryProduct({
+      navid: navid,
+      size: size
+    }).then(res => {
+      console.log("res", res)
+
+      let oldArr = this.data.proArr
+      let newArr = oldArr.concat(res.data) 
+
+      this.setData({
+        proArr: newArr
+      })
+
+      if(this.data.proArr.length >= res.data.total) {
+        this.setData({
+          doesRemain: false
+        })
+      }
+    })
+
+    this.setData({
+      isLoading: false
+    })
+  },
+  navChange: function (e) {
+    // console.log("e", e)
+    let index = e.detail.index
+    navid = this.data.navArr[index]._id
+    // console.log(navid)
+    this.getProductList()
+
+    this.setData({
+      proArr: [],
+      doesRemain: true,
+      isLoading: false
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+  // 触底加载更多
   onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+    this.getProductList(this.data.proArr.length)
   }
+
 })

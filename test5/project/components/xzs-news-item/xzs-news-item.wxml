@@ -1,6 +1,4 @@
-<!--components/xzs-news-item/xzs-news-item.wxml-->
-
-<view class="newsitem">
+<navigator url="/pages/newsDetail/newsDetail?id={{item._id}}" class="newsitem">
   <view class="pic">
     <image
       src="{{item.picurl}}"
@@ -30,4 +28,4 @@
     </view>
 
   </view>
-</view>
+</navigator>

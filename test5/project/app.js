@@ -4,7 +4,17 @@ App({
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
   onLaunch: function () {
-    
+    // wx.request({
+    //   url: 'https://tea.qingnian8.com/xzs/nav/get',
+    //   method: "POST",
+    //   header: {
+    //     'content-type': 'application/json',
+    //     "access-key": "160535"
+    //   },
+    //   success: res => {
+    //     console.log("res", res)
+    //   }
+    // })
   },
 
   /**

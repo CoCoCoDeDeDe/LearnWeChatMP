@@ -34,3 +34,12 @@ export function queryProduct(data) {
     data: data
   })
 }
+
+// 获取产品 detail
+export function proDetail(data) {
+  return request({
+    url: "/product/detail",
+    method: "POST",
+    data: data
+  })
+}

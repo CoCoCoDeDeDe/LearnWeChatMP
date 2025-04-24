@@ -33,3 +33,5 @@
     <view class="noData" wx:if="{{!doesRemain}}" >没有更多数据了</view>
   </view>
 </view>
+
+<xzs-footer></xzs-footer>

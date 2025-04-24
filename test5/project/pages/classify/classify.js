@@ -19,15 +19,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   async onLoad(options) {
+    let {idx} = options;
+    console.log("idx", idx)
     await this.getNavList()
-    navid = this.data.navArr[0]._id
-    this.getProductList()
+
+    if(idx) {
+      this.navChange(idx)
+    } else {
+      navid = this.data.navArr[0]._id
+      this.getProductList()
+    }
   },
 
   // 获取分类导航
   async getNavList() {
     await listNav().then(res => {
-      console.log(res)
+      console.log("res", res)
 
       this.setData({
         navArr: res.data
@@ -40,8 +47,6 @@ Page({
   // get products list
   getProductList(size=0) {
 
-    if(!this.data.doesRemain) return
-
     this.setData({
       isLoading: true
     })
@@ -50,7 +55,8 @@ Page({
       navid: navid,
       size: size
     }).then(res => {
-      console.log("res", res)
+
+      console.log("queryProductres", res)
 
       let oldArr = this.data.proArr
       let newArr = oldArr.concat(res.data) 
@@ -59,7 +65,7 @@ Page({
         proArr: newArr
       })
 
-      if(this.data.proArr.length >= res.data.total) {
+      if(res.data.length == 0) {
         this.setData({
           doesRemain: false
         })
@@ -72,7 +78,7 @@ Page({
   },
   navChange: function (e) {
     // console.log("e", e)
-    let index = e.detail.index
+    let index = e?.detail?.index ?? e
     navid = this.data.navArr[index]._id
     // console.log(navid)
     this.getProductList()
@@ -80,12 +86,16 @@ Page({
     this.setData({
       proArr: [],
       doesRemain: true,
-      isLoading: false
+      isLoading: false,
+      activeNavIdx: Number(index)
     })
   },
 
   // 触底加载更多
   onReachBottom() {
+
+    if(!this.data.doesRemain) return
+
     this.getProductList(this.data.proArr.length)
   }
 

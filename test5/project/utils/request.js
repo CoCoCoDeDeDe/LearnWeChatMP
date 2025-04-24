@@ -5,7 +5,7 @@ export function request(params){
   let dataObj = params.data || {};
   let headerObj = {			
     'content-type': 'application/json',
-    "access-key": "160535"
+    // "access-key": "160535"
   }
   
   return new Promise((resolve,reject)=>{

@@ -1,4 +1,4 @@
-<view class="product">
+<view class="product" bind:tap="clickPro" data-_id="{{item._id}}" >
   <view class="pic">
     <image class="image" mode="widthFix" src="{{item.picpath}}"></image>
   </view>

@@ -3,11 +3,18 @@
   "projectname": "project",
   "setting": {
     "compileHotReLoad": true,
-    "urlCheck": false
+    "urlCheck": true
   },
   "condition": {
     "miniprogram": {
       "list": [
+        {
+          "name": "pages/proDetail/proDetail",
+          "pathName": "pages/proDetail/proDetail",
+          "query": "id=28ee4e3e6050598b0af006d25246ec3f",
+          "launchMode": "default",
+          "scene": null
+        },
         {
           "name": "pages/newsDetail/newsDetail",
           "pathName": "pages/newsDetail/newsDetail",

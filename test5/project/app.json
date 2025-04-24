@@ -3,11 +3,12 @@
     "pages/index/index",
     "pages/classify/classify",
     "pages/news/news",
-    "pages/newsDetail/newsDetail"
+    "pages/newsDetail/newsDetail",
+    "pages/proDetail/proDetail"
   ],
   "window": {
     "navigationBarTitleText": "巷子深茶美文化馆",
-    "navigationBarBackgroundColor": "#000",
+    "navigationBarBackgroundColor": "#BDA066",
     "navigationBarTextStyle": "white"
   },
   "componentFramework": "glass-easel",

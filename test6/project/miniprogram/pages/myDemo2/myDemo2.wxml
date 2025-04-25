@@ -1,0 +1,70 @@
+<button type="primary" bind:tap="getData" >get data</button>
+
+<view style="display: flex; flex-wrap: wrap;">
+  <block wx:for="{{dataObj}}" wx:key="_id" >
+    <view style="width: 96%; border: 1px solid #666; font-size:26rpx; margin:0 auto; padding:10rpx 20rpx; box-sizing: border-box;">
+      <view>_id:{{item._id}}</view>
+      <view>plog{{index}}: </view>
+      <view wx:for="{{item.author}}" wx:for-item="item2" wx:for-index="idx2" wx:key="id">author{{idx2}}: {{item2.name}}</view>
+      <view>content: {{item.content}}</view>
+      <view>title: {{item.title}}</view>
+      <view wx:for="{{item.tags}}" wx:for-item="item3" wx:for-index="idx3" wx:key="*this" >tag{{idx3}}: {{item3}}</view>
+    </view>
+  </block>
+</view>
+
+
+--------------------------------------------------------
+
+<button type="primary" bind:tap="addData" >add data</button>
+
+--------------------------------------------------------
+
+<form bindsubmit="onSubmit">
+  <input type="text" name="title" placeholder="type in title" />
+  <input type="text" name="ip_province" placeholder="type in ip_province" />
+  <textarea name="content" placeholder="type in content"></textarea>
+  <button type="primary" form-type="submit">submit</button>
+  <button form-type="reset">reset</button>
+</form>
+
+--------------------------------------------------------
+update
+
+<form bindsubmit="onUpdate">
+  <input type="text" name="_id" placeholder="type in _id" />
+  <input type="text" name="title" placeholder="type in title" />
+  <input type="text" name="ip_province" placeholder="type in ip_province" />
+  <textarea name="content" placeholder="type in content"></textarea>
+  <button type="primary" form-type="submit">Update</button>
+  <button form-type="reset">reset</button>
+</form>
+
+
+--------------------------------------------------------
+delete
+
+<form bindsubmit="onDelete">
+  <input type="text" name="_id" placeholder="type in _id" />
+  <button type="warn" form-type="submit">Delete</button>
+  <button form-type="reset">reset</button>
+</form>
+
+--------------------------------------------------------
+count num of matched records
+
+<form bindsubmit="onCount">
+  <input type="text" name="author_name" placeholder="type in author name" />
+  <view style="width: 90%; height: 40rpx; text-align: center; margin: 1rpx auto; background: #f9f9f9; " >{{count}}</view>
+  <button type="primary" form-type="submit">Count</button>
+  <button form-type="reset">reset</button>
+</form>
+
+
+
+
+<!-- flex布局中，flex父容器的justify-content属性用于设置子容器在主轴的布局方式，align-items属性用于设置子容器在交叉轴的布局方式
+justify-items是Grid布局中父容器的属性 -->
+<view style="width: 100%; height: 300rpx; display: flex; justify-content: center; align-items: center;" >
+  bottom
+</view>

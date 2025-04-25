@@ -1,0 +1,10 @@
+button {
+  margin: 30rpx 0rpx;
+}
+
+input, textarea {
+  width: 90%;
+  border: 1px solid #666;
+  margin: 1rpx auto;
+  background: #f9f9f9;
+}

@@ -1,0 +1,19 @@
+<!--pages/demo1/demo1.wxml-->
+<button type="primary" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar" style="padding: 6rpx; width: 440rpx; border-radius: 30rpx; " >Set Avatar</button>
+
+<image src="{{avatarUrl}}" mode=""/>
+
+<input type="nickname" bindconfirm="onNicknameConfirm" style="border:1px solid #666; width:92%; margin:0 auto;" />
+
+
+<button wx:if="{{!isLogin}}" type="primary" bind:tap="onLogIn" style="padding: 6rpx; width: 440rpx; border-radius: 30rpx;">LogIn</button>
+
+<button wx:if="{{isLogin}}" type="warn" bind:tap="onLogOut" style="padding: 6rpx; width: 440rpx; border-radius: 30rpx;">Log Out</button>
+
+<!-- 弹窗 -->
+<!-- <view class="pop_rooter">
+  <view class="pop_container">
+    <view>login pop</view>
+    <button>log in</button>
+  </view>
+</view> -->

@@ -1,0 +1,71 @@
+<view wx:if="{{isLogin}}" class="container">
+  <!-- <view class="mask"></view> -->
+  <view class="board">
+    <block wx:if="{{state == state_enum.GetOpenId}}">
+      <view class="titleBox">
+        <text class="title">请登录后使用</text>
+      </view>
+      <view class="avatarBox">
+        <image src="{{userPublicInfo.avatarUrl}}" mode="" class="avatar"/>
+      </view>
+
+      <view class="tip">一键授权代表您同意本平台的使用协议</view>
+
+        <view class="allBtnBox">
+          <view class="btnBox">
+            <view class="confirmBtn" bindtap="onGetOpenId">一键授权</view>
+          </view>
+        </view>
+      </block>
+      
+    <block wx:if="{{state == state_enum.Register}}">
+      <view class="titleBox">
+        <text class="title">您可选择注册账号</text>
+      </view>
+
+      <view class="avatarBox">
+        <image src="{{userPublicInfo.avatarUrl}}" mode="" class="avatar"/>
+      </view>
+
+      <view class="iptBox">
+        <input type="nickname" class="ipt"/>
+      </view>
+
+      <view class="tip">注册账号代表您同意本平台的使用协议</view>
+
+        <view class="allBtnBox">
+          <view class="btnBox">
+            <view class="confirmBtn" bindtap="onConfirm">确 认</view>
+          </view>
+          <view class="btnBoxGap"></view>
+          <view class="btnBox">
+            <view class="CancelBtn" bindtap="onCancel">取 消</view>
+          </view>
+        </view>
+    </block>
+    <block wx:if="{{state == state_enum.Confirm}}">
+      <view class="titleBox">
+        <text class="title">请确认您的账号</text>
+      </view>
+
+      <view class="avatarBox">
+        <image src="{{userPublicInfo.avatarUrl}}" mode="" class="avatar"/>
+      </view>
+
+      <view class="nickname">{{userPublicInfo.nickname}}</view>
+      
+        <view class="allBtnBox">
+          <view class="btnBox">
+            <view class="confirmBtn" bindtap="onConfirm">确 认</view>
+          </view>
+          <view class="btnBoxGap"></view>
+          <view class="btnBox">
+            <view class="CancelBtn" bindtap="onCancel">取 消</view>
+          </view>
+        </view>
+    </block>
+
+
+
+  </view>
+</view>

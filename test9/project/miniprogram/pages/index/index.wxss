@@ -1,0 +1,136 @@
+.contentContainer {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  color: #181441;
+}
+
+/* 场所 天气 */
+.regionBoxAndWeatherBox_Box {
+  width: 100%;
+
+  padding: 0 20rpx;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.regionBox {
+  /* width: 400rpx; */
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+}
+.regionBtn {
+}
+.regionText {
+  display: flexbox;
+  font-size: 40rpx;
+  /* font-weight: 700; */
+}
+.regionArrowImg {
+  display: flexbox;
+  height: 30rpx;
+  margin-left: 10rpx;
+}
+.regionArrowImg_inactive {
+  transform: rotate(0deg);
+  animation: rotate2 0.5s ease-in-out 0s 1;
+}
+@keyframes rotate2 {
+  0% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.regionArrowImg_active {
+  transform: rotate(-90deg);
+
+  animation: rotate1 0.5s ease-in-out 0s 1;
+}
+@keyframes rotate1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-90deg);
+  }
+}
+.weatherBox {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+.weatherTextBox {
+  display: flexbox;
+  padding-bottom: 4rpx;
+}
+.weatherText {
+  font-size: 28rpx;
+}
+.weatherImgBox {
+  height: 60rpx;
+  margin-left: 14rpx;
+  display: flexbox;
+}
+.weatherImg {
+  height: 60rpx;
+  width: 60rpx;
+  object-fit: cover;
+}
+
+/* Zone、通知 */
+.zoneBoxAndInformBtnBox_Box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20rpx;
+}
+.zoneBox {
+  display: flex;
+  align-items: center;
+}
+.zoneTextBox {
+  padding: 0 6rpx;
+}
+.zoneTextBox:first-child {
+  padding-left: 0;
+}
+.zoneTextBox:last-child {
+  padding-right: 0;
+}
+.zoneText {
+  font-size: 32rpx;
+}
+.gapLineBox {
+  display: flex;
+  align-items: center;
+}
+.gapLine {
+  height: 40rpx;
+
+}
+.informImgBox {
+  display: flex;
+  align-items: center;
+}
+.informImg {
+  height: 46rpx;
+}
+
+/* 背景 */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+
+  background: linear-gradient(180deg, #b7e1ff 35%, #edf7ff 100%);
+
+  background-attachment: fixed;
+  background-clip: content-box;
+}

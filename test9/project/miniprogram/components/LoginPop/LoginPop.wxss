@@ -17,6 +17,20 @@
 
   background-color: rgba(0, 0, 0, 0.2);
   color: #181441;
+
+  animation: emerge_1 0.4s ease-in-out 0s 1;
+}
+  /* container_emerge: name; 1s: duration; ease-in-out: timing-function; 0s: delay; 1: iteration-count; forwards: fill-mode 
+  animation: container_before_emerge 1s ease-in-out 0s 1 forwards; */
+@keyframes emerge_1 {
+  0% {
+    background-color: rgba(0, 0, 0, 0);
+    color: #18144100;
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #181441;
+  }
 }
 .board {
   background-color: rgb(255, 255, 255);
@@ -32,6 +46,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
+  animation: emerge_2 1s ease-in-out 0s 1;
+}
+@keyframes emerge_2 {
+  0% {
+    background-color: rgba(255, 255, 255, 0);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 255);
+  }
 }
 .titleBox {
   padding: 34rpx 0 0;
@@ -47,6 +71,17 @@
   height: 140rpx;
   border-radius: 70rpx;
   /* background-color: green; */
+  opacity: 1;
+  
+  animation: emerge_5 1s ease-in-out 0s 1;
+}
+@keyframes emerge_5 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .nicknameIptBox {
   padding-bottom: 28rpx;
@@ -79,6 +114,16 @@
   font-size: 24rpx;
   padding-bottom: 26rpx;
   color: #888;
+  
+  animation: emerge_3 1s ease-in-out 0s 1;
+}
+@keyframes emerge_3 {
+  0% {
+    color: rgba(136, 136, 136, 0);
+  }
+  100% {
+    color: #888;
+  }
 }
 .btnBoxGap {
   width: 50rpx;
@@ -102,6 +147,18 @@
   /* border: 2px solid rgba(0, 0, 0, 0.089); */
   /* box-shadow: h v blur spread color inset */
   box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.1) ;
+  
+  animation: emerge_4 1s ease-in-out 0s 1;
+}
+@keyframes emerge_4 {
+  0% {
+    background: #4cd15100;
+    box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0) ;
+  }
+  100% {
+    background: #4cd151;
+    box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.1) ;
+  }
 }
 .confirmBtn:active {
   background: #6aec6e;
@@ -127,13 +184,3 @@
 }
 
 
-  /* container_emerge: name; 1s: duration; ease-in-out: timing-function; 0s: delay; 1: iteration-count; forwards: fill-mode */
-  /* animation: container_before_emerge 1s ease-in-out 0s 1 forwards; */
-@keyframes container_before_emerge {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.2;
-  }
-}

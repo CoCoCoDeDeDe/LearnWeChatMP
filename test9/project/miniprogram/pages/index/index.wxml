@@ -1,2 +1,38 @@
-index
 <LoginPop></LoginPop>
+
+<view class="contentContainer">
+  <view class="regionBoxAndWeatherBox_Box">
+    <view class="regionBox">
+      <view class="regionBtn" bind:tap="onUnfoldRegionPop">
+        <text class="regionText">虚拟富康路小区</text>
+        <image src="/images/icons/simpleArrowIcon_darkBlue_Left@2x.png" mode="heightFix" class="regionArrowImg {{isRegionPopUnfolded?'regionArrowImg_active':'regionArrowImg_inactive'}}"/>
+      </view>
+    </view>
+    <view class="weatherBox">
+      <view class="weatherTextBox">
+        <text class="weatherText">西青区 25℃</text>
+      </view>
+      <view class="weatherImgBox">
+        <image src="/images/icons/weatherIcon_cloudy@1x.png" mode="" class="weatherImg"/>
+      </view>
+    </view>
+  </view>
+  <view class="zoneBoxAndInformBtnBox_Box">
+    <view class="zoneBox">
+      <block wx:for="{{5}}" wx:key="*this">
+        <view class="zoneTextBox">
+          <text class="zoneText">功能区</text>
+        </view>
+      </block>
+    </view>
+    <view class="gapLineBox">
+      <image src="/images/icons/gapLine_darkBlue@2x.png" mode="heightFix" class="gapLine"/>
+    </view>
+    <view class="informImgBox">
+      <image src="/images/icons/ringIcon_line_darkBlue@2x.png" mode="heightFix" class="informImg"/>
+    </view>
+  </view>
+
+</view>
+
+<view class="background"></view>

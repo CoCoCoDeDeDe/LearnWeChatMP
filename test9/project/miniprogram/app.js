@@ -19,7 +19,7 @@ App({
   // 重置 app
   reset(e) {
     this.globalData = {
-      isLogin: false,  // 每次launch小程序时置登录标志false
+      isLogin: true,  // 每次launch小程序时置登录标志false  // Debug
       userPublicInfo: {
         avatarUrl: '/images/icons/defaultAvatar.png',
         city: 'default city',

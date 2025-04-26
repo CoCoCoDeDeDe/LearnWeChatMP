@@ -1,18 +1,62 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/smartLink/index",
+    "pages/product/index",
+    "pages/mine/index"
   ],
+  "usingComponents": {
+    "LoginPop": "/components/LoginPop/LoginPop"
+  },
   "window": {
+    "navigationBarBackgroundColor": "#b7e1ff",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "CoCresco Linking",
+    "navigationStyle": "default",
+    "homeButton": true,
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "gloval title",
-    "navigationBarTextStyle": "black"
+    "enablePullDownRefresh": false,
+    "onReachBottomDistance": 20,
+    "pageOrientation": "portrait",
+    "restartStrategy": "homePage",
+    "visualEffectInBackground": "none"
+  },
+  "tabBar": {
+    "color": "#767676",
+    "selectedColor": "#181441",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "position": "bottom",
+    "custom": false,
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "场所",
+        "iconPath": "/images/icons/tabBar_site_inactive.png",
+        "selectedIconPath": "/images/icons/tabBar_site_active.png"
+      },
+      {
+        "pagePath": "pages/smartLink/index",
+        "text": "智联",
+        "iconPath": "/images/icons/tabBar_smartLink_inactive.png",
+        "selectedIconPath": "/images/icons/tabBar_smartLink_active.png"
+      },
+      {
+        "pagePath": "pages/product/index",
+        "text": "产品",
+        "iconPath": "/images/icons/tabBar_product_inactive.png",
+        "selectedIconPath": "/images/icons/tabBar_product_active.png"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "我的",
+        "iconPath": "/images/icons/tabBar_mine_inactive.png",
+        "selectedIconPath": "/images/icons/tabBar_mine_active.png"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2",
-  "lazyCodeLoading": "requiredComponents",
-  "usingComponents": {
-    "LoginPop": "/components/LoginPop/LoginPop"
-  }
+  "lazyCodeLoading": "requiredComponents"
 }

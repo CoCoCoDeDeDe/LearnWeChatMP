@@ -4,7 +4,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    isRegionPopUnfolded: false
   },
 
   /**
@@ -12,6 +12,13 @@ Page({
    */
   onLoad: function (options) {
     
+  },
+
+  // onLayoutRegionCard
+  onUnfoldRegionPop(e) {
+    this.setData({
+      isRegionPopUnfolded: !this.data.isRegionPopUnfolded
+    })
   }
   
 })

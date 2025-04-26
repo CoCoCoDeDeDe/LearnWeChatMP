@@ -48,15 +48,25 @@
   border-radius: 70rpx;
   /* background-color: green; */
 }
+.nicknameIptBox {
+  padding-bottom: 28rpx;
+}
+.nicknameIpt {
+  width: 400rpx;
+  height: 60rpx;
+  border-radius: 30rpx;
+  background-color: #eee;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.05) inset;
+
+  text-align: center;
+
+  font-size: 32rpx;
+  color: #181441;
+}
 .tip {
   font-size: 24rpx;
   padding-bottom: 26rpx;
   color: #888;
-}
-.nickname {
-  font-size: 32rpx;
-  padding-bottom: 28rpx;
-  color: #181441;
 }
 .allBtnBox {
   display: flex;

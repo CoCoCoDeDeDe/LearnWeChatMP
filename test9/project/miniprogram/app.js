@@ -14,7 +14,7 @@ App({
     }
 
     this.globalData = {
-      isLogin: false
+      isLogin: false  // 每次launch小程序时置登录标志false
     };
   },
 });

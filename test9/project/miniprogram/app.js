@@ -13,8 +13,34 @@ App({
       });
     }
 
-    this.globalData = {
-      isLogin: false  // 每次launch小程序时置登录标志false
-    };
+    this.reset()
   },
+
+  // 重置 app
+  reset(e) {
+    this.globalData = {
+      isLogin: false,  // 每次launch小程序时置登录标志false
+      userPublicInfo: {
+        avatarUrl: '/images/icons/defaultAvatar.png',
+        city: 'default city',
+        country: 'default country',
+        gender: 0,
+        language: 'default language',
+        nickname: null
+      }
+    }
+  },
+
+  // 重置全局用户信息
+  resetUserPublicInfo(e) {
+    this.globalData.userPublicInfo = {
+      avatarUrl: '/images/icons/defaultAvatar.png',
+      city: 'default city',
+      country: 'default country',
+      gender: 0,
+      language: 'default language',
+      nickname: null
+    }
+  }
+
 });

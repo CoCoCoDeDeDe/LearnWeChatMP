@@ -63,15 +63,22 @@
   font-size: 32rpx;
   color: #181441;
 }
-.tip {
-  font-size: 24rpx;
-  padding-bottom: 26rpx;
-  color: #888;
+.nicknameBox {
+  padding-bottom: 20rpx;
+}
+.nickname {
+  text-align: center;
+  font-size: 32rpx;
+  color: #181441;
 }
 .allBtnBox {
   display: flex;
   flex-direction: row;
-  
+}
+.tip {
+  font-size: 24rpx;
+  padding-bottom: 26rpx;
+  color: #888;
 }
 .btnBoxGap {
   width: 50rpx;

@@ -22,12 +22,12 @@
         <text class="title">您可选择注册账号</text>
       </view>
 
-      <view class="avatarBox">
+      <view class="avatarBox" bind:tap="onGetUserWeChatAvatar">
         <image src="{{userPublicInfo.avatarUrl}}" mode="" class="avatar"/>
       </view>
 
       <view class="nicknameIptBox">
-        <input type="nickname" class="nicknameIpt"/>
+        <input type="nickname" class="nicknameIpt" placeholder="请输入昵称" model:value="{{nicknameIpt_value}}" bindinput="onnicknameIpt_bindinput" />
       </view>
 
       <view class="tip">注册账号代表您同意本平台的使用协议</view>
@@ -51,17 +51,19 @@
         <image src="{{userPublicInfo.avatarUrl}}" mode="" class="avatar"/>
       </view>
 
-      <view class="nickname">{{userPublicInfo.nickname}}</view>
+      <view class="nicknameBox">
+        <text class="nickname">{{userPublicInfo.nickname}}</text>
+      </view>
       
-        <view class="allBtnBox">
-          <view class="btnBox">
-            <view class="confirmBtn" bindtap="onConfirm">确 认</view>
-          </view>
-          <view class="btnBoxGap"></view>
-          <view class="btnBox">
-            <view class="CancelBtn" bindtap="onCancel">取 消</view>
-          </view>
+      <view class="allBtnBox">
+        <view class="btnBox">
+          <view class="confirmBtn" bindtap="onConfirm">确 认</view>
         </view>
+        <view class="btnBoxGap"></view>
+        <view class="btnBox">
+          <view class="CancelBtn" bindtap="onCancel">取 消</view>
+        </view>
+      </view>
     </block>
   </view>
 </view>

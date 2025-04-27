@@ -1,1 +1,78 @@
-/* pages/product/index.wxss */
+.page{
+  width: 100vw;
+  min-height: 100vh;
+  background: #ebf6ff;
+
+}
+
+/* myDevice */
+.myDeviceArea{
+  
+}
+
+/* myDevice topBar */
+.myDeviceTopBarBox{
+  padding: 0 18rpx 0 40rpx;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  color: #181441;
+}
+.myDeviceTopBarTitlebox{
+  display: flex;
+}
+.myDeviceTopBarTitle{
+  font-size: 43rpx;
+  letter-spacing: 0.2em;
+}
+.addDeviceBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 6rpx 16rpx 6rpx 22rpx;
+  border-radius: 1000rpx;
+  background: #fffc;
+  backdrop-filter: blur(10px);
+  box-shadow: 1px 1px 4px 2px #0000000c;
+}
+.addDeviceTextBox{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.addDeviceText{
+  font-size: 30rpx;
+  color: #181441;
+}
+.addDeviceIconBox{
+  display: flex;
+}
+.addDeviceIcon{
+  height: 54rpx;
+}
+
+/* myDevice showMore */
+.showMoreBtnBox{
+width: 100%;
+padding: 0 200rpx;
+}
+.showMoreBtn{
+  padding: 20rpx 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.showMoreBtnText{
+  display: flex;
+  font-size: 30rpx;
+  color: #181441;
+}
+.showMoreBtnImg{
+  padding-top: 4rpx;
+  display: flex;
+  height: 28rpx;
+}

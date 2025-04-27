@@ -2,6 +2,6 @@
   "usingComponents": {
     "navigatorCardsCardBox": "/components/navigatorCardsCardBox/index"
   },
-  "navigationBarBackgroundColor": "#fff",
+  "navigationBarBackgroundColor": "#f3f7fa",
   "navigationBarTextStyle": "black"
 }

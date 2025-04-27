@@ -1,12 +1,44 @@
+/* 背景 */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+
+  background: linear-gradient(180deg, #b7e1ff 35%, #edf7ff 100%);
+
+  background-attachment: fixed;
+  background-clip: content-box;
+}
+
+/* 可以控制的主盒子 */
 .contentContainer {
+  font-family: 'SourceHanSansCN-Regular', sans-serif;
+
   position: relative;
   z-index: 1;
   min-height: 100vh;
   color: #181441;
 }
 
+/* 顶部我的导航栏 */
+.topBarBox {
+  z-index: 20;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, #b7e1ffff 85%, #b7e1ff00);
+  /* background: rgba(255, 255, 255, 0.2); */
+  /* backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); */
+}
+
 /* 场所 天气 */
 .regionBoxAndWeatherBox_Box {
+
   width: 100%;
 
   padding: 0 20rpx;
@@ -15,24 +47,29 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
 }
 .regionBox {
-  /* width: 400rpx; */
   display: flex;
   flex-direction: row;
-  /* align-items: center; */
+  align-items: center;
 }
-.regionBtn {
+.regionTextBox {
+  /* scroll-view */
 }
 .regionText {
-  display: flexbox;
-  font-size: 40rpx;
-  /* font-weight: 700; */
+  display: inline-block;
+  max-width: 350rpx;
+
+  white-space: nowrap;
+  font-size: 42rpx;
+  color: #181441;
+}
+.regionArrowImgBox {
+  margin-left: 10rpx;
 }
 .regionArrowImg {
-  display: flexbox;
   height: 30rpx;
-  margin-left: 10rpx;
 }
 .regionArrowImg_inactive {
   transform: rotate(0deg);
@@ -90,11 +127,15 @@
   padding: 0 20rpx;
 }
 .zoneBox {
-  display: flex;
-  align-items: center;
+  width: 90%;
+  white-space: nowrap;
 }
 .zoneTextBox {
-  padding: 0 6rpx;
+  display: inline-block; 
+  width: fit-content;
+  padding: 12rpx 16rpx;
+  padding-top: 20rpx;
+  padding-bottom: 10rpx;
 }
 .zoneTextBox:first-child {
   padding-left: 0;
@@ -105,32 +146,40 @@
 .zoneText {
   font-size: 32rpx;
 }
-.gapLineBox {
-  display: flex;
-  align-items: center;
-}
-.gapLine {
-  height: 40rpx;
 
-}
 .informImgBox {
+  flex: 1;
   display: flex;
+  justify-content: flex-end;
   align-items: center;
+  padding-top: 10rpx;
 }
 .informImg {
-  height: 46rpx;
+  height: 44rpx;
 }
 
-/* 背景 */
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
+.contentSwiper {
+  z-index: 10;
+  width: 100%;
+  min-height: 89vh;
+  
+  /* height: fit-content; */
+}
+.contentSwiper_item {
+  /* swiper-item 宽高自动设置为100% */
   width: 100vw;
-  min-height: 100vh;
+  /* padding: 0 20rpx 0; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background: rgb(231, 219, 219);
+}
 
-  background: linear-gradient(180deg, #b7e1ff 35%, #edf7ff 100%);
-
-  background-attachment: fixed;
-  background-clip: content-box;
+/* 内容 */
+.contentBox {
+  width: 100%;
+  padding: 130rpx 14rpx 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }

@@ -1,1 +1,61 @@
-/* pages/mine/index.wxss */
+.page {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 20rpx;
+
+  background: #fafafa;
+}
+
+.accountCardBox {
+  padding: 30rpx 30rpx 30rpx;
+}
+.accountBoard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  padding-left: 50rpx;
+  padding-right: 40rpx;
+
+  border-radius: 40rpx;
+  background: #fefefe;
+  box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.05);
+}
+.accountTextBox {
+  display: flexbox;
+
+  padding-top: 26rpx;
+}
+.usernameBox {
+  padding-bottom: 16rpx;
+}
+.usernameText {
+  display: inline-block;
+  font-size: 40rpx;
+  color: #181441;
+}
+.arrowImg {
+  display: inline-block;
+  width: 26rpx;
+  height: 26rpx;
+  margin-left: 10rpx;
+}
+.accountNumberBox {
+
+}
+.accountNumber {
+  display: inline-block;
+  font-size: 32rpx;
+  color: #999;
+}
+.accountAvatarImgBox {
+  display: flexbox;
+
+}
+.accountAvatarImg {
+  width: 170rpx;
+  height: 170rpx;
+}
+

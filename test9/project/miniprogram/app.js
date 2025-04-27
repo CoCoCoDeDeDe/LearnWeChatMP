@@ -13,6 +13,20 @@ App({
       });
     }
 
+    wx.loadFontFace({
+      family: 'webfont',
+      source: 'url("//at.alicdn.com/t/webfont_1f7b3qbimiv.eot")',
+      success: function (res) {
+          console.log(res.status) //  loaded
+      },
+      fail: function (res) {
+          console.log(res.status) //  error
+      },
+      complete: function (res) {
+          console.log(res.status);
+      }
+  });
+
     this.reset()
   },
 
@@ -21,12 +35,13 @@ App({
     this.globalData = {
       isLogin: true,  // 每次launch小程序时置登录标志false  // Debug
       userPublicInfo: {
-        avatarUrl: '/images/icons/defaultAvatar.png',
+        avatarUrl: '/static/images/icons/defaultAvatar.png',
         city: 'default city',
         country: 'default country',
         gender: 0,
         language: 'default language',
-        nickname: null
+        nickname: "请登录",
+        accountNumber: null
       }
     }
   },
@@ -34,7 +49,7 @@ App({
   // 重置全局用户信息
   resetUserPublicInfo(e) {
     this.globalData.userPublicInfo = {
-      avatarUrl: '/images/icons/defaultAvatar.png',
+      avatarUrl: '/static/images/icons/defaultAvatar.png',
       city: 'default city',
       country: 'default country',
       gender: 0,

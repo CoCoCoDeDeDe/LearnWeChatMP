@@ -5,9 +5,7 @@
     "pages/product/index",
     "pages/mine/index"
   ],
-  "usingComponents": {
-    "LoginPop": "/components/LoginPop/LoginPop"
-  },
+  "usingComponents": {},
   "window": {
     "navigationBarBackgroundColor": "#b7e1ff",
     "navigationBarTextStyle": "black",

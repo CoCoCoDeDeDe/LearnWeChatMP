@@ -1,28 +1,30 @@
 <view class="cardBox">
   <view class="board">
-    <view class="columnPreviewImg">
-      <image src="{{deviceProfile.previewImgUrl}}" mode="heightFix" class="previewImg"/>
-    </view>
-    <view class="columnTextInfo">
-      <view class="rowNickName">
-        <text class="nickname">{{deviceProfile.nickname}}</text>
+
+    <view class="column_PreviewImgAndTextInfo" bind:tap="onToDeviceDetail">
+      <view class="columnPreviewImg">
+        <image src="{{deviceProfile.previewImgUrl}}" mode="heightFix" class="previewImg"/>
       </view>
-      <view class="rowPosition">
-        <text class="position">
-          {{deviceProfile.atRegionName}} | {{deviceProfile.atZoneName}}
-        </text>
+
+      <view class="columnTextInfo">
+        <view class="rowNickName">
+          <text class="nickname">{{deviceProfile.nickname}}</text>
+        </view>
+        <view class="rowPosition">
+          <text class="position">
+            {{deviceProfile.atRegionName}} | {{deviceProfile.atZoneName}}
+          </text>
+        </view>
       </view>
     </view>
+
     <view class="columnBtns">
-      <view class="columnDeviceDetailBtn">
-        <image src="/static/images/icons/icon_deviceDetail_line_dekBlue@2x.png" mode="heightFix" class="deviceDetailBtn" bind:tap="onToDeviceDetail"/>
-      </view>
-      <view class="columnEditDeviceBtn">
-        <image src="/static/images/icons/icon_edit_line_darkBlue@2x.png" mode="heightFix" class="editDeviceBtn" bind:tap="onToEditDevice"/>
-      </view>
-      <view class="columnDeleteDeviceBtn">
-        <image src="/static/images/icons/icon_delete_line_darkBlue@2x.png" mode="heightFix" class="deleteDeviceBtn" bind:tap="onToDeleteDevice"/>
-      </view>
+      <block wx:for="{{columnBtnsArr}}" wx:key="bindtap">
+        <view class="columnBtn" bind:tap="{{item.bindtap}}">
+          <image src="{{item.imageSrc}}" mode="heightFix" class="btnIcon"/>
+        </view>
+      </block>
     </view>
+
   </view>
 </view>

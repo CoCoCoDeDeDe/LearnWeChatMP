@@ -19,8 +19,8 @@
     </view>
 
     <view class="myDevicesList">
-      <block wx:for="{{[1]}}" wx:key="index">
-        <deviceCard></deviceCard>
+      <block wx:for="{{deviceProfileList}}" wx:key="id">
+        <deviceCard deviceProfile="{{item}}"></deviceCard>
       </block>
     </view>
     
@@ -34,7 +34,57 @@
         <image src="/static/images/icons/simpleArrowIcon_darkBlue_Left@2x.png" mode="heightFix" class="showMoreBtnImg"/>
       </view>
     </view>
+    
   </view>
 
+  <view class="shoppingArea">
+    
+    <view class="shoppingMainSwiperArea">
+      <swiper class="shoppingMainSwiper">
+        <block wx:for="{{[1]}}" wx:key="index">
+
+          <view class="swiper-item">
+            
+          </view>
+
+        </block>
+      </swiper>
+    </view>
+
+    <view class="commodityCardsArea">
+      <block wx:for="{{commodityCardProfileList}}" wx:key="id" wx:for-item="item_profile">
+        
+        <view class="commodityCardArea">
+          <view class="commodityCardBoard" bind:tap="onToCommodityDetailPage" data-commodityProfile="{{item_profile}}">
+
+            <view class="commodityCardPreviewImgBox">
+              <image src="{{item_profile.previewImgUrl}}" mode="widthFix" class="commodityCardPreviewImg"/>
+            </view>
+
+            <view class="commodityCardTextBox">
+              <view class="commodityCardTitle">
+                {{item_profile.title}}
+              </view>
+              <scroll-view scroll-x="{{true}}" enable-flex show-scrollbar="{{false}}" enhanced="{{true}}" class="commodityCardPromotionsBox">
+                <block wx:for="{{item_profile.promotionList}}" wx:key="id" wx:for-item="item_promotion">
+                  <view class="commodityCardPromotionBox">
+                    <view class="commodityCardPromotionText">
+                      {{item_promotion.title_short}}
+                    </view>
+                  </view>
+                </block>
+              </scroll-view>
+              <view class="commodityCardPrice">
+                ¥ {{item_profile.price}}
+              </view>
+            </view>
+
+          </view>
+        </view>
+
+      </block>
+    </view>
+
+  </view>
 
 </view>

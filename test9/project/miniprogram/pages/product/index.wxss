@@ -7,7 +7,8 @@
 
 /* myDevice */
 .myDeviceArea{
-  
+  padding: 0 0 10rpx 0;
+  /* backdrop-filter: blur(10px); */
 }
 
 /* myDevice topBar */
@@ -34,7 +35,7 @@
   align-items: center;
   padding: 6rpx 16rpx 6rpx 22rpx;
   border-radius: 1000rpx;
-  background: #fffc;
+  background: #fff;
   backdrop-filter: blur(10px);
   box-shadow: 1px 1px 4px 2px #0000000c;
 }
@@ -75,4 +76,95 @@ padding: 0 200rpx;
   padding-top: 4rpx;
   display: flex;
   height: 28rpx;
+}
+
+
+
+/* 购物区 */
+
+
+
+/* 商品卡片 */
+.commodityCardsArea{
+  padding: 10rpx 10rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-end;
+  background-color: #f6f6f6;
+}
+
+.commodityCardArea{
+  padding: 10rpx;
+}
+.commodityCardBoard{
+  width: fit-content;
+
+  background-color: #fefefe;
+  border-radius: 20rpx;
+  /* box-shadow: 1px 1px 4px 2px #0000000a; */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.commodityCardPreviewImgBox{
+  /* padding: 14rpx 14rpx 0rpx; */
+}
+.commodityCardPreviewImg{
+  width: 340rpx;
+  border-radius: 20rpx 20rpx 0 0;
+}
+
+.commodityCardTextBox{
+  max-width: 340rpx;
+  padding: 0rpx 14rpx 20rpx;
+}
+.commodityCardTitle{
+  /* TODO 学习 -webkit-box */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 30rpx;
+  color: var(--main-text-color);
+}
+.commodityCardPromotionsBox{
+  line-height: 30rpx;
+  white-space: nowrap;
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* flex-wrap: nowrap; */
+  /* justify-content: flex-start; */
+  /* align-items: center; */
+}
+.commodityCardPromotionBox{
+  display: inline-block;
+  /* width: fit-content; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  border-radius:8rpx;
+  border: 0.8px solid var(--Promotion-text-color);
+  /* padding: 1rpx; */
+  margin: 0 2rpx;
+}
+.commodityCardPromotionBox:first-child{
+  margin-left: 0;
+}
+.commodityCardPromotionBox:last-child{
+  margin-right: 0;
+}
+.commodityCardPromotionText{
+  font-size: 24rpx;
+  color: var(--Promotion-text-color);
+}
+
+.commodityCardPrice{
+  font-size: 30rpx;
+  color: var(--goodPrice-text-color);
 }

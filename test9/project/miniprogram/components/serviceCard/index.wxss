@@ -11,7 +11,7 @@
   border-radius: 30rpx;
 
   background-color: #fefefe;
-  box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.08);
+  box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.03);
 
   padding: 50rpx 0 20rpx;
 
@@ -54,5 +54,5 @@
 }
 .deviceInfoText {
   font-size: 24rpx;
-  color: #666;
+  color: #9f9f9f;
 }

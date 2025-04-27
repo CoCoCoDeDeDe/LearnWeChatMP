@@ -1,0 +1,72 @@
+.cardBox{
+  padding: 20rpx 24rpx;
+}
+.board{
+  border-radius: 30rpx;
+  background: #fcfcfc;
+  box-shadow: 2px 2px 8px 2px #0000000e;
+
+  padding: 20rpx 20rpx 20rpx 28rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.column_PreviewImgAndTextInfo{
+  display: flex;
+  direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.columnPreviewImg{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.previewImg {
+  display: flexbox;
+  height: 120rpx;
+}
+
+.columnTextInfo{
+  padding: 10rpx 0rpx 10rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.rowNickName{
+  display: flex;
+
+}
+.nickname{
+  white-space: nowrap;
+  font-size: 32rpx;
+  color: var(--main-text-color);
+}
+.rowPosition{
+  display: flex;
+
+}
+.position{
+  white-space: nowrap;
+  font-size: 24rpx;
+  color: #9f9f9f;
+}
+
+.columnBtns{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.columnBtn{
+  padding: 30rpx 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.btnIcon{
+  display: flex;
+  height: 40rpx;
+}

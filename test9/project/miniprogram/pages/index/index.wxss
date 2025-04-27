@@ -6,7 +6,7 @@
   width: 100vw;
   min-height: 100vh;
 
-  background: linear-gradient(180deg, #b7e1ff 35%, #edf7ff 100%);
+  background: linear-gradient(180deg, var(--background-linear-gradient-color-1) 20%, var(--background-linear-gradient-color-2) 100%);
 
   background-attachment: fixed;
   background-clip: content-box;
@@ -19,18 +19,20 @@
   position: relative;
   z-index: 1;
   min-height: 100vh;
-  color: #181441;
+  color: var(--main-text-color);
 }
 
 /* 顶部我的导航栏 */
 .topBarBox {
   z-index: 20;
 
+  padding: 0 12rpx;
+
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(180deg, #b7e1ffff 85%, #b7e1ff00);
+  background: linear-gradient(180deg, var(--background-linear-gradient-color-1) 85%, var(--background-linear-gradient-color-1-transparent));
   /* background: rgba(255, 255, 255, 0.2); */
   /* backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px); */
@@ -56,16 +58,16 @@
   align-items: center;
 }
 .regionTextBox {
-  display: flex;
   /* scroll-view */
+  height: fit-content;
 }
 .regionText {
-  display: inline-block;
+  display: block;
   max-width: 350rpx;
 
   white-space: nowrap;
   font-size: 42rpx;
-  color: #181441;
+  color: var(--main-text-color);
 }
 .regionArrowImgBox {
   display: flex;
@@ -185,4 +187,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+view, text, image, scroll-view {
+  --background-linear-gradient-color-1: #c9e8ff;
+  --background-linear-gradient-color-1-transparent: #c9e8ff00;
+  --background-linear-gradient-color-2: #edf7ff;
 }

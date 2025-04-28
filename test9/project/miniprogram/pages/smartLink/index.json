@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "LoginPop": "/components/LoginPop/LoginPop"
-  }
+  },
+  "navigationBarBackgroundColor": "#ebf6ff"
 }

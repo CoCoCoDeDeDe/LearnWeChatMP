@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    
+  },
+  "navigationBarBackgroundColor": "#fefefe",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "设备详情"
+}

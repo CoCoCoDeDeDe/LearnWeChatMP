@@ -7,6 +7,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/deviceDetail/index",
+          "pathName": "pages/deviceDetail/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/product/index",
           "pathName": "pages/product/index",
           "query": "",

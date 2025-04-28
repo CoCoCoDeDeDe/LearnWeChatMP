@@ -9,7 +9,7 @@ Component({
       type: Object,
       value: {
         id: 'default_id',
-        previewImgUrl: '/static/images/previewImg/previewImg_aqaq.png',
+        previewImgUrl: 'https://mp-1b9cd3c8-d666-4006-b791-11d5ce02e1be.cdn.bspapp.com/IoT1/test/previewImg_aqaq.png',
         nickname: '默认设备昵称',
         atRegionName: '默认场所',
         atZoneName: '默认功能区'

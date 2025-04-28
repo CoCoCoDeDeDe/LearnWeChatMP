@@ -39,16 +39,37 @@
 
   <view class="shoppingArea">
     
-    <view class="shoppingMainSwiperArea">
-      <swiper class="shoppingMainSwiper">
-        <block wx:for="{{[1]}}" wx:key="index">
+    <view class="shoppingAreaDecorationSmallTopLine"></view>
+    
+    <view class="advertisementSwiperArea">
 
-          <view class="swiper-item">
-            
-          </view>
+      <swiper 
+      class="advertisementSwiper"
+      indicator-dots="{{false}}"
+      autoplay="{{true}}"
+      interval="{{2500}}"
+      duration="{{2000}}"
+      circular="{{true}}"
+      display-multiple-items="{{1}}"
+      easing-function="easeInOutCubic"
+      >
+        <block wx:for="{{advertisementSwiperItemList}}" wx:key="imgUrl">
+        
+          <swiper-item 
+          class="shoppingAdvertisementSwiperItem"
+          bind:tap="onToAdvertisementPage"
+          data-advertisementSwiperItem="{{item}}"
+          >
+
+            <view class="shoppingAdvertisementSwiperItemImgBox">
+              <image src="{{item.imgUrl}}" mode="aspectFill" class="shoppingAdvertisementSwiperItemImg"/>
+            </view>
+
+          </swiper-item>
 
         </block>
       </swiper>
+
     </view>
 
     <view class="commodityCardsArea">

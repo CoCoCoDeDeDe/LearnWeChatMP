@@ -7,13 +7,13 @@
 
 /* myDevice */
 .myDeviceArea{
-  padding: 0 0 10rpx 0;
+  padding: 0 0 5px 0;
   /* backdrop-filter: blur(10px); */
 }
 
 /* myDevice topBar */
 .myDeviceTopBarBox{
-  padding: 0 18rpx 0 40rpx;
+  padding: 0 11px 0 15px;
 
   display: flex;
   flex-direction: row;
@@ -26,15 +26,15 @@
   display: flex;
 }
 .myDeviceTopBarTitle{
-  font-size: 43rpx;
+  font-size: 20px;
   letter-spacing: 0.2em;
 }
 .addDeviceBox {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 6rpx 16rpx 6rpx 22rpx;
-  border-radius: 1000rpx;
+  padding: 3px 8px 3px 14px;
+  border-radius: 30px;
   background: #fff;
   backdrop-filter: blur(10px);
   box-shadow: 1px 1px 4px 2px #0000000c;
@@ -43,25 +43,27 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding-right: 4px;
+  padding-bottom: 1px;
 }
 .addDeviceText{
-  font-size: 30rpx;
+  font-size: 15px;
   color: #181441;
 }
 .addDeviceIconBox{
   display: flex;
 }
 .addDeviceIcon{
-  height: 54rpx;
+  height: 23px;
 }
 
 /* myDevice showMore */
 .showMoreBtnBox{
 width: 100%;
-padding: 0 200rpx;
+padding: 0 120px;
 }
 .showMoreBtn{
-  padding: 20rpx 0;
+  padding: 10px 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -69,41 +71,93 @@ padding: 0 200rpx;
 }
 .showMoreBtnText{
   display: flex;
-  font-size: 30rpx;
+  font-size: 15px;
   color: #181441;
 }
 .showMoreBtnImg{
-  padding-top: 4rpx;
+  padding-top: 2px;
   display: flex;
-  height: 28rpx;
+  height: 14px;
 }
 
 
 
 /* 购物区 */
+.shoppingArea{
+  background-color: #f8f8f8;
+  border-radius: 15px 15px 0 0;
+  padding: 15px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.shoppingAreaDecorationSmallTopLine{
+  width: 50px;
+  height: 6px;
+  border-radius: 6px;
+  background-color: #b5d8f5;
+}
 
-
+/* 滚动广告 */
+.advertisementSwiperArea{
+  padding: 15px 0px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.advertisementSwiper{
+  width: 375px;
+  height: 180px;
+}
+.shoppingAdvertisementSwiperItem{
+  /* height: fit-content; */
+  /* border-radius: 20rpx; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* overflow: hidden; */
+}
+.shoppingAdvertisementSwiperItemImgBox{
+  width: 100%;
+  height: fit-content;
+  padding: 0 15px;
+  /* border-radius: 30rpx; */
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.shoppingAdvertisementSwiperItemImg{
+  width: 100%;
+  border-radius: 15px;
+}
 
 /* 商品卡片 */
 .commodityCardsArea{
-  padding: 10rpx 10rpx 20rpx;
+  padding: 0px 5px 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: flex-end;
-  background-color: #f6f6f6;
+  align-items: flex-start;
+  /* background-color: #f6f6f6; */
 }
 
 .commodityCardArea{
-  padding: 10rpx;
+  padding: 5px;
 }
 .commodityCardBoard{
   width: fit-content;
+  width: 170px;
+  max-width: 170px;
 
-  background-color: #fefefe;
-  border-radius: 20rpx;
-  /* box-shadow: 1px 1px 4px 2px #0000000a; */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px 2px #0000000a;
 
   display: flex;
   flex-direction: column;
@@ -112,16 +166,19 @@ padding: 0 200rpx;
 }
 
 .commodityCardPreviewImgBox{
+  width: 100%;
   /* padding: 14rpx 14rpx 0rpx; */
 }
 .commodityCardPreviewImg{
-  width: 340rpx;
-  border-radius: 20rpx 20rpx 0 0;
+  /* width: 170px; */
+  width: 100%;
+  border-radius: 10px 10px 0 0;
 }
 
 .commodityCardTextBox{
-  max-width: 340rpx;
-  padding: 0rpx 14rpx 20rpx;
+  width: 100%;
+  /* max-width: 140px; */
+  padding: 0px 7px 10px;
 }
 .commodityCardTitle{
   /* TODO 学习 -webkit-box */
@@ -130,11 +187,11 @@ padding: 0 200rpx;
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 30rpx;
+  font-size: 15px;
   color: var(--main-text-color);
 }
 .commodityCardPromotionsBox{
-  line-height: 30rpx;
+  line-height: 15px;
   white-space: nowrap;
   /* display: flex; */
   /* flex-direction: row; */
@@ -148,10 +205,10 @@ padding: 0 200rpx;
   /* display: flex; */
   /* flex-direction: column; */
   /* justify-content: center; */
-  border-radius:8rpx;
+  border-radius: 4px;
   border: 0.8px solid var(--Promotion-text-color);
   /* padding: 1rpx; */
-  margin: 0 2rpx;
+  margin: 0 1px;
 }
 .commodityCardPromotionBox:first-child{
   margin-left: 0;
@@ -160,11 +217,11 @@ padding: 0 200rpx;
   margin-right: 0;
 }
 .commodityCardPromotionText{
-  font-size: 24rpx;
+  font-size: 12px;
   color: var(--Promotion-text-color);
 }
 
 .commodityCardPrice{
-  font-size: 30rpx;
+  font-size: 15px;
   color: var(--goodPrice-text-color);
 }

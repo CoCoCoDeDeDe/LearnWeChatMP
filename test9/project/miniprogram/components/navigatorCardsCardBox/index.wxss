@@ -1,20 +1,20 @@
 .navigatorCardsCardBox{
-  padding: 20rpx 30rpx;
+  padding: 10px 15px;
 }
 .navigatorCardsBoard {
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
 
-  padding: 20rpx 20rpx;
+  padding: 10px 10px;
 
-  border-radius: 40rpx;
+  border-radius: 20px;
   background: #fefefe;
   box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.03);
 }
 
 .navigatorCard {
-  padding: 14rpx 16rpx;
+  padding: 7px 8px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -22,18 +22,18 @@
 }
 .navigatorIconBox {
   display: flex;
-  height: 58rpx;
+  height: 29px;
 }
 .navigatorIcon {
   height: 100%;
 }
 .navigatorTextBox {
-  padding-left: 30rpx;
+  padding-left: 15px;
   display: flex;
   align-items: center;
-  height: 76rpx;
+  height: 38px;
 }
 .navigatorText {
   display: inline-block;
-  font-size: 38rpx;
+  font-size: 19px;
 }

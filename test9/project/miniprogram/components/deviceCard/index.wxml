@@ -1,7 +1,7 @@
 <view class="cardBox">
   <view class="board">
 
-    <view class="column_PreviewImgAndTextInfo" bind:tap="onToDeviceDetail">
+    <view class="column_PreviewImgAndTextInfo" bind:tap="onToDeviceDetail" data-deviceProfile="{{deviceProfile}}">
       <view class="columnPreviewImg">
         <image src="{{deviceProfile.previewImgUrl}}" mode="heightFix" class="previewImg"/>
       </view>
@@ -20,7 +20,7 @@
 
     <view class="columnBtns">
       <block wx:for="{{columnBtnsArr}}" wx:key="bindtap">
-        <view class="columnBtn" bind:tap="{{item.bindtap}}">
+        <view class="columnBtn" bind:tap="{{item.bindtap}}" data-deviceProfile="{{deviceProfile}}">
           <image src="{{item.imageSrc}}" mode="heightFix" class="btnIcon"/>
         </view>
       </block>

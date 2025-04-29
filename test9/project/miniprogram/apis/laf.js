@@ -19,20 +19,30 @@ export async function register(username, password) {
         password: password
       },
       success: res => {
-        if (res.statusCode === 200) {
-          console.log("注册成功:", res.data)
-          resolve(res.data)
-        } else {
-          console.error("注册失败:", res.data)
-          reject(new Error(res.data.message || '注册失败'))
+        console.log("res", res)
+        switch(res.data.runCondition)
+        {
+          case 'invalid username':
+            console.log('invalid username')
+            reject('无效的用户名')
+            return
+          case 'invalid password':
+            console.log('invalid password')
+            reject('无效的密码')
+            return
+          case 'username already existed':
+            console.log('username already existed')
+            reject('用户名已被注册')
+            return
+          case 'registered successfully':
+            console.log('registered successfully')
+            resolve('注册成功')
+            return
         }
       },
       fail: err => {
         console.error("网络请求失败:", err)
-        reject(new Error('网络连接失败'))
-      },
-      complete: e => {
-        console.log("register completed")
+        reject('网络请求失败')
       }
     })
   })
@@ -40,6 +50,9 @@ export async function register(username, password) {
 
 // login
 export async function login(username, password) {
+  // console.log("function login")
+  // console.log(username)
+  // console.log(password)
   return new Promise((resolve, reject) => {
     wx.request({
       method: "POST",
@@ -49,21 +62,34 @@ export async function login(username, password) {
       },
       data: {
         username: username,
-        password: password
+        password: password,
       },
       success: res => {
-        if (res.statusCode === 200) {
-          console.log("登录成功:", res.data)
-          resolve(res.data)
-        } else {
-          reject(new Error(res.data.message || '登录失败'))
+        switch(res.data.runCondition){
+          case 'invalid username or password':
+            console.log("登录失败，账号或密码错误，errMsg:", res.data.errMsg)
+            reject('账号或密码错误')
+            return
+          case 'login succeed':
+            console.log("登录成功，token:", res.data.access_token)
+
+            wx.setStorage({
+              key: 'laf_token',
+              data: res.data.access_token,
+              encrypt: false
+            }).catch(err => {
+              console.log("token本地存储失败 err:", err)
+              reject('token本地存储失败')
+              return
+            })
+
+            resolve('登录成功')
+            return
         }
       },
       fail: err => {
-        reject(new Error('网络连接失败'))
-      },
-      complete: e => {
-        console.log("login completed")
+        console.log("网络请求失败 err:", err)
+        reject('网络请求失败')
       }
     })
   })

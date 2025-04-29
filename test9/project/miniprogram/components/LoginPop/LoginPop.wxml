@@ -1,69 +1,22 @@
-<view wx:if="{{!isLogin}}" class="container">
-  <!-- <view class="mask"></view> -->
+<!-- loginPop显示标志位，默认true，上机时判断laf_token进行一次判断是否显示，每次检测到laf_token无效时显示，每次登录完成后隐藏。核心：token有效就隐藏，token无效就显示 -->
+<view wx:if="{{!laf_token_validity}}" class="container">
+  <view class="mask"></view>
   <view class="board">
-    <block wx:if="{{state == state_enum.GetOpenid}}">
-      <view class="titleBox">
-        <text class="title">请登录后使用</text>
-      </view>
-      <view class="avatarBox">
-        <image src="{{userPublicInfo.avatarUrl}}" mode="" class="avatar"/>
-      </view>
+    <block wx:if="{{state == state_enum.login}}">
 
-      <view class="tip">一键授权代表您同意本平台的使用协议</view>
-
-      <view class="allBtnBox">
+      <form bindsubmit="onSubmit">
+        <view class="title">请在登录后使用</view>
+        <view class="iptBox">
+          <input type="text" name="user_name" placeholder="用户名" placeholder-style="margin-left:16px; color:#aaa;" maxlength="{{14}}" confirm-type="next" class="ipt"/>
+          <input type="safe-password" name="user_password" placeholder="密码" placeholder-style="margin-left:16px; color:#aaa;" maxlength="{{14}}" confirm-type="done" class="ipt"/>
+        </view>
         <view class="btnBox">
-          <view class="confirmBtn" bindtap="onGetOpenid">一键授权</view>
+          <button form-type="submit" id="login" class="btn loginBtn">登录</button>
+          <button form-type="submit" id="register" class="btn registerBtn">一键注册</button>
         </view>
-      </view>
-    </block>
-    <block wx:if="{{state == state_enum.Register}}">
-      <view class="titleBox">
-        <text class="title">您可选择注册账号</text>
-      </view>
+      </form>
 
-      <view class="avatarBox" bind:tap="onGetUserWeChatAvatar">
-        <image src="{{userPublicInfo.avatarUrl}}" mode="" class="avatar"/>
-      </view>
-
-      <view class="nicknameIptBox">
-        <input type="nickname" class="nicknameIpt" placeholder="请输入昵称" model:value="{{nicknameIpt_value}}" bindinput="onnicknameIpt_bindinput" />
-      </view>
-
-      <view class="tip">注册账号代表您同意本平台的使用协议</view>
-
-        <view class="allBtnBox">
-          <view class="btnBox">
-            <view class="confirmBtn" bindtap="onConfirm">确 认</view>
-          </view>
-          <view class="btnBoxGap"></view>
-          <view class="btnBox">
-            <view class="CancelBtn" bindtap="onCancel">取 消</view>
-          </view>
-        </view>
-    </block>
-    <block wx:if="{{state == state_enum.Login}}">
-      <view class="titleBox">
-        <text class="title">请确认您的账号</text>
-      </view>
-
-      <view class="avatarBox">
-        <image src="{{userPublicInfo.avatarUrl}}" mode="" class="avatar"/>
-      </view>
-
-      <view class="nicknameBox">
-        <text class="nickname">{{userPublicInfo.nickname}}</text>
-      </view>
-      
-      <view class="allBtnBox">
-        <view class="btnBox">
-          <view class="confirmBtn" bindtap="onConfirm">确 认</view>
-        </view>
-        <view class="btnBoxGap"></view>
-        <view class="btnBox">
-          <view class="CancelBtn" bindtap="onCancel">取 消</view>
-        </view>
-      </view>
     </block>
   </view>
+
 </view>

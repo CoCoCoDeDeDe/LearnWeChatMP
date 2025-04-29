@@ -1,4 +1,4 @@
-view, image, text, text, scroll-view {
+view, image, text, text, scroll-view, input, form {
   box-sizing: border-box;
 
   font-family:"webfont" !important;

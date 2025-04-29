@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    
+    "lightSensorCard": "/components/deviceFunctionCards/lightSensorCard/index"
   },
   "navigationBarBackgroundColor": "#fefefe",
   "navigationBarTextStyle": "black",

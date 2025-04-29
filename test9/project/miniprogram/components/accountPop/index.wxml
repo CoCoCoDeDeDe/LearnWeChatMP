@@ -1,0 +1,12 @@
+<!-- app launch时检查token状态，token不存在或者过期则触发弹窗 -->
+
+  <view class="board">
+  
+    <view class="rowTitle">
+      请登录后使用
+    </view>
+  
+    
+
+  </view>
+

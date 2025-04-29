@@ -1,2 +1,19 @@
-<!--pages/deviceDetail/index.wxml-->
-<text>pages/deviceDetail/index.wxml</text>
+<view class="page">
+
+  <view class="page-background">
+    <image src="https://mp-1b9cd3c8-d666-4006-b791-11d5ce02e1be.cdn.bspapp.com/IoT1/test/devicePoster1x1_22213.png" mode="widthFix" class="page-background-img"/>
+  </view>
+
+  <view class="page-posterPlaceholder"></view>
+
+  <view class="page-mainCard">
+  
+    <view class="page-mainCard-board">
+    
+      <lightSensorCard></lightSensorCard>
+    
+    </view>
+  
+  </view>
+
+</view>

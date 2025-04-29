@@ -6,7 +6,9 @@
     "pages/mine/index",
     "pages/deviceDetail/index"
   ],
-  "usingComponents": {},
+  "usingComponents": {
+    "accountPop": "/components/accountPop"
+  },
   "window": {
     "navigationBarBackgroundColor": "#b7e1ff",
     "navigationBarTextStyle": "black",

@@ -1,3 +1,6 @@
+// ./代表当前目录，../代表双亲目录，/代表根目录
+import { test, register, login } from "./apis/laf"
+
 App({
   onLaunch: function () {
     if (!wx.cloud) {
@@ -28,12 +31,18 @@ App({
   });
 
     this.reset()
+
+    // 测试API
+    test()
+    // register('testuser', '123456').catch(console.error)
+    login('testuser', '123456').catch(console.error)
+
   },
 
   // 重置 app
   reset(e) {
     this.globalData = {
-      isLogin: true,  // 每次launch小程序时置登录标志false  // Debug
+      isLogin: false,  // 每次launch小程序时置登录标志false  // Debug
       userPublicInfo: {
         avatarUrl: '/static/images/icons/defaultAvatar.png',
         city: 'default city',

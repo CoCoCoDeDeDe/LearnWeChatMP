@@ -1,0 +1,33 @@
+<view class="card">
+
+  <view class="board">
+  
+    <view class="introColumn">
+    
+      <view class="introColumn-titleRow">
+      环境光照
+      </view>
+      <introColumn-unitRow>
+      lx
+      </introColumn-unitRow>
+
+    </view>
+
+    <view class="graphyDataColumn">
+    
+    <!-- TODO: 根据数据生成图表 -->
+    
+    </view>
+
+    <view class="textDataColumn">
+    
+      <view class="textDataColumn-Data">
+        
+      </view>
+    
+    </view>
+
+
+  </view>
+
+</view>

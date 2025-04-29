@@ -94,3 +94,78 @@ export async function login(username, password) {
     })
   })
 }
+
+// 读取并验证本地缓存的 laf_token
+export async function verify_laf_token() {
+  return new Promise((resolve, reject) => {
+    // 读取本地laf_token
+    wx.getStorage({
+      key: 'laf_token'
+    }).then(res => {
+      console.log("获取到本地laf_token res.data:", res.data)
+      return verify_laf_token_request(res.data)
+    }).then(res => {
+      console.log("本地laf_token验证成功 res:", res)
+      resolve({
+        runCondition: 'local storage laf_token verify succeed',
+        errMsg: 'local storage laf_token verify succeed'
+      })
+    }).catch(err => {
+      console.log("本地laf_token验证失败 err:", err)
+      reject({
+        runCondition: 'local storage laf_token verify failed',
+        errMsg: 'local storage laf_token verify failed'
+      })
+    })
+  })
+}
+
+// 验证 laf_token
+// 输入：laf_token
+// 输出：验证结果（1：成功；2：token失效；3：请求失败）
+// 本地缓存的token作为证明登录的唯一凭证，也是用于获取在线信息时用于匹配指定用户的客户端唯一凭证
+export async function verify_laf_token_request(laf_token) {
+  
+  return new Promise((resolve, reject) => {
+    wx.request({
+      method: 'GET',
+      url: 'https://dhb91nur4r.bja.sealos.run/utils/verifyToken',
+      header: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + laf_token
+      },
+      success: res => {
+        switch(res.data.runCondition) {
+          case 'laf_token verify succeed':
+            resolve({
+              runCondition: 'laf_token verify succeed',
+              errMsg: 'laf_token verify succeed'
+            })
+          return
+          case 'token parse error':
+          case 'cant find the account':
+            resolve({
+              runCondition: 'laf_token verify failed',
+              errMsg: 'laf_token verify failed'
+            })
+            return
+        }
+      },
+      fail: err => {
+        console.log("laf_token验证请求失败 err:", err)
+        resolve({
+          runCondition: 'laf_token request failed',
+          errMsg: 'laf_token request failed'
+        })
+        return
+      }
+    })
+
+
+
+
+  })
+
+
+
+}

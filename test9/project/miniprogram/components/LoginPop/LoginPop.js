@@ -29,14 +29,13 @@ Component({
   methods: {
     // 初始化组件
     reset(e) {
-      console.log("reset loginPop")
       let app = getApp()
-      console.log("app", app)
       this.setData({
         state: this.data.state_enum.login,
         // 同步全局的laf_token_validity
         laf_token_validity : app.globalData.laf_token_validity
       })
+      console.log("app.globalData.laf_token_validity", app.globalData.laf_token_validity)
     },
 
     // 登录表单提交

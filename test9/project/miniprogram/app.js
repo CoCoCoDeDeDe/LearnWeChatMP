@@ -1,5 +1,5 @@
 // ./代表当前目录，../代表双亲目录，/代表根目录
-import { test, register, login } from "./apis/laf"
+import { register, login, verify_laf_token } from "./apis/laf"
 
 App({
   globalData: {
@@ -35,6 +35,16 @@ App({
 
     this.reset()
 
+    verify_laf_token()
+      .then(res => {
+        // 本地laf_token有效，设为登录状态
+        this.globalData.laf_token_validity = true
+      })
+      .catch(err => {
+        // 本地laf_token无效，显示loginPop
+        this.globalData.laf_token_validity = false
+      })
+
     // 本地缓存调试
     // await wx.setStorage({
     //   key: 'laf_token',
@@ -48,12 +58,9 @@ App({
     //     console.log("获取本地缓存信息成功，res:", res)
     //   })
 
-    // this.laf_tokenCheak()
-
     // 测试API
     // register('testuser', '123456').catch(console.error)
     // login('testuser', '123456').catch(console.error)
-
   },
 
   // 重置 app
@@ -62,34 +69,5 @@ App({
       laf_token_validity: false
     }
   },
-
-  // 检查laf_token状态，当token没有或者时效时触发登录弹窗
-  async laf_tokenCheak() {
-    let laf_token
-    try{
-      laf_token = await wx.getStorage({key: 'laf_token'})
-      console.log("获取到laf_token:", laf_token.data)
-    }catch(err){
-      console.log("读取laf_token出问题 err:", err)
-      // TODO 触发登录弹窗
-    }
-    try{
-      wx.request({
-        method: 'POST',
-        url: 'https://dhb91nur4r.bja.sealos.run/utils/verifyToken',
-        header: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + laf_token.data
-        },
-        success: res => {
-          console.log("本地laf_token匹配到用户id res.data", res.data)
-          // 本地缓存的token作为证明登录的唯一凭证，也是用于获取在线信息时用于匹配指定用户的客户端唯一凭证
-        }
-      })
-    }catch(err){
-      console.log("验证laf_token出问题 err:", err)
-      // TODO 触发登录弹窗
-    }
-  }
 
 });

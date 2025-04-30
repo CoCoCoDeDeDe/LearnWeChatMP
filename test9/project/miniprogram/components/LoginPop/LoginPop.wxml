@@ -1,5 +1,7 @@
 <!-- loginPop显示标志位，默认true，上机时判断laf_token进行一次判断是否显示，每次检测到laf_token无效时显示，每次登录完成后隐藏。核心：token有效就隐藏，token无效就显示 -->
-<view wx:if="{{!laf_token_validity}}" class="container">
+<block wx:if="{{!laf_token_validity}}">
+
+<view class="container">
   <view class="mask"></view>
   <view class="board">
     <block wx:if="{{state == state_enum.login}}">
@@ -20,3 +22,5 @@
   </view>
 
 </view>
+  
+</block>

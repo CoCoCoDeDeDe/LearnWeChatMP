@@ -18,33 +18,35 @@ Component({
       login: 'login',
       register: 'register'
     },
-    laf_token_validity: false
+    laf_token_validity: false,
+    state: 'login'
   },
 
   // 组件挂载时
   attached: async function(e) {
-    
-    // 在LoginPop组件中读取本地token并作为小程序启动时主动判断登录状态的载体
-    await verify_laf_token()
-      .then(res => {
-        // 本地laf_token有效，设为登录状态
-        getApp().globalData.laf_token_validity = true
-        this.setData({
-          laf_token_validity: true
-        })
-      })
-      .catch(err => {
-        // 本地laf_token无效，显示loginPop
-        getApp().globalData.laf_token_validity = false
-        this.setData({
-          laf_token_validity: false
-        })
-        on_laf_token_Invalid()
-      })
 
     this.reset()
+    
+    if(getApp().globalData.laf_token_validity == false) {
+      // 在LoginPop组件中读取本地token并作为小程序启动时主动判断登录状态的载体
+      await verify_laf_token()
+        .then(res => {
+          // 本地laf_token有效，设为登录状态
+          getApp().globalData.laf_token_validity = true
+          this.setData({
+            laf_token_validity: true
+          })
+        })
+        .catch(err => {
+          // 本地laf_token无效，显示loginPop
+          getApp().globalData.laf_token_validity = false
+          this.setData({
+            laf_token_validity: false
+          })
+          on_laf_token_Invalid()
+        })
 
-
+    } // no else yet
   },
 
 
@@ -54,14 +56,13 @@ Component({
     reset(e) {
       let app = getApp()
       this.setData({
-        state: this.data.state_enum.login,
+        // state: this.data.state_enum.login, // 目前只有 Login 页面
         laf_token_validity : app.globalData.laf_token_validity  // 同步全局的laf_token_validity
       })
-      console.log("loginPop读取的laf_token_validity:", app.globalData.laf_token_validity)
+      // console.log("loginPop读取的laf_token_validity:", app.globalData.laf_token_validity)
     },
 
-    // observeGlobalData
-    // 将全局的laf_token_validity和LoginPop的laf_token_validity双向绑定
+    // TODO 将全局的laf_token_validity和LoginPop的laf_token_validity双向绑定
 
     // 登录表单提交
     async onSubmit(e) {

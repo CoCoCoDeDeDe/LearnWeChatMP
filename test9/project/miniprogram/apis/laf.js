@@ -166,9 +166,11 @@ export async function verify_laf_token_request(laf_token) {
 }
 
 // 前端调用laf 云函数 需要laf_token的 API 的通用函数
-// 成功的返回：runCondition、errMsg、API返回的结果  // 1种成功：request succeed
+// 成功的返回：runCondition、errMsg、API返回的结果  // 1种成功：request succeed // 在此基础上还要解析 runCondition 云函数是不是还有错误
 // 失败的返回：runCondition、errMsg // 2种失败：laf_token error、request error
 export async function requestWithLafToken( method, last_url, data ) {
+
+  if( method == null || last_url == null ) return
 
   let laf_token
 
@@ -200,6 +202,8 @@ export async function requestWithLafToken( method, last_url, data ) {
       return
     }
 
+    console.log("开始请求API:", baseUrl + last_url)
+
     // 根据参数（ method, last_url, data ）请求云函数
     wx.request({
       method: method,
@@ -210,10 +214,21 @@ export async function requestWithLafToken( method, last_url, data ) {
       },
       data: data,
       success: (result) => {
+
+        switch(result.data.runCondition) {
+          case 'token parse error':
+          case 'cant find the account':
+            resolve({
+              runCondition: 'laf_token error',
+              errMsg: 'laf_token error'
+            })
+            return
+        }
+
         resolve({
           runCondition: 'request succeed',
           errMsg: 'request succeed ',
-          response: result
+          response: result  // 进一步对 response.data.runCondition 进行错误识别
         })
         return
       },

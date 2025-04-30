@@ -1,4 +1,6 @@
 // pages/product/index.js
+import { requestWithLafToken } from '../../apis/laf'
+
 Page({
 
   /**
@@ -135,13 +137,77 @@ Page({
           }
         ]
       }
-    ]
+    ],
+    limit: 2
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    this.requestPageData()
+  },
+
+  // 生命周期函数--监听页面隐藏
+  async onHide() {
+    this.setData({
+      limit: 2  //每次离开页面重置 limit 使设备列表折叠
+    })
+  },
+  
+  // 页面重置
+  reset(e) {
+    this.setData({
+      limit: 2  //每次离开页面重置 limit 使设备列表折叠
+    })
+
+  },
+
+  async requestPageData(e) {
+
+     let data = await requestWithLafToken('GET', `/iot/requestDevicesSimpleInfo?limit=${this.data.limit}`)
+      .then(res => {
+        console.log("requestPageData res.response.data.data:", res.response.data.data)
+
+        switch(res.response.data.runCondition) {
+          case 'find devices error':
+          case 'find region error':
+            on_request_error()
+            return
+          case 'succeed':
+          // TODO: 没有设备时显示提示词
+        }
+
+        return res.response.data.data
+      })
+      .catch(err => {
+        console.log("requestPageData err:", err)
+        switch(err.runCondition) {
+          case 'laf_token error':
+            on_laf_token_Invalid()
+            return
+          case 'request error':
+            on_request_error()
+            return
+        }
+      })
+
+      if (!data) {
+        return
+      }
+
+      this.setData({
+        devices: data
+      })
+
+  },
+
+  onShowMoreDevices(e) {
+    this.setData({
+      limit: 0  // 不限制获取设备的数量，获取全部设备
+    })
+
+    this.requestPageData()
 
   },
 

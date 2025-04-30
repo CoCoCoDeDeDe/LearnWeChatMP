@@ -8,11 +8,11 @@
 
       <view class="columnTextInfo">
         <view class="rowNickName">
-          <text class="nickname">{{deviceProfile.nickname}}</text>
+          <text class="nickname">{{deviceProfile.deviceName != null || '' ? deviceProfile.deviceName : deviceProfile.productName}}</text>
         </view>
         <view class="rowPosition">
           <text class="position">
-            {{deviceProfile.atRegionName}} | {{deviceProfile.atZoneName}}
+            {{deviceProfile.regionName ? deviceProfile.regionName : '未分配Region'}}
           </text>
         </view>
       </view>

@@ -1,5 +1,6 @@
 // pages/mine/index.js
 import { requestWithLafToken, on_laf_token_Invalid, on_request_error } from '../../apis/laf'
+
 Page({
 
   /**
@@ -57,10 +58,21 @@ Page({
   // 获取mine页面信息
   async requestPageData(e) {
 
-    let data
-
-    data = await requestWithLafToken('GET', '/iot/requestAccountProfile')
+    let data = await requestWithLafToken('GET', `/iot/requestAccountProfile`)
       .then(res => {
+        switch(res.response.data.runCondition) {
+          case 'cant find the account':
+          case 'find account profile error':
+          
+          wx.showToast({
+            title: '找不到账号',
+            icon: 'error',
+            mask: true,
+          })
+
+          return  // 此处退出回调函数使得 data 得 undefine，在外面判断 data 是否为 undefine 以跳出 requestWithLafToken()
+        }
+        console.log("requestPageData res.response:", res.response)
         console.log("requestPageData res.response.data.data:", res.response.data.data)
         return res.response.data.data
       })
@@ -75,6 +87,10 @@ Page({
             return
         }
       })
+
+      if (!data) {
+        return  // 接力 then() 的 return
+      }
 
       this.setData({
         user_profile: {

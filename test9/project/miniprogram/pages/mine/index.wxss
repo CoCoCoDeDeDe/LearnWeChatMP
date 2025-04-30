@@ -29,6 +29,7 @@
   padding-top: 13px;
 }
 .usernameBox {
+  padding-left: 4px;
   padding-bottom: 8px;
 }
 .usernameText {

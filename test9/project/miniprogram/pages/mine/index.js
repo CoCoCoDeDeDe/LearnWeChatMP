@@ -1,4 +1,5 @@
 // pages/mine/index.js
+import { requestWithLafToken, on_laf_token_Invalid, on_request_error } from '../../apis/laf'
 Page({
 
   /**
@@ -28,27 +29,61 @@ Page({
         title: '设置',
         navigateUrl: '/pages/mine/index'  // TODO 打造程序设置页面
       }
-    ]
+    ],
+    user_profile: {
+      avatar_url: '/static/images/icons/defaultAvatar.png',
+      nickname: 'default nickname',
+      username: 'default username'
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-    console.log("onLoad options:", options)
+  async onLoad(options) {
+    // console.log("onLoad options:", options)
     this.reset()
+
+    this.requestPageData()
+    // const res = await wx.getStorage({key: 'laf_token'})
+    // console.log("测试 res", res)
   },
   
   // 页面重置
   reset(e) {
-    this.setData({
-      userPublicInfo: {
-        avatarUrl: getApp().globalData.userPublicInfo.avatarUrl,
-        nickname: getApp().globalData.userPublicInfo.nickname,
-        accountNumber: getApp().globalData.userPublicInfo.accountNumber,
-        test1: 1
-      }
-    })
+
+  },
+
+  // 获取mine页面信息
+  async requestPageData(e) {
+
+    let data
+
+    data = await requestWithLafToken('GET', '/iot/requestAccountProfile')
+      .then(res => {
+        console.log("requestPageData res.response.data.data:", res.response.data.data)
+        return res.response.data.data
+      })
+      .catch(err => {
+        console.log("requestPageData err:", err)
+        switch(err.runCondition) {
+          case 'laf_token error':
+            on_laf_token_Invalid()
+            return
+          case 'request error':
+            on_request_error()
+            return
+        }
+      })
+
+      this.setData({
+        user_profile: {
+          avatar_url: data.avatar_url ? data.avatar_url : '/static/images/icons/defaultAvatar.png',
+          nickname: data.nickname ? data.nickname : '请设置昵称',
+          username: data.username ? data.username : '请设置用户名'
+        }
+      })
+
   }
 
 

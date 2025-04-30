@@ -8,7 +8,7 @@
         <view class="title">请在登录后使用</view>
         <view class="iptBox">
           <input type="text" name="user_name" placeholder="用户名" placeholder-style="margin-left:16px; color:#aaa;" maxlength="{{14}}" confirm-type="next" class="ipt"/>
-          <input type="safe-password" name="user_password" placeholder="密码" placeholder-style="margin-left:16px; color:#aaa;" maxlength="{{14}}" confirm-type="done" class="ipt"/>
+          <input type="text" name="user_password" placeholder="密码" placeholder-style="margin-left:16px; color:#aaa;" maxlength="{{14}}" confirm-type="done" class="ipt"/>
         </view>
         <view class="btnBox">
           <button form-type="submit" id="login" class="btn loginBtn">登录</button>

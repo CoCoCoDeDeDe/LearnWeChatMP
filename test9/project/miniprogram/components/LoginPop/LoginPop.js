@@ -1,8 +1,10 @@
-import { register, login, test} from "../../apis/laf"
+// ./代表当前目录，../代表双亲目录，/代表根目录
+import { register, login, verify_laf_token, on_laf_token_Invalid } from "../../apis/laf"
 
 Component({
   // 组件设置
   options: {
+    pureDataPattern: /^_/, // 指定所有 _ 开头的数据字段为纯数据字段，{{}}无法显示纯数据字段
     multipleSlots: true
   },
 
@@ -20,8 +22,29 @@ Component({
   },
 
   // 组件挂载时
-  attached: function(e) {
+  attached: async function(e) {
+    
+    // 在LoginPop组件中读取本地token并作为小程序启动时主动判断登录状态的载体
+    await verify_laf_token()
+      .then(res => {
+        // 本地laf_token有效，设为登录状态
+        getApp().globalData.laf_token_validity = true
+        this.setData({
+          laf_token_validity: true
+        })
+      })
+      .catch(err => {
+        // 本地laf_token无效，显示loginPop
+        getApp().globalData.laf_token_validity = false
+        this.setData({
+          laf_token_validity: false
+        })
+        on_laf_token_Invalid()
+      })
+
     this.reset()
+
+
   },
 
 
@@ -32,11 +55,13 @@ Component({
       let app = getApp()
       this.setData({
         state: this.data.state_enum.login,
-        // 同步全局的laf_token_validity
-        laf_token_validity : app.globalData.laf_token_validity
+        laf_token_validity : app.globalData.laf_token_validity  // 同步全局的laf_token_validity
       })
-      console.log("app.globalData.laf_token_validity", app.globalData.laf_token_validity)
+      console.log("loginPop读取的laf_token_validity:", app.globalData.laf_token_validity)
     },
+
+    // observeGlobalData
+    // 将全局的laf_token_validity和LoginPop的laf_token_validity双向绑定
 
     // 登录表单提交
     async onSubmit(e) {

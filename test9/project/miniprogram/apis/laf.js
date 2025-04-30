@@ -1,16 +1,11 @@
-const baseUrl = 'https://dhb91nur4r.bja.sealos.run/test'
-
-// test
-export function test() {
-  console.log("laf test")
-}
+const baseUrl = 'https://dhb91nur4r.bja.sealos.run'
 
 // register
 export async function register(username, password) {
   return new Promise((resolve, reject) => {
     wx.request({
       method: "POST",
-      url: baseUrl + "/register",
+      url: baseUrl + "/test/register",
       header: {
         "Content-Type": "application/json"
       },
@@ -56,7 +51,7 @@ export async function login(username, password) {
   return new Promise((resolve, reject) => {
     wx.request({
       method: "POST",
-      url: baseUrl + "/login",
+      url: baseUrl + "/test/login",
       header: {
         "Content-Type": "application/json"
       },
@@ -129,7 +124,7 @@ export async function verify_laf_token_request(laf_token) {
   return new Promise((resolve, reject) => {
     wx.request({
       method: 'GET',
-      url: 'https://dhb91nur4r.bja.sealos.run/utils/verifyToken',
+      url: baseUrl + '/utils/verifyToken',
       header: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + laf_token
@@ -168,4 +163,93 @@ export async function verify_laf_token_request(laf_token) {
 
 
 
+}
+
+// 前端调用laf 云函数 需要laf_token的 API 的通用函数
+// 成功的返回：runCondition、errMsg、API返回的结果  // 1种成功：request succeed
+// 失败的返回：runCondition、errMsg // 2种失败：laf_token error、request error
+export async function requestWithLafToken( method, last_url, data ) {
+
+  let laf_token
+
+  return await new Promise(async (resolve, reject) => {
+
+    // 本地token有无：是否提醒登录并return
+    try {
+      const res = await wx.getStorage({key: 'laf_token'})
+      // console.log("测试 res", res)
+
+      if(res.data == '' || res.data == null ) {
+        console.log("读取本地缓存laf_token为空")
+        reject({
+          runCondition: 'laf_token error',
+          errMsg: 'laf_token error',
+        })
+        return
+      } else {
+        console.log("读取本地缓存laf_token成功 res.data:", res.data)
+        // 继续
+        laf_token = res.data
+      }
+    } catch(err) {
+      console.log("读取本地缓存laf_token错误，可能laf_token不存在 err:", err)
+      reject({
+        runCondition: 'laf_token error',
+        errMsg: 'laf_token error',
+      })
+      return
+    }
+
+    // 根据参数（ method, last_url, data ）请求云函数
+    wx.request({
+      method: method,
+      url: baseUrl + last_url,
+      header: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + laf_token,
+      },
+      data: data,
+      success: (result) => {
+        resolve({
+          runCondition: 'request succeed',
+          errMsg: 'request succeed ',
+          response: result
+        })
+        return
+      },
+      fail: (err) => {
+        console.log("网络请求失败 err:", err)
+        reject({
+          runCondition: 'request error',
+          errMsg: 'request error',
+        })
+        return
+      }
+    })
+
+  })
+}
+
+export async function on_laf_token_Invalid( title = '请在登录后使用' ) {
+  // 提示登录
+  wx.showToast({
+    title: title,
+    duration: 1100,
+    icon: 'error',
+    mask: true
+  })
+
+  // 置标志位
+  let app = getApp()
+  app.globalData.laf_token_validity = false
+}
+
+export async function on_request_error(title = '请求失败') {
+  // 提示
+  wx.showToast({
+    title: title,
+    duration: 1500,
+    icon: 'error',
+    mask: true
+  })
 }

@@ -3,6 +3,7 @@ import { register, login, verify_laf_token } from "./apis/laf"
 
 App({
   globalData: {
+    laf_token_validity: false
   },
 
   onLaunch: async function () {
@@ -35,15 +36,6 @@ App({
 
     this.reset()
 
-    verify_laf_token()
-      .then(res => {
-        // 本地laf_token有效，设为登录状态
-        this.globalData.laf_token_validity = true
-      })
-      .catch(err => {
-        // 本地laf_token无效，显示loginPop
-        this.globalData.laf_token_validity = false
-      })
 
     // 本地缓存调试
     // await wx.setStorage({

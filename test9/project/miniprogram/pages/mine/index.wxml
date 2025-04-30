@@ -7,16 +7,16 @@
     <view class="accountBoard">
       <view class="accountTextBox">
         <view class="usernameBox">
-          <view class="usernameText">{{userPublicInfo.nickname}}</view>
+          <view class="usernameText">{{user_profile.nickname}}</view>
           <image src="/static/images/icons/simpleArrowIcon_darkBlue_Left@2x.png" mode="" class="arrowImg"/>
         </view>
         <view class="accountNumberBox">
-          <text class="accountNumber">{{userPublicInfo.accountNumber}}</text>
+          <text class="accountNumber">{{user_profile.username}}</text>
         </view>
       </view>
       <view class="accountAvatarImgBox">
         {{test1}}
-        <image src="{{userPublicInfo.avatarUrl}}" mode="" class="accountAvatarImg"/>
+        <image src="{{user_profile.avatar_url}}" mode="" class="accountAvatarImg"/>
       </view>
     </view>
 

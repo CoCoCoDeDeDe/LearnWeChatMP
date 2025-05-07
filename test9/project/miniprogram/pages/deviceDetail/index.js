@@ -1,4 +1,5 @@
 // pages/deviceDetail/index.js
+import { requestWithLafToken } from '../../apis/laf'
 Page({
 
   /**
@@ -51,13 +52,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
+  async onLoad(options) {
 
     // TODO：获取设备信息，包括设备昵称\devicePoster
-
-    wx.setNavigationBarTitle({
+    await wx.setNavigationBarTitle({
       title: this.data.rootPageState.deviceNickname
     })
+
+    await this.onRequestDeviceLatestProperties()
   },
 
   /**
@@ -74,10 +76,11 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
+  // 获取本设备详情页面的设备所拥有的属性
+  async onRequestDeviceLatestProperties(e) {
+    // 通过 device_id 获取设备 uniIO 列表
+    
+    // 通过 uniIO 列表获取 uniIO 数据
 
   }
 })

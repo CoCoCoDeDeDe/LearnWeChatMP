@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "lightSensorCard": "/components/deviceFunctionCards/lightSensorCard/index"
+    "uniIO-WSD": "/components/uniIOCard/uniIO-WSD"
   },
   "navigationBarBackgroundColor": "#fefefe",
   "navigationBarTextStyle": "black",

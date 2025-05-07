@@ -92,26 +92,51 @@ export async function login(username, password) {
 
 // 读取并验证本地缓存的 laf_token
 export async function verify_laf_token() {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     // 读取本地laf_token
-    wx.getStorage({
-      key: 'laf_token'
-    }).then(res => {
-      console.log("获取到本地laf_token res.data:", res.data)
-      return verify_laf_token_request(res.data)
-    }).then(res => {
-      console.log("本地laf_token验证成功 res:", res)
-      resolve({
-        runCondition: 'local storage laf_token verify succeed',
-        errMsg: 'local storage laf_token verify succeed'
+    let get_local_laf_token_res
+    try {
+      get_local_laf_token_res = await wx.getStorage({
+        key: 'laf_token'
       })
-    }).catch(err => {
-      console.log("本地laf_token验证失败 err:", err)
-      reject({
-        runCondition: 'local storage laf_token verify failed',
-        errMsg: 'local storage laf_token verify failed'
-      })
-    })
+      if(get_local_laf_token_res.data === null || get_local_laf_token_res.data === '') {
+        throw new Error('本地 laf_token 为空')
+      }
+    } catch(err) {
+      console.log("读取本地 laf_token err:", err)
+      return {
+        runCondition: 'laf_token error',
+        errMsg: '读取本地 laf_token 错误',
+      }
+    }
+    const local_laf_token = get_local_laf_token_res.data
+    console.log("读取到本地 laf_token", local_laf_token)
+
+    // 网络验证本地 laf_token
+    let online_verify_laf_token_res
+    try {
+      online_verify_laf_token_res = await verify_laf_token_request(local_laf_token)
+      switch(online_verify_laf_token_res.runCondition) {
+        case 'succeed':
+          break
+        case 'token error':
+          return {
+            runCondition: 'laf_token error',
+            errMsg: '网络验证 laf_token 错误',
+          }
+      }
+    } catch(err) {
+      console.log("网络验证 laf_token err:", err)
+      return {
+        runCondition: 'request error',
+        errMsg: '网络验证 laf_token 错误',
+      }
+    }
+    return {
+      runCondition: 'succeed',
+      errMsg: 'succeed',
+    }
+
   })
 }
 
@@ -124,33 +149,32 @@ export async function verify_laf_token_request(laf_token) {
   return new Promise((resolve, reject) => {
     wx.request({
       method: 'GET',
-      url: baseUrl + '/utils/verifyToken',
+      url: baseUrl + '/iot2/verifyLafToken',
       header: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + laf_token
       },
       success: res => {
         switch(res.data.runCondition) {
-          case 'laf_token verify succeed':
+          case 'succeed':
             resolve({
-              runCondition: 'laf_token verify succeed',
+              runCondition: 'succeed',
               errMsg: 'laf_token verify succeed'
             })
           return
-          case 'token parse error':
-          case 'cant find the account':
+          case 'token error':
             resolve({
-              runCondition: 'laf_token verify failed',
+              runCondition: 'error',
               errMsg: 'laf_token verify failed'
             })
             return
         }
       },
       fail: err => {
-        console.log("laf_token验证请求失败 err:", err)
+        console.log("laf_token 验证请求失败 err:", err)
         resolve({
-          runCondition: 'laf_token request failed',
-          errMsg: 'laf_token request failed'
+          runCondition: 'error',
+          errMsg: 'laf_token 验证请求失败'
         })
         return
       }
@@ -166,11 +190,27 @@ export async function verify_laf_token_request(laf_token) {
 }
 
 // 前端调用laf 云函数 需要laf_token的 API 的通用函数
+// 传入的 query 的格式：一个query对象内有若干个键值对。query: { key1: 'value1', key2: 'value2' }
 // 成功的返回：runCondition、errMsg、API返回的结果  // 1种成功：request succeed // 在此基础上还要解析 runCondition 云函数是不是还有错误
 // 失败的返回：runCondition、errMsg // 2种失败：laf_token error、request error
-export async function requestWithLafToken( method, last_url, data ) {
-
+export async function requestWithLafToken( method, last_url, query='', data ) {
   if( method == null || last_url == null ) return
+
+  // TODO 将 query 转化为 ?key1=value1&key2=value2的格式的字符串 query_str
+  let query_str = '';
+  if (typeof query === 'object' && query!== null) {
+    // Object.entries() 将 query: { key1: 'value1', key2: 'value2' } 此类对象转化为数组，期内的键值对也用含两个元素的数组表示，两个元素分别对应键名和值，形式如 query: [ ['key1', 'value1'], ['key2', 'value2'] ] 此方法通常用于用遍历数组的方式遍历对象
+    // [key, value] 是将 map 向回调函数的参数 item 进行结构, item 的形式是 Object.entire() 将键值对对象转化得到的 ['key1', 'value1'] 数组, 对应转化前的一个键值对, 用 [key, value] 结构 ['key1', 'value1'] 可以将 'key1' 和 'value1' 分别赋值给 key 和 value 作为回调函数的参数
+    // encodeURIComponent解析: 因为转换后的 query 要作为 URL 的一部分使用, URL 有特殊的格式要求, 要在将 query 的 key 和 value 字符串拼入 URL 前用 encodeURIComponent() 对字符串进行编码, 将字符串中除了字母和数字以及部分特定字符（-、_、.、!、~、*、'、(、)）之外的所有字符都转为 URL 规范的格式, 为了避免出现 URL 的保留字符导致 URL 解析问题, URL 的保留字符有如 :, /, ?, #, ;, =, &, @, +, $, , 等. 被编码的字符会被转换为 UTF - 8 编码的转义序列
+    // 后端 解析 query 时要注意 query 中被 encodeURIComponent 转换后的 UTF - 9 编码的转义序列
+    // encodeURI 不同于 encodeURIComponent, 前者会保留 URL 保留字符, 因为前者用于对已经拼接完成的整个 URL 进行转换, 默认其中的 URL 保留字符是符合使用者要求的, 而后者是用于处理使用者明确了 其中的可能出现的 URL 保留字符不是用于 URL 格式解析的
+    // URL, URN, URI Fragment 是 URI 的子集, URI 统一资源标识符, URL 统一资源定位符, URI Fragment 片段标识符
+    const queryPairs = Object.entries(query).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+    if (queryPairs.length > 0) {
+      query_str = '?' + queryPairs.join('&');
+    }
+  }
+  // console.log("要插入URL的query query_str:", query_str)
 
   let laf_token
 
@@ -207,7 +247,7 @@ export async function requestWithLafToken( method, last_url, data ) {
     // 根据参数（ method, last_url, data ）请求云函数
     wx.request({
       method: method,
-      url: baseUrl + last_url,
+      url: baseUrl + last_url + query_str,
       header: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + laf_token,

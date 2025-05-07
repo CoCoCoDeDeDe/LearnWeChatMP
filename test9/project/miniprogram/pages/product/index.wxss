@@ -72,7 +72,7 @@ padding: 0 120px;
 .showMoreBtnText{
   display: flex;
   font-size: 15px;
-  color: #181441;
+  color: var(--main-text-color);
 }
 .showMoreBtnImg{
   padding-top: 2px;
@@ -80,6 +80,30 @@ padding: 0 120px;
   height: 14px;
 }
 
+/* 没有设备时的Tip */
+.noDevicesTipBox{
+  width: 100%;
+  padding: 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.noDevicesTip{
+  padding: 20px 0;
+  color: var(--vice-text-color);
+  text-align: center;
+}
+.noDevicesTip_btmWarnPattern_box{
+  display: flex;
+  flex-direction: row;
+}
+.noDevicesTip_btmWarnPattern{
+  width: 6px;
+  height: 6px;
+  margin: 0px 5px 10px;
+  border-radius: 3px;
+  background-color: #ccc;
+}
 
 
 /* 购物区 */

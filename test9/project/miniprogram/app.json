@@ -5,7 +5,8 @@
     "pages/product/index",
     "pages/mine/index",
     "pages/deviceDetail/index",
-    "pages/login/index"
+    "pages/login/index",
+    "pages/productList/index"
   ],
   "usingComponents": {
   },

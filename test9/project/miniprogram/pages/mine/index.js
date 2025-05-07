@@ -57,49 +57,42 @@ Page({
 
   // 获取mine页面信息
   async requestPageData(e) {
-
-    let data = await requestWithLafToken('GET', `/iot/requestAccountProfile`)
-      .then(res => {
-        switch(res.response.data.runCondition) {
-          case 'cant find the account':
-          case 'find account profile error':
-          
+    let userProfile
+    try{
+      const requestRes = await requestWithLafToken('GET', `/iot2/getUserProfile`)
+      switch(requestRes.data.runCondition) {
+        case 'succeed':
+          userProfile = requestRes.data.userProfile
+          break
+        case 'db error':
           wx.showToast({
-            title: '找不到账号',
+            title: '数据库错误',
+            duration: 1500,
             icon: 'error',
             mask: true,
           })
-
-          return  // 此处退出回调函数使得 data 得 undefine，在外面判断 data 是否为 undefine 以跳出 requestWithLafToken()
-        }
-        console.log("requestPageData res.response:", res.response)
-        console.log("requestPageData res.response.data.data:", res.response.data.data)
-        return res.response.data.data
-      })
-      .catch(err => {
-        console.log("requestPageData err:", err)
-        switch(err.runCondition) {
-          case 'laf_token error':
-            on_laf_token_Invalid()
-            return
-          case 'request error':
-            on_request_error()
-            return
-        }
-      })
-
-      if (!data) {
-        return  // 接力 then() 的 return
+          return
       }
+    } catch(err) {
+      console.log("API getUserProfile err:", err)
+      switch(err.runCondition) {
+        case 'laf_token error':
+          on_laf_token_Invalid()
+          return
+        case 'request error':
+          on_request_error()
+          return
+      }
+    }
 
-      this.setData({
-        user_profile: {
-          avatar_url: data.avatar_url ? data.avatar_url : '/static/images/icons/defaultAvatar.png',
-          nickname: data.nickname ? data.nickname : '请设置昵称',
-          username: data.username ? data.username : '请设置用户名'
-        }
-      })
-
+    // 成功的继续
+    this.setData({
+      user_profile: {
+        avatar_url: userProfile.avatar_url ? userProfile.avatar_url : '/static/images/icons/defaultAvatar.png',
+        nickname: userProfile.nickname ? userProfile.nickname : 'default nickname',
+        username: userProfile.username,
+      }
+    })
   }
 
 

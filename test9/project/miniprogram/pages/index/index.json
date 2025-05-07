@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "LoginPop": "/components/LoginPop/LoginPop",
     "serviceCard": "/components/serviceCard/index"
   },
   "navigationBarBackgroundColor": "#c9e8ff",

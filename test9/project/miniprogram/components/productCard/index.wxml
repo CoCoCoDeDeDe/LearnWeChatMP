@@ -1,0 +1,33 @@
+<view class="box">
+
+  <block wx:for="{{productList}}" wx:key="_id">
+    
+    <view class="cardBox" bind:tap="onGetProductList" data-idx="{{index}}">
+
+      <view class="board">
+
+        <view class="imgBox-column">
+
+          <image src="{{item.previewImg_url}}" mode="" class="img"/>
+
+        </view>
+
+        <view class="textBox-column">
+
+          <view class="title-row">
+            
+          </view>
+          <view class="discrobe-row">
+            
+          </view>
+
+        </view>
+
+      </view>
+
+    </view>
+
+
+  </block>
+
+</view>

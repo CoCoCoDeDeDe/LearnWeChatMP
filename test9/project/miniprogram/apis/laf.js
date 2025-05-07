@@ -5,7 +5,7 @@ export async function register(username, password) {
   return new Promise((resolve, reject) => {
     wx.request({
       method: "POST",
-      url: baseUrl + "/test/register",
+      url: baseUrl + "/iot2/register",
       header: {
         "Content-Type": "application/json"
       },
@@ -17,27 +17,22 @@ export async function register(username, password) {
         console.log("res", res)
         switch(res.data.runCondition)
         {
-          case 'invalid username':
-            console.log('invalid username')
-            reject('无效的用户名')
+          case 'succeed':
+            console.log('注册账号 API 返回成功')
+            resolve(res.data)
             return
-          case 'invalid password':
-            console.log('invalid password')
-            reject('无效的密码')
-            return
-          case 'username already existed':
-            console.log('username already existed')
-            reject('用户名已被注册')
-            return
-          case 'registered successfully':
-            console.log('registered successfully')
-            resolve('注册成功')
+          default:
+            console.log('注册账号 API 返回错误 res.data:', res.data)
+            reject(res.data)
             return
         }
       },
       fail: err => {
         console.error("网络请求失败:", err)
-        reject('网络请求失败')
+        reject({
+          runCondition: 'request error',
+          errMsg: '网络请求失败',
+        })
       }
     })
   })
@@ -45,13 +40,10 @@ export async function register(username, password) {
 
 // login
 export async function login(username, password) {
-  // console.log("function login")
-  // console.log(username)
-  // console.log(password)
   return new Promise((resolve, reject) => {
     wx.request({
       method: "POST",
-      url: baseUrl + "/test/login",
+      url: baseUrl + "/iot2/login",
       header: {
         "Content-Type": "application/json"
       },
@@ -59,34 +51,46 @@ export async function login(username, password) {
         username: username,
         password: password,
       },
-      success: res => {
+      success: async res => {
         switch(res.data.runCondition){
-          case 'invalid username or password':
+          case 'param error':
             console.log("登录失败，账号或密码错误，errMsg:", res.data.errMsg)
-            reject('账号或密码错误')
+            reject(res.data)
             return
-          case 'login succeed':
+          case 'succeed':
             console.log("登录成功，token:", res.data.access_token)
-
-            wx.setStorage({
-              key: 'laf_token',
-              data: res.data.access_token,
-              encrypt: false
-            }).catch(err => {
-              console.log("token本地存储失败 err:", err)
-              reject('token本地存储失败')
-              return
+            
+            // 存储 laf_token 到本地缓存
+            try {
+              await wx.setStorage({
+                key: 'laf_token',
+                data: res.data.access_token,
+                encrypt: false
+              })
+            }catch(err) {
+              console.log("laf_token 存储到本地失败 err:", err)
+              reject({
+                runCondition: 'storage error',
+                errMsg: 'laf_token 存储到本地失败',
+              })
+            }
+            console.log("获取新 laf_token 并存储到本地成功")
+            resolve({
+              runCondition: 'succeed',
+              errMsg: 'succeed',
             })
-
-            resolve('登录成功')
             return
         }
       },
       fail: err => {
         console.log("网络请求失败 err:", err)
-        reject('网络请求失败')
+        reject({
+          runCondition: 'request error',
+          errMsg: '网络请求失败',
+        })
       }
     })
+
   })
 }
 
@@ -196,7 +200,7 @@ export async function verify_laf_token_request(laf_token) {
 export async function requestWithLafToken( method, last_url, query='', data ) {
   if( method == null || last_url == null ) return
 
-  // TODO 将 query 转化为 ?key1=value1&key2=value2的格式的字符串 query_str
+  // 将 query 转化为 ?key1=value1&key2=value2的格式的字符串 query_str
   let query_str = '';
   if (typeof query === 'object' && query!== null) {
     // Object.entries() 将 query: { key1: 'value1', key2: 'value2' } 此类对象转化为数组，期内的键值对也用含两个元素的数组表示，两个元素分别对应键名和值，形式如 query: [ ['key1', 'value1'], ['key2', 'value2'] ] 此方法通常用于用遍历数组的方式遍历对象
@@ -210,42 +214,33 @@ export async function requestWithLafToken( method, last_url, query='', data ) {
       query_str = '?' + queryPairs.join('&');
     }
   }
-  // console.log("要插入URL的query query_str:", query_str)
+  console.log("requestWithLafToken query_str:", query_str)
 
   let laf_token
-
   return await new Promise(async (resolve, reject) => {
 
     // 本地token有无：是否提醒登录并return
     try {
       const res = await wx.getStorage({key: 'laf_token'})
-      // console.log("测试 res", res)
-
-      if(res.data == '' || res.data == null ) {
-        console.log("读取本地缓存laf_token为空")
-        reject({
-          runCondition: 'laf_token error',
-          errMsg: 'laf_token error',
-        })
-        return
+      if(res.data === '' || res.data === null ) {
+        throw new Error('"requestWithLafToken 读取本地缓存 laf_token 为空')
       } else {
-        console.log("读取本地缓存laf_token成功 res.data:", res.data)
+        console.log("requestWithLafToken 读取本地缓存laf_token成功 res.data:", res.data)
         // 继续
         laf_token = res.data
       }
     } catch(err) {
-      console.log("读取本地缓存laf_token错误，可能laf_token不存在 err:", err)
+      console.log("requestWithLafToken 读取本地缓存laf_token错误 err:", err)
       reject({
         runCondition: 'laf_token error',
-        errMsg: 'laf_token error',
+        errMsg: 'token 错误',
       })
       return
     }
 
-    console.log("开始请求API:", baseUrl + last_url)
-
     // 根据参数（ method, last_url, data ）请求云函数
-    wx.request({
+    console.log("开始请求API:", baseUrl + last_url)
+    await wx.request({
       method: method,
       url: baseUrl + last_url + query_str,
       header: {
@@ -253,30 +248,16 @@ export async function requestWithLafToken( method, last_url, query='', data ) {
         'Authorization': 'Bearer ' + laf_token,
       },
       data: data,
-      success: (result) => {
-
-        switch(result.data.runCondition) {
-          case 'token parse error':
-          case 'cant find the account':
-            resolve({
-              runCondition: 'laf_token error',
-              errMsg: 'laf_token error'
-            })
-            return
-        }
-
-        resolve({
-          runCondition: 'request succeed',
-          errMsg: 'request succeed ',
-          response: result  // 进一步对 response.data.runCondition 进行错误识别
-        })
+      success: (res) => {
+        console.log("网络请求成功 res:", res)
+        resolve(res) // 请求成功 进一步对 response.data.runCondition 进行错误识别
         return
       },
       fail: (err) => {
         console.log("网络请求失败 err:", err)
         reject({
           runCondition: 'request error',
-          errMsg: 'request error',
+          errMsg: '网络请求失败',
         })
         return
       }
@@ -289,22 +270,23 @@ export async function on_laf_token_Invalid( title = '请在登录后使用' ) {
   // 提示登录
   wx.showToast({
     title: title,
-    duration: 1100,
+    duration: 1500,
     icon: 'error',
-    mask: true
+    mask: true,
   })
 
-  // 置标志位
-  let app = getApp()
-  app.globalData.laf_token_validity = false
+  // 跳转到登录和注册的页面
+  wx.navigateTo({
+    url: '/pages/login/index',
+  })
 }
 
-export async function on_request_error(title = '请求失败') {
+export async function on_request_error(title = '网络请求失败') {
   // 提示
   wx.showToast({
     title: title,
     duration: 1500,
     icon: 'error',
-    mask: true
+    mask: true,
   })
 }

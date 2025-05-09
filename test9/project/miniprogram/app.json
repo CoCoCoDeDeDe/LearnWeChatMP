@@ -4,9 +4,10 @@
     "pages/smartLink/index",
     "pages/product/index",
     "pages/mine/index",
-    "pages/deviceDetail/index",
     "pages/login/index",
-    "pages/productList/index"
+    "pages/device/deviceDetail/index",
+    "pages/device/productList/index",
+    "pages/device/bindUserWithDevice/index"
   ],
   "usingComponents": {
   },

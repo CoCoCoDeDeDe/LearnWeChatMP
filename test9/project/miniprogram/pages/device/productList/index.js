@@ -1,5 +1,5 @@
 // pages/productList/index.js
-import { requestWithLafToken, on_laf_token_Invalid, on_request_error, on_request_kit } from '../../../apis/laf'
+import { requestWithLafToken, on_laf_token_Invalid, on_request_error, on_param_error } from '../../../apis/laf'
 Page({
 
   /**
@@ -81,13 +81,16 @@ Page({
         'dbInfo.total': requestRes.data.total
       })
     } catch(err) {
-      console.log("请求失败 err:", err)
+      console.log("请求失败 err:", err) // 有混用的情况
       switch(err.runCondition) {
         case 'laf_token error':
           on_laf_token_Invalid()
           return
         case 'request error':
           on_request_error()
+          return
+        case 'param error':
+          on_param_error()
           return
       }
     }
@@ -131,6 +134,9 @@ Page({
           return
         case 'request error':
           on_request_error()
+          return
+        case 'param error':
+          on_param_error()
           return
       }
     }

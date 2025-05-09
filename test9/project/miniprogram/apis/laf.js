@@ -214,7 +214,7 @@ export async function requestWithLafToken( method, last_url, query='', data ) {
       query_str = '?' + queryPairs.join('&');
     }
   }
-  console.log("requestWithLafToken query_str:", query_str)
+  // console.log("requestWithLafToken query_str:", query_str)
 
   let laf_token
   return await new Promise(async (resolve, reject) => {
@@ -225,7 +225,7 @@ export async function requestWithLafToken( method, last_url, query='', data ) {
       if(res.data === '' || res.data === null ) {
         throw new Error('"requestWithLafToken 读取本地缓存 laf_token 为空')
       } else {
-        console.log("requestWithLafToken 读取本地缓存laf_token成功 res.data:", res.data)
+        // console.log("requestWithLafToken 读取本地缓存laf_token成功 res.data:", res.data)
         // 继续
         laf_token = res.data
       }
@@ -239,7 +239,7 @@ export async function requestWithLafToken( method, last_url, query='', data ) {
     }
 
     // 根据参数（ method, last_url, data ）请求云函数
-    console.log("开始请求API:", baseUrl + last_url)
+    console.log("开始请求API:", baseUrl + last_url + query_str)
     await wx.request({
       method: method,
       url: baseUrl + last_url + query_str,
@@ -250,7 +250,15 @@ export async function requestWithLafToken( method, last_url, query='', data ) {
       data: data,
       success: (res) => {
         console.log("网络请求成功 res:", res)
-        resolve(res) // 请求成功 进一步对 response.data.runCondition 进行错误识别
+        switch(res.data.runCondition) {
+          case 'succeed':
+            break //继续
+          default:
+            reject(res.data)  // succeed  之外都在 catch 中
+            return
+        }
+
+        resolve(res) // 请求成功 进一步对 data.runCondition 进行错误识别
         return
       },
       fail: (err) => {
@@ -289,4 +297,66 @@ export async function on_request_error(title = '网络请求失败') {
     icon: 'error',
     mask: true,
   })
+}
+
+export async function on_db_error(title = '数据库错误') {
+  // 提示
+  wx.showToast({
+    title: title,
+    duration: 1500,
+    icon: 'error',
+    mask: true,
+  })
+}
+
+export async function on_param_error(title = '参数无效') {
+  // 提示
+  wx.showToast({
+    title: title,
+    duration: 1500,
+    icon: 'error',
+    mask: true,
+  })
+}
+
+export async function on_common_error(resData) {
+  // 提示
+  wx.showToast({
+    title: resData.errMsg,
+    duration: 1500,
+    icon: 'error',
+    mask: true,
+  })
+}
+
+// 已弃用
+export async function on_unknown_error(title = '未知错误') {
+  // 提示
+  wx.showToast({
+    title: title,
+    duration: 1500,
+    icon: 'error',
+    mask: true,
+  })
+}
+
+// requestWithLafToken() 与其错误处理函数 on_laf_token_Invalid() on_request_error() 打包, 自动处理 laf_token error 和 request error 的错误。
+// 网络 API 返回的其他错误需要在改函数后另外识别和处理
+// 调用该函数记得 await
+// 该函数目前弃用
+export async function on_request_kit( method, last_url, query, data ) {
+  try{
+    const requestRes = await requestWithLafToken(method, last_url, query, data)
+    return requestRes
+  } catch(err) {
+    console.log("请求失败 err:", err)
+    switch(err.runCondition) {
+      case 'laf_token error':
+        on_laf_token_Invalid()
+        return
+      case 'request error':
+        on_request_error()
+        return
+    }
+  }
 }

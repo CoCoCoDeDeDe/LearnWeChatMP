@@ -74,6 +74,9 @@ Page({
       wx.reLaunch({
         url: '/pages/index/index'
       })
+      // wx.navigateTo({
+      //   url: '/pages/index/index'
+      // })
     }, 1500)
 
   },

@@ -7,6 +7,27 @@
     "miniprogram": {
       "list": [
         {
+          "name": "匹配设备",
+          "pathName": "pages/device/bindUserWithDevice/index",
+          "query": "product_id=67e22c942902516e866abb29",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "设备详情",
+          "pathName": "pages/device/deviceDetail/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "添加设备-产品列表",
+          "pathName": "pages/device/productList/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "tabBar-首页-智联组",
           "pathName": "pages/index/index",
           "query": "",
@@ -35,22 +56,8 @@
           "scene": null
         },
         {
-          "name": "设备详情",
-          "pathName": "pages/deviceDetail/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
           "name": "登录和注册",
           "pathName": "pages/login/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "产品列表",
-          "pathName": "pages/productList/index",
           "query": "",
           "launchMode": "default",
           "scene": null

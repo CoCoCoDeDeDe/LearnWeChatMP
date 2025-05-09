@@ -1,0 +1,20 @@
+<view class="CardBox">
+  <view class="Board">
+  
+    <view class="Board_ColumnIntro">
+      <view class="Desc_Title">水位</view>
+      <view class="Desc_unit">cm</view>
+    </view>
+    
+    <view class="Board_ColumnChart">
+      echart
+    </view>
+    
+    <view class="Board_ColumnCurrentValue">
+      <view class="CurrentValue_value">
+        
+      </view>
+    </view>
+
+  </view>
+</view>

@@ -6,13 +6,15 @@
   background: #fcfcfc;
   box-shadow: 2px 2px 8px 2px #0000000e;
 
-  padding: 10px 10px 10px 14px;
+  padding: 6px 10px 6px 7px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 .column_PreviewImgAndTextInfo{
+  /* width: 230px; */
+
   display: flex;
   direction: row;
   justify-content: flex-start;
@@ -26,31 +28,42 @@
 }
 .previewImg {
   display: flexbox;
-  width: 60px;
-  height: 60px;
+  width: 63px;
+  height: 63px;
+
+  padding: 1px;
+
+  background-color: #f1f1f1;
+  border-radius: 10px;
 }
 
 .columnTextInfo{
+  width: 176px;
+
   padding: 5px 0px 5px 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  /* justify-content: space-around; */
 }
 .rowNickName{
-  display: flex;
+  overflow: scroll;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: normal;
 
-}
-.nickname{
-  white-space: nowrap;
+  padding: 0 0 10px 0;
+
   font-size: 16px;
   color: var(--main-text-color);
 }
 .rowPosition{
-  display: flex;
+  overflow: scroll;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: normal;
 
-}
-.position{
-  white-space: nowrap;
+  padding: 2px 0 0 0 ;
+
   font-size: 12px;
   color: #9f9f9f;
 }

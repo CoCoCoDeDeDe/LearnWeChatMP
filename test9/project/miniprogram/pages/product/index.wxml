@@ -17,21 +17,21 @@
         </view>
       </view>
     </view>
-
-    <!-- 设备列表空时，不显示设备列表，显示提示词 -->
-    <block wx:if="{{devices.length  != 0 ? true : false}}">
+    <!-- 设备列表空时，不显示设备列表，显示提示词
+    要求 deviceList 为数组类型，不可为 undefined 等等 -->
+    <block wx:if="{{deviceList.length  != 0 ? true : false}}">
 
       <view class="myDevicesList">
-        <block wx:for="{{devices}}" wx:key="id">
+        <block wx:for="{{deviceList}}" wx:key="_id">
           <deviceCard deviceProfile="{{item}}"></deviceCard>
         </block>
       </view>
       
-      <!-- 页面要有下拉刷新功能，下拉刷新后显示showMoreBtn，默认展示n个设备 -->
+      <!-- TODO 页面要有下拉刷新功能，下拉刷新后显示showMoreBtn，默认展示n个设备 -->
       <!-- 设备来源是从服务器获取该用户的设备列表，进入产品页面默认获取n个（Limit: n）设备，点击更多获取全部并不再渲染showMoreBtn -->
       <!-- 产品页面的设备卡片要获取的信息有：产品设备卡片专用预览图、设备名、region、zone、id -->
       <!-- 设备卡片的 查看设备按钮（按卡片本身也算）、编辑按钮、删除按钮 要用data-deviceId="{{item.id}}"携带把设备id数据。作为路由数据带到设备详细页面，或用于指引编辑的哪个设备，或用于指引删除的哪个设备 -->
-      <view class="showMoreBtnBox" wx:if="{{ limit != 0 ? true : false }}">
+      <view class="showMoreBtnBox" wx:if="{{ deviceList.length >= deviceListProfile.total ? false : true }}">
         <view class="showMoreBtn" bind:tap="onShowMoreDevices">
           <text class="showMoreBtnText">更多</text>
           <image src="/static/images/icons/simpleArrowIcon_darkBlue_Left@2x.png" mode="heightFix" class="showMoreBtnImg"/>

@@ -1,0 +1,31 @@
+.CardBox{
+  width: 100%;
+  padding: 8px;
+}
+.Board{
+  width: 100%;
+  padding: 10px;
+
+    border-radius: 10px;
+  box-shadow: 1px 1px 8px 2px #0000000f;
+}
+.Board_ColumnIntro{
+  width: 20%;
+}
+.Desc_Title{
+
+}
+.Desc_unit{
+
+}
+.Board_ColumnChart{
+  width: 20%;
+
+}
+.Board_ColumnCurrentValue{
+  width: 20%;
+
+}
+.CurrentValue_value{
+
+}

@@ -1,5 +1,6 @@
 // pages/productList/index.js
-import { requestWithLafToken, on_laf_token_Invalid, on_request_error, on_param_error } from '../../../apis/laf'
+import { isValidNonEmptyString } from '../../../utils/common'
+import { requestWithLafToken, on_laf_token_Invalid, on_request_error, on_db_error, on_param_error, on_unknown_error, on_common_error } from '../../../apis/laf'
 Page({
 
   /**
@@ -75,13 +76,13 @@ Page({
     // 请求追加产品
     let newProductList
     try{
-      const requestRes = await requestWithLafToken('GET', '/iot2/getProductList', { limit: this.data.requestOptions.limit, skip: this.data.requestOptions.skip })
-      newProductList = requestRes.data.productList
+      const resData = await requestWithLafToken('GET', '/iot2/getProductList', { limit: this.data.requestOptions.limit, skip: this.data.requestOptions.skip })
+      // console.log("resData", resData)
+      newProductList = resData.productList
       this.setData({
-        'dbInfo.total': requestRes.data.total
+        'dbInfo.total': resData.total
       })
     } catch(err) {
-      console.log("请求失败 err:", err) // 有混用的情况
       switch(err.runCondition) {
         case 'laf_token error':
           on_laf_token_Invalid()
@@ -89,8 +90,14 @@ Page({
         case 'request error':
           on_request_error()
           return
+        case 'db error':
+          on_db_error()
+          return
         case 'param error':
           on_param_error()
+          return
+        default:
+          on_common_error()
           return
       }
     }
@@ -121,13 +128,12 @@ Page({
   async onGetProductList(e) {
     let productList
     try{
-      const requestRes = await requestWithLafToken('GET', '/iot2/getProductList', { limit: this.data.requestOptions.limit, skip: this.data.requestOptions.skip })
-      productList = requestRes.data.productList
+      const resData = await requestWithLafToken('GET', '/iot2/getProductList', { limit: this.data.requestOptions.limit, skip: this.data.requestOptions.skip })
+      productList = resData.productList
       this.setData({
-        'dbInfo.total': requestRes.data.total
+        'dbInfo.total': resData.total
       })
     } catch(err) {
-      console.log("请求失败 err:", err)
       switch(err.runCondition) {
         case 'laf_token error':
           on_laf_token_Invalid()
@@ -135,15 +141,30 @@ Page({
         case 'request error':
           on_request_error()
           return
+        case 'db error':
+          on_db_error()
+          return
         case 'param error':
           on_param_error()
+          return
+        default:
+          on_common_error()
           return
       }
     }
     // 成功请求的后续
-    console.log("productList:", productList)
+    // console.log("productList:", productList)
     this.setData({
       productList: productList
+    })
+  },
+
+  async onToBindPageWithProductId(e) {
+    // console.log("onToBindPage 携带参数 e.currentTarget.dataset:", e.currentTarget.dataset)
+    const { product_id } = e.currentTarget.dataset
+    // console.log("onToBindPage 携带参数 product_id:", product_id)
+    wx.navigateTo({
+      url: `/pages/device/bindUserWithDevice/index?product_id=${product_id}`,
     })
   }
 })

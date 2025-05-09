@@ -35,7 +35,7 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "场所",
+        "text": "智联组",
         "iconPath": "/static/images/icons/tabBar_site_inactive.png",
         "selectedIconPath": "/static/images/icons/tabBar_site_active.png"
       },

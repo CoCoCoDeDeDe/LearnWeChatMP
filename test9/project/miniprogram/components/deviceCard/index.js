@@ -1,4 +1,6 @@
 // components/deviceCard/index.js
+import { isValidNonEmptyString } from '../../utils/common'
+import { requestWithLafToken, on_laf_token_Invalid, on_request_error, on_db_error, on_param_error, on_unknown_error, on_common_error } from '../../apis/laf'
 Component({
 
   /**
@@ -8,11 +10,11 @@ Component({
     deviceProfile: {
       type: Object,
       value: {
-        id: 'default_id',
-        previewImgUrl: 'https://mp-1b9cd3c8-d666-4006-b791-11d5ce02e1be.cdn.bspapp.com/IoT1/test/previewImg_aqaq.png',
-        deviceName: '默认设备昵称',
-        regionName: '默认场所',
-        zoneName: '默认功能区'
+        _id: 'default_id',
+        product_id: 'default_product_id',
+        huawei_device_id: 'default_huawei_device_id',
+        previewImg_url: 'https://mp-1b9cd3c8-d666-4006-b791-11d5ce02e1be.cdn.bspapp.com/IoT1/test/previewImg_aqaq.png', // 来自产品集合
+        name: '默认设备名称', // 用户自定的，来自设备集合
       }
       ,
       required: false,
@@ -27,15 +29,15 @@ Component({
     columnBtnsArr: [
       {
         imageSrc: '/static/images/icons/icon_deviceDetail_line_dekBlue@2x.png',
-        bindtap: 'onToDeviceDetail'
+        bindtap: 'onBindtapDeviceDetail'
       },
       {
         imageSrc: '/static/images/icons/icon_edit_line_darkBlue@2x.png',
-        bindtap: 'onToEditDevice'
+        bindtap: 'onBindtapEditDevice'
       },
       {
         imageSrc: '/static/images/icons/icon_delete_line_darkBlue@2x.png',
-        bindtap: 'onToDeleteDevice'
+        bindtap: 'onBindtapUnbindDevice'
       }
     ]
   },
@@ -45,16 +47,145 @@ Component({
    */
   methods: {
 
-    onToDeviceDetail(e) {
-      console.log("onToDeviceDetail e:", e)
+    onBindtapDeviceDetail(e) {
+      const { deviceprofile } = e.currentTarget.dataset // data- 属性传递的数据的键名全小写
+      console.log("onBindtapDeviceDetail deviceprofile:", deviceprofile)
     },
 
-    onToEditDevice(e) {
-      console.log("onToEditDevice e:", e)
+    onBindtapEditDevice(e) {
+      const { deviceprofile } = e.currentTarget.dataset // data- 属性传递的数据的键名全小写
+      console.log("onBindtapEditDevice deviceprofile:", deviceprofile)
+      
+      wx.showModal({
+        cancelColor: '#aaa',
+        cancelText: '取消',
+        confirmColor: '#54c17d',
+        confirmText: '提交',
+        // content: '',
+        editable: true,
+        placeholderText: 'new name',
+        showCancel: true,
+        title: '请宝宝输入新米即',
+        success: async (result) => {
+          console.log("result", result)
+          if(result.cancel) {
+            return
+          }
+          if(result.confirm) {
+            const { deviceprofile } = e.currentTarget.dataset // data- 属性传递的数据的键名全小写
+            this.onEditDevice(deviceprofile, result.content)
+          }
+        },
+        fail: (res) => {},
+        complete: (res) => {},
+      })
     },
 
-    onToDeleteDevice(e) {
-      console.log("onToDeleteDevice e:", e)
-    }
+    async onEditDevice(deviceprofile, newName) {
+      // newName 校验
+      if(typeof newName !== 'string' || newName.trim().length <= 0) {
+        wx.showToast({
+          title: `新名称 ${newName} 不合格`,
+          duration: 1500,
+          icon: 'error',
+          mask: false,
+        })
+        return
+      }
+
+      try{
+        const resData = await requestWithLafToken('GET', '/iot2/device/editDeviceName', {huawei_device_id: deviceprofile.huawei_device_id, name: newName})
+      } catch(err) {
+        switch(err.runCondition) {
+          case 'laf_token error':
+            on_laf_token_Invalid()
+            return
+          case 'request error':
+            on_request_error()
+            return
+          case 'db error':
+            on_db_error()
+            return
+          case 'param error':
+            on_param_error()
+            return
+          default:
+            on_common_error()
+            return
+        }
+      }
+
+      wx.showToast({
+        title: `改名为 ${newName} 成功`,
+        duration: 1500,
+        icon: 'none',
+        mask: true,
+      })
+
+      // TODO 子组件控制双亲页面刷新页面
+
+    },
+
+    onBindtapUnbindDevice(e) {
+      wx.showModal({
+        cancelColor: '#aaa',
+        cancelText: '取消',
+        confirmColor: '#c41a16',
+        confirmText: '解绑',
+        content: '请谨慎确认',
+        editable: false,
+        placeholderText: 'placeholderText',
+        showCancel: true,
+        title: '是否确认解绑设备',
+        success: async (result) => {
+          // console.log("result", result)
+          if(result.cancel) {
+            return
+          }
+          if(result.confirm) {
+            const { deviceprofile } = e.currentTarget.dataset // data- 属性传递的数据的键名全小写
+            this.onUnbindDevice(deviceprofile)
+          }
+        },
+        fail: (res) => {},
+        complete: (res) => {},
+      })
+
+    },
+
+    async onUnbindDevice(deviceprofile) {
+      console.log("onUnbindDevice deviceprofile:", deviceprofile)
+      try{
+        const resData = await requestWithLafToken('GET', '/iot2/device/unbindUserWithDevice', {huawei_device_id: deviceprofile.huawei_device_id})
+      } catch(err) {
+        switch(err.runCondition) {
+          case 'laf_token error':
+            on_laf_token_Invalid()
+            return
+          case 'request error':
+            on_request_error()
+            return
+          case 'db error':
+            on_db_error()
+            return
+          case 'param error':
+            on_param_error()
+            return
+          default:
+            on_common_error()
+            return
+        }
+      }
+
+      wx.showToast({
+        title: '解绑成功',
+        duration: 1500,
+        icon: 'success',
+        mask: true,
+      })
+
+      // TODO 子组件控制双亲页面刷新页面
+    },
+
   }
 })

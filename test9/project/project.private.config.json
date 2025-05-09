@@ -7,23 +7,23 @@
     "miniprogram": {
       "list": [
         {
-          "name": "匹配设备",
-          "pathName": "pages/device/bindUserWithDevice/index",
-          "query": "product_id=67e22c942902516e866abb29",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "设备详情",
+          "name": "device/设备详情",
           "pathName": "pages/device/deviceDetail/index",
           "query": "",
           "launchMode": "default",
           "scene": null
         },
         {
-          "name": "添加设备-产品列表",
+          "name": "device/产品列表",
           "pathName": "pages/device/productList/index",
-          "query": "",
+          "query": "product_id=67e22c942902516e866abb29",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "device/绑定设备",
+          "pathName": "pages/device/bindUserWithDevice/index",
+          "query": "product_id=67e22c942902516e866abb29",
           "launchMode": "default",
           "scene": null
         },

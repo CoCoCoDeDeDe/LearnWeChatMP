@@ -7,35 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    serviceNavigatorCardList: [
-      {
-        iconUrl: '/static/images/icons/icon_helpAndFeedback_block_darkBlue@2x.png',
-        title: '帮助与反馈',
-        navigateUrl: '/pages/mine/index'  // TODO 打造帮助与反馈页面
-      },
-      {
-        iconUrl: '/static/images/icons/icon_shoppingOrder_block_darkBlue@2x.png',
-        title: '购物记录',
-        navigateUrl: '/pages/mine/index'  // TODO 打造购物记录页面
-      },
-      {
-        iconUrl: '/static/images/icons/icon_afterService_block_darkBlue@2x.png',
-        title: '产品售后',
-        navigateUrl: '/pages/mine/index'  // TODO 打造产品售后页面
-      }
-    ],
-    programNavigatorCardList: [
-      {
-        iconUrl: '/static/images/icons/icon_programSetting_block_darkBlue@2x.png',
-        title: '设置',
-        navigateUrl: '/pages/mine/index'  // TODO 打造程序设置页面
-      }
-    ],
-    user_profile: {
-      avatar_url: '/static/images/icons/defaultAvatar.png',
-      nickname: 'default nickname',
-      username: 'default username'
-    }
   },
 
   /**
@@ -52,7 +23,43 @@ Page({
   
   // 页面重置
   reset(e) {
-
+    this.setData({
+      serviceNavigatorCardList: [
+        {
+          iconUrl: '/static/images/icons/icon_helpAndFeedback_block_darkBlue@2x.png',
+          title: '帮助与反馈',
+          navigateUrl: '/pages/mine/index'  // TODO 打造帮助与反馈页面
+        },
+        {
+          iconUrl: '/static/images/icons/icon_shoppingOrder_block_darkBlue@2x.png',
+          title: '购物记录',
+          navigateUrl: '/pages/mine/index'  // TODO 打造购物记录页面
+        },
+        {
+          iconUrl: '/static/images/icons/icon_afterService_block_darkBlue@2x.png',
+          title: '产品售后',
+          navigateUrl: '/pages/mine/index'  // TODO 打造产品售后页面
+        }
+      ],
+      programNavigatorCardList: [
+        {
+          iconUrl: '/static/images/icons/icon_programSetting_block_darkBlue@2x.png',
+          title: '设置',
+          navigateUrl: '/pages/mine/index'  // TODO 打造程序设置页面
+        }
+      ],
+      cardData_logOff: {
+        iconUrl: '/static/images/icons/icon_programSetting_block_darkBlue@2x.png',
+        title: '退出登录',
+        // methodName_bindTap: 'on_logOff',
+        // navigateUrl: null,
+      },
+      userProfile: {
+        avatar_url: '/static/images/icons/defaultAvatar.png',
+        nickname: '默认昵称',
+        username: 'default user_name'
+      }
+    })
   },
 
   // 获取mine页面信息
@@ -60,19 +67,7 @@ Page({
     let userProfile
     try{
       const requestRes = await requestWithLafToken('GET', `/iot2/getUserProfile`)
-      switch(requestRes.data.runCondition) {
-        case 'succeed':
-          userProfile = requestRes.data.userProfile
-          break
-        case 'db error':
-          wx.showToast({
-            title: '数据库错误',
-            duration: 1500,
-            icon: 'error',
-            mask: true,
-          })
-          return
-      }
+      userProfile = requestRes.userProfile
     } catch(err) {
       console.log("API getUserProfile err:", err)
       switch(err.runCondition) {
@@ -82,18 +77,47 @@ Page({
         case 'request error':
           on_request_error()
           return
+        case 'db error':
+          on_db_error()
+          return
+        case 'param error':
+          on_param_error()
+          return
+        default:
+          on_unknown_error()
+          return
       }
     }
 
     // 成功的继续
     this.setData({
-      user_profile: {
-        avatar_url: userProfile.avatar_url ? userProfile.avatar_url : '/static/images/icons/defaultAvatar.png',
-        nickname: userProfile.nickname ? userProfile.nickname : 'default nickname',
-        username: userProfile.username,
-      }
+      userProfile: {...this.data.userProfile, ...userProfile} // 展开语法，后者拥有的元素(包括值为 undefined 的)会覆盖前者中相同键的元素，其他方法：遍历
     })
-  }
+    console.log("this.data.userProfile", this.data.userProfile)
+  },
 
+  onLogOff(e) {
+    wx.removeStorage({
+      key: 'laf_token',
+      success: (res) => {
+        wx.showToast({
+          title: '退出登录成功',
+          duration: 2000,
+          icon: 'success',
+          mask: false,
+        })
+      },
+      fail: (res) => {
+        wx.showToast({
+          title: '退出登录成功失败',
+          duration: 15000,
+          icon: 'error',
+          mask: true,
+        })
+      },
+    })
+
+    this.reset()
+  }
 
 })

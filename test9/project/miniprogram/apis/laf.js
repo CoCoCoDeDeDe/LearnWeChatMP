@@ -258,7 +258,7 @@ export async function requestWithLafToken( method, last_url, query='', data ) {
             return
         }
 
-        resolve(res) // 请求成功 进一步对 data.runCondition 进行错误识别
+        resolve(res.data) // 请求成功 进一步对 data.runCondition 进行错误识别
         return
       },
       fail: (err) => {

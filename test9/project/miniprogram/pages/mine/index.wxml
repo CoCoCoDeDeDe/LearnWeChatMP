@@ -7,16 +7,16 @@
     <view class="accountBoard">
       <view class="accountTextBox">
         <view class="usernameBox">
-          <view class="usernameText">{{user_profile.nickname}}</view>
+          <view class="usernameText">{{userProfile.nickname}}</view>
           <image src="/static/images/icons/simpleArrowIcon_darkBlue_Left@2x.png" mode="" class="arrowImg"/>
         </view>
         <view class="accountNumberBox">
-          <text class="accountNumber">{{user_profile.username}}</text>
+          <text class="accountNumber">{{userProfile.username}}</text>
         </view>
       </view>
       <view class="accountAvatarImgBox">
         {{test1}}
-        <image src="{{user_profile.avatar_url}}" mode="" class="accountAvatarImg"/>
+        <image src="{{userProfile.avatar_url}}" mode="" class="accountAvatarImg"/>
       </view>
     </view>
 
@@ -32,6 +32,11 @@
   <navigatorCardsCardBox navigatorCardList="{{serviceNavigatorCardList}}"></navigatorCardsCardBox>
 
   <navigatorCardsCardBox navigatorCardList="{{programNavigatorCardList}}"></navigatorCardsCardBox>
+
+  <!-- 退出登录卡片 -->
+  <navigatorCard cardData="{{cardData_logOff}}" bind:tap="onLogOff"></navigatorCard>
+
+
   <!-- 平台服务卡片 -->
   <!-- <view class="platformSeervicesCardBox">
     <view class="platformSeervicesBoard">

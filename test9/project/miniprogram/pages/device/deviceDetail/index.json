@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "uniIO-WSD": "/components/uniIOCard/uniIO-WSD"
+    "uniIOCard_WSD": "/components/uniIOCard/uniIOCard_WSD"
   },
   "navigationBarBackgroundColor": "#fefefe",
   "navigationBarTextStyle": "black",

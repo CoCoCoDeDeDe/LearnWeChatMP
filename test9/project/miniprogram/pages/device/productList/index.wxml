@@ -4,7 +4,7 @@
   <view class="productCardsContainer">
 
     <block wx:for="{{productList}}" wx:key="_id">
-      <productCard cardData="{{item}}"></productCard>
+      <productCard cardData="{{item}}" bind:tap="onToBindPageWithProductId" data-product_id="{{item._id}}"></productCard>
     </block>
 
     <block wx:if="{{ dbInfo.total != undefined && productList.length >= dbInfo.total }}">

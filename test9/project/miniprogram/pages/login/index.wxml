@@ -14,7 +14,7 @@
       </view>
     
       <view class="iptBox">
-        <input class="ipt" type="safe-password" name="" id=""model:value="{{value_ipt_pwd}}" placeholder="请输入密码" placeholder-style="font-size: 16px; color:var(--vice-text-color);" />
+        <input class="ipt" type="text" password="{{true}}" confirm-type="done" name="" id=""model:value="{{value_ipt_pwd}}" placeholder="请输入密码" placeholder-style="font-size: 16px; color:var(--vice-text-color);" />
       </view>
 
     </view>
@@ -42,8 +42,9 @@
           注册
         </view>
       </view>
-    
+
     </view>
+    
   </block>
   <block wx:elif="{{page_state == 'loginSucceed'}}">
     <view class="2iconBox">

@@ -43,9 +43,9 @@ Page({
 
   async onGetProductProfile(product_id) {
     try{
-      const result = await requestWithLafToken('GET', '/iot2/product/getProductProfile', { product_id: product_id })
+      const resData = await requestWithLafToken('GET', '/iot2/product/getProductProfile', { product_id: product_id })
       this.setData({
-        cardData: result.data.productProfile
+        cardData: resData.productProfile
       })
     } catch(err) {
       switch(err.runCondition) {
@@ -62,7 +62,7 @@ Page({
           on_param_error()
           return
         default:
-          on_unknown_error()
+          on_common_error()
           return
       }
     }
@@ -94,9 +94,11 @@ Page({
 
   async onBindRequest(huawei_device_id) {
     // 开始请求
+    let bindResData
     try{
-      const result = await requestWithLafToken('GET', '/iot2/device/bindUserWithDevice', {huawei_device_id: huawei_device_id})
+      const resData = await requestWithLafToken('GET', '/iot2/device/bindUserWithDevice', {huawei_device_id: huawei_device_id})
       // 继续
+      bindResData = resData
     } catch(err) {
       switch(err.runCondition) {
         case 'laf_token error':
@@ -118,13 +120,15 @@ Page({
     }
     // 匹配成功后返回上一页
     console.log("绑定成功")
-    wx.showToast({
-      title: '绑定成功',
-      duration: 1500,
+    await wx.showToast({
+      title: bindResData.errMsg,
+      duration: 2000,
       icon: 'success',
       mask: false,
     })
-    wx.navigateBack()
+    setTimeout(() => {
+      wx.navigateBack()
+    }, 2000)
   }
 
 

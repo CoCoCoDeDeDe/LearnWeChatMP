@@ -54,12 +54,26 @@ Page({
    */
   async onLoad(options) {
 
+    this.reset()
+
     // TODO：获取设备信息，包括设备昵称\devicePoster
     await wx.setNavigationBarTitle({
       title: this.data.rootPageState.deviceNickname
     })
 
     await this.onRequestDeviceLatestProperties()
+  },
+
+  reset() {
+    let htmlSnip = `
+      <uniIOCard_WSD></uniIOCard_WSD>
+      <view>in view</view>
+      <div>in div</div>
+    `
+
+    this.setData({
+      htmlSnip: htmlSnip,
+    })
   },
 
   /**

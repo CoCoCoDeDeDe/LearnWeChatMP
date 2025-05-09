@@ -2,5 +2,6 @@
   "usingComponents": {
     "deviceCard": "/components/deviceCard/index"
   },
-  "navigationBarBackgroundColor": "#ebf6ff"
+  "navigationBarBackgroundColor": "#ebf6ff",
+  "enablePullDownRefresh": true
 }

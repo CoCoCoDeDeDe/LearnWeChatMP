@@ -18,16 +18,20 @@
 .page-posterPlaceholder{
   position: relative;
   width: 100%;
-  height: 280px;
+  height: 40vh; /* 对应组 1 */
 }
 
 .page-mainCard{
   width: 100%;
   height: fit-content;
+  /* min-height: 600px; */
 }
 .page-mainCard-board{
   width: 100%;
   height: fit-content;
+  min-height: 60vh;   /* 对应组 1 */
   background-color: #f6f6f6;
-
+  border-radius: 20px;
+  
+  padding: 10px 0 0;
 }

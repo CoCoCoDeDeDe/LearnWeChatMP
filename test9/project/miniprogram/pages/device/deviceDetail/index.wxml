@@ -11,7 +11,11 @@
   
     <view class="page-mainCard-board">
     
-    <uniIO-WSD></uniIO-WSD>
+    <uniIOCard_WSD></uniIOCard_WSD>
+
+    <component is="uniIOCard_WSD"></component>
+
+    <component-tag-name is="uniIOCard_WSD"></component-tag-name>
     
     </view>
   

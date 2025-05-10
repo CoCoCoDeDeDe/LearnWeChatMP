@@ -1,31 +1,86 @@
+view {
+  --text-1column-min-height: 60px;
+}
+
 .CardBox{
   width: 100%;
   padding: 8px;
 }
 .Board{
   width: 100%;
+  /* height: 200px; */
+
   padding: 10px;
 
-    border-radius: 10px;
-  box-shadow: 1px 1px 8px 2px #0000000f;
-}
-.Board_ColumnIntro{
-  width: 20%;
-}
-.Desc_Title{
+  border-radius: 10px;
+  background-color: #f8f8f8;
+  box-shadow: 2px 2px 6px 1px #0000001f;
 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
-.Desc_unit{
+.left_1column{
+  flex: 1 1 36px; /* width */
+  height: 100%;
+  /* 当 左右文本 1column 的内容高度小于 中间图表的内容高度时，由 左右文本 1column 的 min-height 撑起盒子。
+  当 ... 大于 ... 时，由 中间图表的内容高度撑起盒子。 */
+  min-height: var(--text-1column-min-height);
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.Board_ColumnChart{
-  width: 20%;
+.title_1row{
+  flex: 3 2 auto;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 18px;
+  color: var(--main-text-color);
 }
-.Board_ColumnCurrentValue{
-  width: 20%;
+.group_1row{
+  flex: 1 1 auto;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  font-size: 13px;
+  color: var(--vice-text-color);
 }
-.CurrentValue_value{
+.middle_1column{
+  flex: 4 4 auto; /* width */
+  height: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.right_1column{
+  flex: 1 1 30px; /* width */
+  height: 100%;
+  min-height: var(--text-1column-min-height);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.value_3row{
 
+  font-size: 21px;
+  color: var(--main-text-color);
+}
+.unit_3row{
+
+  font-size: 14px;
+  color: var(--vice-text-color);
 }

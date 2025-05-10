@@ -96,6 +96,32 @@ Page({
     console.log("this.data.userProfile", this.data.userProfile)
   },
 
+  on_bindTap_LogOff(e) {
+    // 为退出登录函数嵌套确认弹窗
+      wx.showModal({
+        cancelColor: '#aaa',
+        cancelText: '取消',
+        confirmColor: '#c41a16',
+        confirmText: '退出登录',
+        content: '请谨慎确认',
+        editable: false,
+        placeholderText: 'placeholderText',
+        showCancel: true,
+        title: '是否确认退出登录',
+        success: async (result) => {
+          // console.log("result", result)
+          if(result.cancel) {
+            return
+          }
+          if(result.confirm) {
+            this.onLogOff()
+          }
+        },
+        fail: (res) => {},
+        complete: (res) => {},
+      })
+  },
+
   onLogOff(e) {
     wx.removeStorage({
       key: 'laf_token',

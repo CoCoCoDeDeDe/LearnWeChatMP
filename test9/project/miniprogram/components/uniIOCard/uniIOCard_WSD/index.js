@@ -8,11 +8,10 @@ Component({
     uniIO_Data: {
       type: Object,
       value: {
-        deviec_id: '',
-        device_name: '',
-        product_id: '',
-        product_name: '',
-        
+        external_name: '负水位',
+        smartLinkGroup_name: '智联组1',
+        currentValue: 30,
+        para_unit: 'cm',
       }
     }
   },

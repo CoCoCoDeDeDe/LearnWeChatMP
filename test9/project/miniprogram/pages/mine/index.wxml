@@ -34,7 +34,7 @@
   <navigatorCardsCardBox navigatorCardList="{{programNavigatorCardList}}"></navigatorCardsCardBox>
 
   <!-- 退出登录卡片 -->
-  <navigatorCard cardData="{{cardData_logOff}}" bind:tap="onLogOff"></navigatorCard>
+  <navigatorCard cardData="{{cardData_logOff}}" bind:tap="on_bindTap_LogOff"></navigatorCard>
 
 
   <!-- 平台服务卡片 -->

@@ -1,3 +1,7 @@
+<template name="uniIOCard_WSD">
+    <uniIOCard_WSD></uniIOCard_WSD>
+</template>
+
 <view class="page">
 
   <view class="page-background">
@@ -13,9 +17,10 @@
     
     <uniIOCard_WSD></uniIOCard_WSD>
 
-    <component is="uniIOCard_WSD"></component>
 
-    <component-tag-name is="uniIOCard_WSD"></component-tag-name>
+    <block wx:for="{{uniIOCardList}}" wx:key="_id">
+      <template is="{{item.templateName}}" data="{{item}}"/>
+    </block>
     
     </view>
   

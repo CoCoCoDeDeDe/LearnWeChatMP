@@ -6,6 +6,44 @@ Page({
    * 页面的初始数据
    */
   data: {
+    device_profile: {
+      device_name: '默认设备名称',
+    },
+
+
+    uniIOCardList: [
+      {
+      _id: '1',
+      templateName: 'uniIOCard_WSD',
+        external_name: '负水位',
+        // nickname: '负水位',
+        para_unit: 'cm',
+        smartLinkGroup_id: '1',
+        smartLinkGroup_name: '智联组1',
+        currentValue: 30,
+        racords: [
+          {
+            "event_time": "20250510T031623Z",
+            "value": "1",
+          },
+          {
+            "event_time": "20250510T031624Z",
+            "value": "2",
+          },
+          {
+            "event_time": "20250510T031625Z",
+            "value": "3",
+          },
+        ]
+      },
+    ],
+    
+    componentData: {
+      deviec_id: '',
+      device_name: '',
+      product_id: '',
+      product_name: '',
+    },
 
     descFunctionCardType_enum: {
       sensor_Light: 'sensor_Light',
@@ -55,46 +93,27 @@ Page({
   async onLoad(options) {
 
     this.reset()
-
-    // TODO：获取设备信息，包括设备昵称\devicePoster
-    await wx.setNavigationBarTitle({
-      title: this.data.rootPageState.deviceNickname
-    })
-
-    await this.onRequestDeviceLatestProperties()
   },
 
-  reset() {
-    let htmlSnip = `
-      <uniIOCard_WSD></uniIOCard_WSD>
-      <view>in view</view>
-      <div>in div</div>
-    `
-
+  // 根据 uniIO 数组获取 uniIO 数据、生成 uniIO 卡片的程序要独立于 通过 device 获取 uniIO 数组的程序，以便根据 smartLinkGroup 等其他方式获取不同的 uniIO 数组
+  async reset() {
+    // 初始化各种配置
     this.setData({
-      htmlSnip: htmlSnip,
+      
+    })
+
+    /* 获取设备信息( device_name, product_detailPoster_url,  ) */
+
+    /* 通过 huawei_device_id 获取 uniIOCardList */
+
+    /* 获取 uniIOCardList 中的 uniIOCard 的数据。数据由 html 的 wx:for 渲染卡片 */
+
+    // 设置页面导航栏标题
+    await wx.setNavigationBarTitle({
+      title: `我的设备 ${this.data.device_profile.device_name}`,
     })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
 
-  },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  // 获取本设备详情页面的设备所拥有的属性
-  async onRequestDeviceLatestProperties(e) {
-    // 通过 device_id 获取设备 uniIO 列表
-    
-    // 通过 uniIO 列表获取 uniIO 数据
-
-  }
 })

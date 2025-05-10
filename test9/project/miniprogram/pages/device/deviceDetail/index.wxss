@@ -30,7 +30,7 @@
   width: 100%;
   height: fit-content;
   min-height: 60vh;   /* 对应组 1 */
-  background-color: #f6f6f6;
+  background-color: #fff;
   border-radius: 20px;
   
   padding: 10px 0 0;

@@ -2,8 +2,9 @@
   <view class="Board">
   
     <view class="left_1column">
-      <view class="title_1row">{{uniIO_Data.external_name}}</view>
-      <view class="group_1row">{{uniIO_Data.smartLinkGroup_name}}</view>
+      <view class="title_1row">{{UniIOData.UniIO_ExternalName}}</view>
+      <view class="group_1row common1_1row">{{UniIOData.SmartLinkGroup_Name}}</view>
+      <view class="device_1row common1_1row">{{UniIOData.Device_Name}}</view>
     </view>
     
     <view class="middle_1column">
@@ -11,8 +12,8 @@
     </view>
     
     <view class="right_1column">
-      <view class="value_3row">{{uniIO_Data.currentValue}}</view>
-      <view class="unit_3row">{{uniIO_Data.para_unit}}</view>
+      <view class="value_3row">{{( UniIOData.LateastRecord.value != null ) ? UniIOData.LateastRecord.value : '无'}}</view>
+      <view class="unit_3row">{{( UniIOData.LateastRecord.value != null ) ? UniIOData.UniIO_Value_Unit : ''}}</view>
     </view>
 
   </view>

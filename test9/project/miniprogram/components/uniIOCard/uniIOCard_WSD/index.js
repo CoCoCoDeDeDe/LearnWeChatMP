@@ -5,14 +5,24 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    uniIO_Data: {
+    UniIOData: {
       type: Object,
       value: {
-        external_name: '负水位',
-        smartLinkGroup_name: '智联组1',
-        currentValue: 30,
-        para_unit: 'cm',
-      }
+        UniIO_ExternalName: '负水位负水位负水位负水位',
+        SmartLinkGroup_Name: '智联组12345678',
+        Device_Name: '鱼菜共生智能鱼缸se1promax',
+        LateastRecord: {
+          event_time: 'default_event_time',
+          value: 'DefaultValue',
+        },
+        UniIO_Value_Unit: 'DefaultUnit',
+      },
+      Records: [
+        {
+          event_time: 'default_event_time',
+          value: 'DefaultValue',
+        }
+      ]
     }
   },
 

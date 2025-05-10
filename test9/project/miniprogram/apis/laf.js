@@ -5,7 +5,7 @@ export async function register(username, password) {
   return new Promise((resolve, reject) => {
     wx.request({
       method: "POST",
-      url: baseUrl + "/iot2/register",
+      url: baseUrl + "/iot2/user/register",
       header: {
         "Content-Type": "application/json"
       },
@@ -43,7 +43,7 @@ export async function login(username, password) {
   return new Promise((resolve, reject) => {
     wx.request({
       method: "POST",
-      url: baseUrl + "/iot2/login",
+      url: baseUrl + "/iot2/user/login",
       header: {
         "Content-Type": "application/json"
       },
@@ -153,7 +153,7 @@ export async function verify_laf_token_request(laf_token) {
   return new Promise((resolve, reject) => {
     wx.request({
       method: 'GET',
-      url: baseUrl + '/iot2/verifyLafToken',
+      url: baseUrl + '/iot2/user/verifyLafToken',
       header: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + laf_token

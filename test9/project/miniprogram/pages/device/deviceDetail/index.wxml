@@ -1,12 +1,68 @@
-<template name="uniIOCard_WSD">
-    <uniIOCard_WSD></uniIOCard_WSD>
-</template>
+<block>
+  <template name="WSD">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="WQSVR">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="SMSVR">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="WT">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="WPVR">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="APRS">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="WHRS">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="ISVR">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="ALVR">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="PGLVR">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="FRS">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="AT">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="AH">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="WPVRC">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="APRSC">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="WHRSC">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="ALVRC">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="PGLVRC">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+  <template name="FTC">
+    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  </template>
+</block>
 
 <view class="page">
 
   <view class="page-background">
-    <!-- TODO: 插入1x1的设备海报 -->
-    <image src="https://mp-1b9cd3c8-d666-4006-b791-11d5ce02e1be.cdn.bspapp.com/IoT1/test/devicePoster1x1_22213.png"   mode="widthFix" class="page-background-img"/>
+    <!-- 插入画幅为1x1的产品海报 -->
+    <image src="{{common_info.product_info.detailPoster_url}}" mode="widthFix" class="page-background-img"/>
   </view>
 
   <view class="page-posterPlaceholder"></view>
@@ -15,12 +71,11 @@
   
     <view class="page-mainCard-board">
     
-    <uniIOCard_WSD></uniIOCard_WSD>
+      <block wx:for="{{UniIODataList}}" wx:key="_id">
+        <template is="{{item.UniIO_TemplateName}}" data="{{item: item}}"/>
+      </block>
 
-
-    <block wx:for="{{uniIOCardList}}" wx:key="_id">
-      <template is="{{item.templateName}}" data="{{item}}"/>
-    </block>
+      <!-- TODO: 底部印花背景图 -->
     
     </view>
   

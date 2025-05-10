@@ -37,13 +37,13 @@ Page({
       })
     }
 
-    this.onGetProductProfile(product_id)
+    this.onGetProductInfo(product_id)
 
   },
 
-  async onGetProductProfile(product_id) {
+  async onGetProductInfo(product_id) {
     try{
-      const resData = await requestWithLafToken('GET', '/iot2/product/getProductProfile', { product_id: product_id })
+      const resData = await requestWithLafToken('GET', '/iot2/product/getProductInfo', { product_id: product_id })
       this.setData({
         cardData: resData.productProfile
       })

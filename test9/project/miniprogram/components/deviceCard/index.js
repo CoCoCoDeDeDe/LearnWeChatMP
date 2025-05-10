@@ -29,7 +29,7 @@ Component({
     columnBtnsArr: [
       {
         imageSrc: '/static/images/icons/icon_deviceDetail_line_dekBlue@2x.png',
-        bindtap: 'onBindtapDeviceDetail'
+        bindtap: 'onBindtapNavigateToDeviceDetailPage'
       },
       {
         imageSrc: '/static/images/icons/icon_edit_line_darkBlue@2x.png',
@@ -100,15 +100,6 @@ Component({
           case 'laf_token error':
             on_laf_token_Invalid()
             return
-          case 'request error':
-            on_request_error()
-            return
-          case 'db error':
-            on_db_error()
-            return
-          case 'param error':
-            on_param_error()
-            return
           default:
             on_common_error()
             return
@@ -162,15 +153,6 @@ Component({
           case 'laf_token error':
             on_laf_token_Invalid()
             return
-          case 'request error':
-            on_request_error()
-            return
-          case 'db error':
-            on_db_error()
-            return
-          case 'param error':
-            on_param_error()
-            return
           default:
             on_common_error()
             return
@@ -186,6 +168,17 @@ Component({
 
       // TODO 子组件控制双亲页面刷新页面
     },
+
+    async onBindtapNavigateToDeviceDetailPage(e) {
+      console.log("this.data.deviceProfile.huawei_device_id:", this.data.deviceProfile.huawei_device_id)
+      this.onNavigateToDeviceDetailPage(this.data.deviceProfile.huawei_device_id)
+    },
+
+    async onNavigateToDeviceDetailPage(huawei_device_id) {
+      wx.navigateTo({
+        url: `/pages/device/deviceDetail/index?huawei_device_id=${huawei_device_id}`,
+      })
+    }
 
   }
 })

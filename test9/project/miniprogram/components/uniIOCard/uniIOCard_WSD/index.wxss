@@ -10,20 +10,19 @@ view {
   width: 100%;
   /* height: 200px; */
 
-  padding: 10px;
+  padding: 6px 4px;
 
   border-radius: 10px;
-  background-color: #f8f8f8;
-  box-shadow: 2px 2px 6px 1px #0000001f;
+  background-color: #fcfcfc;
+  box-shadow: 2px 2px 6px 2px #0000000f;
 
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
 }
 .left_1column{
-  flex: 1 1 36px; /* width */
-  height: 100%;
+  flex: 4 1 36px; /* width */
+  min-height: 100%; /* height 对高度非绝对的双亲盒子无效 */
   /* 当 左右文本 1column 的内容高度小于 中间图表的内容高度时，由 左右文本 1column 的 min-height 撑起盒子。
   当 ... 大于 ... 时，由 中间图表的内容高度撑起盒子。 */
   min-height: var(--text-1column-min-height);
@@ -39,25 +38,38 @@ view {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center;  /* 文本自带的盒子层面 */
+  text-align: center; /* 字符层面 */
 
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 15px;
   color: var(--main-text-color);
 }
-.group_1row{
+.common1_1row{
   flex: 1 1 auto;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   
-  font-size: 13px;
+  font-size: 11px;
   color: var(--vice-text-color);
 }
+.group_1row{
+  padding: 2px 0 0 0;
+}
+.device_1row{
+  padding: 2px 0 0 0;
+}
 .middle_1column{
-  flex: 4 4 auto; /* width */
-  height: 100%;
+  flex: 10 4 auto; /* 控制 width */
+  min-height: 100%; /* height 对高度非绝对的双亲盒子无效 */
+
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px 1px #0000000f inset;
   
   display: flex;
   flex-direction: column;
@@ -65,8 +77,8 @@ view {
   align-items: center;
 }
 .right_1column{
-  flex: 1 1 30px; /* width */
-  height: 100%;
+  flex: 1 1 30px; /* 控制 width */
+  min-height: 100%; /* 确保至少占满父容器高度 */
   min-height: var(--text-1column-min-height);
   
   display: flex;
@@ -81,6 +93,6 @@ view {
 }
 .unit_3row{
 
-  font-size: 14px;
+  font-size: 12px;
   color: var(--vice-text-color);
 }

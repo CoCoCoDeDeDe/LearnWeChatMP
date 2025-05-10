@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "uniIOCard_WSD": "/components/uniIOCard/uniIOCard_WSD"
+    "uniIOCard_WSD": "/components/uniIOCard/uniIOCard_WSD",
+    "uniIOCard_APRS": "/components/uniIOCard/uniIOCard_APRS"
   },
   "navigationBarBackgroundColor": "#fefefe",
   "navigationBarTextStyle": "black",

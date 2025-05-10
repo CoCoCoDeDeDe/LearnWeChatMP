@@ -66,7 +66,7 @@ Page({
   async requestPageData(e) {
     let userProfile
     try{
-      const requestRes = await requestWithLafToken('GET', `/iot2/getUserProfile`)
+      const requestRes = await requestWithLafToken('GET', `/iot2/user/getUserProfile`)
       userProfile = requestRes.userProfile
     } catch(err) {
       console.log("API getUserProfile err:", err)

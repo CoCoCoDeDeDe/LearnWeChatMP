@@ -76,7 +76,7 @@ Page({
     // 请求追加产品
     let newProductList
     try{
-      const resData = await requestWithLafToken('GET', '/iot2/getProductList', { limit: this.data.requestOptions.limit, skip: this.data.requestOptions.skip })
+      const resData = await requestWithLafToken('GET', '/iot2/product/getProductList', { limit: this.data.requestOptions.limit, skip: this.data.requestOptions.skip })
       // console.log("resData", resData)
       newProductList = resData.productList
       this.setData({
@@ -86,15 +86,6 @@ Page({
       switch(err.runCondition) {
         case 'laf_token error':
           on_laf_token_Invalid()
-          return
-        case 'request error':
-          on_request_error()
-          return
-        case 'db error':
-          on_db_error()
-          return
-        case 'param error':
-          on_param_error()
           return
         default:
           on_common_error()
@@ -128,7 +119,7 @@ Page({
   async onGetProductList(e) {
     let productList
     try{
-      const resData = await requestWithLafToken('GET', '/iot2/getProductList', { limit: this.data.requestOptions.limit, skip: this.data.requestOptions.skip })
+      const resData = await requestWithLafToken('GET', '/iot2/product/getProductList', { limit: this.data.requestOptions.limit, skip: this.data.requestOptions.skip })
       productList = resData.productList
       this.setData({
         'dbInfo.total': resData.total
@@ -137,15 +128,6 @@ Page({
       switch(err.runCondition) {
         case 'laf_token error':
           on_laf_token_Invalid()
-          return
-        case 'request error':
-          on_request_error()
-          return
-        case 'db error':
-          on_db_error()
-          return
-        case 'param error':
-          on_param_error()
           return
         default:
           on_common_error()

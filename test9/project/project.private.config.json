@@ -9,7 +9,7 @@
         {
           "name": "device/设备详情",
           "pathName": "pages/device/deviceDetail/index",
-          "query": "",
+          "query": "huawei_device_id=AQAQ25032901",
           "launchMode": "default",
           "scene": null
         },

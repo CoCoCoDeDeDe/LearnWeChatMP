@@ -1,0 +1,13 @@
+
+      {
+        "pagePath": "pages/index/index",
+        "text": "智联组",
+        "iconPath": "/static/images/icons/tabBar_site_inactive.png",
+        "selectedIconPath": "/static/images/icons/tabBar_site_active.png"
+      },
+      {
+        "pagePath": "pages/smartLink/index",
+        "text": "智联",
+        "iconPath": "/static/images/icons/tabBar_smartLink_inactive.png",
+        "selectedIconPath": "/static/images/icons/tabBar_smartLink_active.png"
+      },

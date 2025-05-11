@@ -1,4 +1,6 @@
 // components/uniIOCard/UniIOCard_Common_1/index.js
+import { isValidNonEmptyString } from '../../../utils/common'
+import { requestWithLafToken, on_laf_token_Invalid, on_request_error, on_db_error, on_param_error, on_unknown_error, on_common_error } from '../../../apis/laf'
 import * as echarts from '../../../components/ec-canvas/echarts';
 
 Component({
@@ -6,18 +8,44 @@ Component({
   // 组件的属性列表
   properties: {
     UniIOData: {
+      // 当 UniIOData 发送变化时执行该函数
+      observer(newVal, oldVal) {
+        // console.log("newVal:", newVal)
+        // console.log("oldVal:", oldVal)
+        // console.log("observer")
+
+        this.RefreshEChart()
+      },
       type: Object,
       value: {
         UniIO_Id: 'Default_UniIO_Id',
         UniIO_ExternalName: '负水位负水位负水位负水位',
         SmartLinkGroup_Name: '智联组12345678',
         Device_Name: '鱼菜共生智能鱼缸se1promax',
+        UniIO_Type: 'actor',
+        Cmd_Config: {
+          Is_Enum: true,
+          Enum: [
+            {
+              Value: 0,
+              Mean: '关闭',
+              Main_Color: '#e64340',
+            },
+            {
+              Value: 1,
+              Mean: '启动',
+              Main_Color: '#1bbb1b',
+            },
+          ],
+          Value_Max: 100,
+          Value_Min: 0,
+        },
         UniIO_Value_Unit: 'DefaultUnit',
-        // UniIO_Value_Mean_Pair: {
-        //   0: "空闲",
-        //   1: "运行",
-        //   2: "错误",
-        // },
+        UniIO_Value_Mean_Pair: {
+          0: "空闲",
+          1: "运行",
+          2: "错误",
+        },
         LateastRecord: {
           event_time: 'default_event_time',
           value: 'DefaultValue',
@@ -50,17 +78,13 @@ Component({
     // ec: {
     //   onInit: this.initChart
     // }
+    Cmd_Ipt_Value: null,
   },
   
   async attached() {
-    const that = this; // 保存 this 的引用
-    this.setData({      
-      ec: {
-        onInit: function(canvas, width, height, dpr) {
-          return that.initChart(canvas, width, height, dpr);
-        }
-      }
-    })
+    this.RefreshEChart()
+
+    this.throttledOnSendCommand = throttle(this.OnSendCommand, 2000) // 时间单位: ms
   },
 
   async ready() {
@@ -79,6 +103,7 @@ Component({
 
   // 组件的方法列表
   methods: {
+
     initChart(canvas, width, height, dpr) {
       const UniIOData = this.properties.UniIOData
 
@@ -113,6 +138,101 @@ Component({
       };
       chart.setOption(option);
       return chart;
+    },
+
+    async RefreshEChart(e) {
+      const that = this; // 保存 this 的引用
+      this.setData({
+        ec: {
+          onInit: function(canvas, width, height, dpr) {
+            return that.initChart(canvas, width, height, dpr);
+          }
+        }
+      })
+  
+    },
+
+    OnBindTapCmdBtn(e) {
+      // console.log("e.currentTarget.dataset:", e.currentTarget.dataset)
+      const CmdValue = e.currentTarget.dataset.cmdvalue // data-value 属性传递的键值对的键名只有小写字母
+      this.throttledOnSendCommand(CmdValue)
+    },
+
+    OnBindTapCmdIptConfirm(e) {
+      // console.log("this.data.Cmd_Ipt_Value:", this.data.Cmd_Ipt_Value)
+      const CmdValue = this.data.Cmd_Ipt_Value
+      this.throttledOnSendCommand(CmdValue)
+    },
+
+    async OnSendCommand(CmdValue) {
+      // 收集参数
+      // console.log("this.data.UniIOData:", this.data.UniIOData)
+      // console.log("this.properties.UniIOData:", this.properties.UniIOData)
+      const Para = {
+        uniIO_id: this.properties.UniIOData.UniIO_Id,
+        value: Number(CmdValue),
+      }
+      console.log("OnSendCommand Para:", Para)
+
+      // 校验参数格式  取值范围
+      if( (Para.uniIO_id === undefined) || (Para.uniIO_id === null) || (Para.uniIO_id.trim().length <= 0) || (Para.value === undefined) || (Para.value === null) || (Para.value < this.properties.UniIOData.Cmd_Config.Value_Min) || (Para.value > this.properties.UniIOData.Cmd_Config.Value_Max) ) {
+        wx.showToast({
+          title: '参数无效',
+          duration: 1500,
+          icon: 'none',
+          mask: false,
+        })
+        return
+      }
+
+      // 调用 API
+      let resData
+      try{
+        resData = await requestWithLafToken('GET', '/iot2/uniIO/sendCommand', {uniIO_id: Para.uniIO_id, value: Para.value})
+      } catch(err) {
+        switch(err.runCondition) {
+          case 'laf_token error':
+            on_laf_token_Invalid()
+            return
+          default:
+            on_common_error()
+            return
+        }
+      }
+      console.log("resData:", resData)
+      wx.showToast({
+        title: '命令发送成功',
+        duration: 1500,
+        // icon: icon,
+        mask: false,
+      })
     }
+
+
+
+  } // methods
+})  // Component
+
+// 函数节流的高阶函数
+function throttle(fn, limit) {
+  let lastCallTime = 0
+
+  return function(...args) {
+    const now = Date.now()
+
+    if(now - lastCallTime >= limit) {
+      fn.apply(this, args)  // this 指向调用 throttleFn() 时的 this , 本例中为 Component 实例。 args 作为 fn 的参数传入 fn
+      lastCallTime = now
+    } else{ // 两次调用的间隔时间如果没有达到 limit 则不调用
+      console.log("请勿频繁操作")
+      wx.showToast({
+        title: '请勿频繁操作',
+        duration: 1000,
+        icon: 'none',
+        mask: false,
+      })
+    }
+  
   }
-})
+}
+

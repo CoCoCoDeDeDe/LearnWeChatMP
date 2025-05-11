@@ -44,13 +44,13 @@ Page({
 
     await this.reset()
 
-    return
+    // return
 
     // 用定时器重复获取新 UniIODataList
     this.data.timer = setInterval(() => {
-      console.log("setInterval Callback")
+      // console.log("setInterval Callback")
       this.GetUniIODataList(this.data.common_info.device_info.huawei_device_id)
-    }, 5000)
+    }, 10000)
   },
 
   onUnload(e) {
@@ -74,7 +74,7 @@ Page({
 
     // 设置页面导航栏标题
     await wx.setNavigationBarTitle({
-      title: `我的设备 ${this.data.common_info.device_info.name}`,
+      title: `${this.data.common_info.device_info.name}`,
     })
   },
 
@@ -142,14 +142,19 @@ Page({
       Object.assign(NewItem,
         {
           UniIO_Id: item.UniIO_Id,
+          UniIO_Type: item.UniIO_Type,
           UniIO_TemplateName: item.UniIO_TemplateName,
           UniIO_ExternalName: item.UniIO_ExternalName,
           SmartLinkGroup_Name: item.SmartLinkGroup_Name,
           Device_Name: item.Device_Name,
           UniIO_Value_Mean_Pair: item.UniIO_Value_Mean_Pair,  // 没有则为 undefined
           UniIO_Value_Unit: item.UniIO_Value_Unit,
+          Cmd_Config: item.Cmd_Config,
         })
         // console.log("NewItem 3:", NewItem)
+        // console.log("NewItem.UniIO_Type:", NewItem.UniIO_Type)
+        // console.log("NewItem.UniIO_Type:", NewItem.UniIO_Type)
+        // console.log("NewItem.Cmd_Config:", NewItem.Cmd_Config)
 
       // 将部分数据改为适合 echart 的格式
       let DataX = [], DataY = []

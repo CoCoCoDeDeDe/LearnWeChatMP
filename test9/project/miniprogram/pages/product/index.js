@@ -173,7 +173,7 @@ Page({
           return
       }
     }
-    console.log("resData.deviceList", resData.deviceList)
+    // console.log("resData.deviceList", resData.deviceList)
     
     let mainList = this.data.deviceList
     // mainList = [...mainList, ...resData.deviceList]

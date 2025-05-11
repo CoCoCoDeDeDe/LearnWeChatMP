@@ -1,63 +1,3 @@
-<block>
-  <template name="WSD">
-  <!-- UniIOData="{{item}}" -->
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="WQSVR">
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="SMSVR">
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="WT">
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="WPVR">
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="APRS">
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="WHRS">
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="ISVR">
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="ALVR">
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="PGLVR">
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="FRS">
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="AT">
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="AH">
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="WPVRC">
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="APRSC">
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="WHRSC">
-    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
-  </template>
-  <template name="ALVRC">
-    ALVRC
-  </template>
-  <template name="PGLVRC">
-  PGLVRC
-  </template>
-  <template name="FTC">
-    FTC
-  </template>
-</block>
 
 <view class="page">
 
@@ -71,9 +11,14 @@
   <view class="page-mainCard">
   
     <view class="page-mainCard-board">
-    
+      <block wx:if="{{UniIODataList.length <= 0}}">
+        <UniIOCard_Com1></UniIOCard_Com1>
+      </block>
+      <!-- DEBUG -->
+      <!-- <UniIOCard_Com1></UniIOCard_Com1> -->
+      
       <block wx:for="{{UniIODataList}}" wx:key="_id">
-        <template is="{{item.UniIO_TemplateName}}" data="{{item: item}}"/>
+        <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
       </block>
 
       <!-- TODO: 底部印花背景图 -->

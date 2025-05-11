@@ -122,9 +122,9 @@ Page({
     console.log("绑定成功")
     await wx.showToast({
       title: bindResData.errMsg,
-      duration: 2000,
+      duration: 1500,
       icon: 'success',
-      mask: false,
+      mask: true,
     })
     setTimeout(() => {
       wx.navigateBack()

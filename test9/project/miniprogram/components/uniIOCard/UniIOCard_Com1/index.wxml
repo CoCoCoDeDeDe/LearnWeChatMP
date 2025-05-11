@@ -1,9 +1,9 @@
 <template name="Template_ValueMeanPair">
   <view class="ComponentValueMeanPairBox">
   
-    <view class="index">{{index}}</view>
-    <view class="colon">:</view>
-    <view class="item">{{item}}</view>
+    <view class="inline">{{index}}</view>
+    <view class="inline">:</view>
+    <view class="inline">{{item}}</view>
 
   </view>
 </template>
@@ -11,7 +11,7 @@
 <view class="componentBox">
 
   <view class="componentBoard">
-  
+    
     <view class="ComponentTxtBox">
 
       <view class="TxtBoxLeftBox">
@@ -57,7 +57,7 @@
     
       <view class="ComponentChartBox">
     
-        <ec-canvas class="ec_canvas" canvas-id="{{ 'myChart_' + UniIOData._id }}" ec="{{ ec }}"></ec-canvas>
+        <ec-canvas class="ec_canvas" canvas-id="{{ 'myChart_' + UniIOData._id }}" ec="{{ec}}"></ec-canvas>
     
       </view>
     
@@ -71,6 +71,23 @@
 
     </view>
 
+    <view class="ComponentSendCommandBox" wx:if="{{UniIOData.UniIO_Type == 'actor'}}">
+      
+      <block wx:if="{{UniIOData.Cmd_Config.Is_Enum}}">
+      
+        <block wx:for="{{UniIOData.Cmd_Config.Enum}}" wx:key="*this">
+          <view class="Cmd_BtnBox" bind:tap="OnBindTapCmdBtn" data-CmdValue="{{item.Value}}" style="background-color:{{item.Main_Color}};">{{item.Mean}}</view>
+        </block>
+
+      </block>
+      <block wx:else>
+        <view class="Cmd_IptBox">
+          <input type="digit" class="Cmd_Ipt" placeholder="请输入命令数值" placeholder-style="padding: 2px 4px; color: #aaa; font-size:15px;" model:value="{{Cmd_Ipt_Value}}" />
+        </view>
+        <view class="Cmd_IptConfirmBox" bind:tap="OnBindTapCmdIptConfirm">发送</view>
+      </block>
+
+    </view>
 
   </view>
 

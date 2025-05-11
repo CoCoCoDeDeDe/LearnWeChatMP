@@ -11,7 +11,12 @@ view {
 
   border-radius: 14px;
   background-color: #f9f9f9;
-  box-shadow: 0px 2px 6px 0.8px #0000001f;
+  /* 立体阴影效果 */
+  box-shadow: 
+    0 4px 6px rgba(50, 50, 93, 0.11),
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 
   padding: 7px 7px;
   display: flex;
@@ -110,4 +115,43 @@ view {
 }
 .ec_canvas {
   
+}
+
+.ComponentValueMeanPairBoxBox{
+  flex: 1 1 auto;
+
+  padding: 6px 2px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.ComponentValueMeanPairBox{
+  width: 22%;
+  margin: 4px 0;
+
+  padding: 4px 4px;
+  text-align: center;
+  border-radius: 8px;
+  
+  /* 主按钮渐变 - 绿色系 */
+  background: linear-gradient(145deg, #e2e2e2, #d4d4d4);
+  
+  /* 立体阴影效果 */
+  box-shadow: 
+    0 4px 6px rgba(50, 50, 93, 0.11),
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+.index{
+  display: inline;
+}
+.colon{
+  display: inline;
+}
+.item{
+  display: inline;
 }

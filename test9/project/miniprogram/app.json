@@ -9,8 +9,7 @@
     "pages/device/productList/index",
     "pages/device/bindUserWithDevice/index"
   ],
-  "usingComponents": {
-  },
+  "usingComponents": {},
   "window": {
     "navigationBarBackgroundColor": "#b7e1ff",
     "navigationBarTextStyle": "black",

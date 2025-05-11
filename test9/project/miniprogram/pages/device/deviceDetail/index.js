@@ -43,6 +43,20 @@ Page({
     })
 
     await this.reset()
+
+    return
+
+    // 用定时器重复获取新 UniIODataList
+    this.data.timer = setInterval(() => {
+      console.log("setInterval Callback")
+      this.GetUniIODataList(this.data.common_info.device_info.huawei_device_id)
+    }, 5000)
+  },
+
+  onUnload(e) {
+    if(this.data.timer) {
+      clearInterval(this.data.timer)
+    }
   },
 
   // 根据 uniIO 数组获取 uniIO 数据、生成 uniIO 卡片的程序要独立于 通过 device 获取 uniIO 数组的程序，以便根据 smartLinkGroup 等其他方式获取不同的 uniIO 数组
@@ -103,7 +117,7 @@ Page({
     
     // 处理每个 UniIOData
     const UniIODataList = await Promise.all( resData.UniIODataList.map( async (item, idx, arr) => {
-      console.log("item 1:", item)
+      // console.log("item 1:", item)
 
       let NewItem = {}
 
@@ -132,6 +146,7 @@ Page({
           UniIO_ExternalName: item.UniIO_ExternalName,
           SmartLinkGroup_Name: item.SmartLinkGroup_Name,
           Device_Name: item.Device_Name,
+          UniIO_Value_Mean_Pair: item.UniIO_Value_Mean_Pair,  // 没有则为 undefined
           UniIO_Value_Unit: item.UniIO_Value_Unit,
         })
         // console.log("NewItem 3:", NewItem)
@@ -145,7 +160,12 @@ Page({
           DataX[i] = TimeStrConvert_ISO8601_To_HHmm(item.Records[item.Records.length - 1 - i].event_time)
           
           // 转化单独 Y 轴数据到数组
-          DataY[i] = item.Records[item.Records.length - 1 - i].value          
+          DataY[i] = item.Records[item.Records.length - 1 - i].value
+          // 如果 UniIO_Value_Mean_Pair 有值则匹配为对应意义 string
+          // 本方案已放弃，echart 折线图的 y 周数据只可为数值
+          // if(NewItem.UniIO_Value_Mean_Pair !== undefined) {
+          //   DataY[i] = NewItem.UniIO_Value_Mean_Pair[DataY[i].toString()]
+          // }   
         }
       } else{
         // 无 Records 不处理
@@ -162,7 +182,7 @@ Page({
           }]
         }
       })
-      console.log("NewItem 4:", NewItem)
+      // console.log("NewItem 4:", NewItem)
 
       // 赋值默认值给暂时没有网络数据的 echart 配置项
       NewItem.EChartData.series[0].name = NewItem.UniIO_ExternalName
@@ -176,6 +196,7 @@ Page({
     this.setData({
       UniIODataList: UniIODataList,
     })
+
   }
 
 

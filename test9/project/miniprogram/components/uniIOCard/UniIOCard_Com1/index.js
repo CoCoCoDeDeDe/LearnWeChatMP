@@ -13,6 +13,11 @@ Component({
         SmartLinkGroup_Name: '智联组12345678',
         Device_Name: '鱼菜共生智能鱼缸se1promax',
         UniIO_Value_Unit: 'DefaultUnit',
+        // UniIO_Value_Mean_Pair: {
+        //   0: "空闲",
+        //   1: "运行",
+        //   2: "错误",
+        // },
         LateastRecord: {
           event_time: 'default_event_time',
           value: 'DefaultValue',
@@ -58,10 +63,24 @@ Component({
     })
   },
 
+  async ready() {
+    this.setData({
+      Is_VALUE_MEAN_PAIR_ON: false
+    })
+
+    // console.log("this.properties.UniIOData.UniIO_Value_Mean_Pair:", this.properties.UniIOData.UniIO_Value_Mean_Pair)
+    if(this.properties.UniIOData.UniIO_Value_Mean_Pair !== undefined) {
+      // console.log("VALUE_MEAN_PAIR_ON")
+      this.setData({
+        Is_VALUE_MEAN_PAIR_ON: true
+      })
+    }
+  },
+
   // 组件的方法列表
   methods: {
     initChart(canvas, width, height, dpr) {
-      const UniIOData = this.properties.UniIOData;
+      const UniIOData = this.properties.UniIOData
 
       const chart = echarts.init(canvas, null, { width, height, devicePixelRatio: dpr });
       canvas.setChart(chart);

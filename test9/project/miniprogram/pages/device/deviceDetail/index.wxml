@@ -16,10 +16,10 @@
     <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="APRS">
-  APRS
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="WHRS">
-  WHRS
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="ISVR">
     <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
@@ -31,7 +31,7 @@
     <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="FRS">
-  FRS
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="AT">
     <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
@@ -43,10 +43,10 @@
     <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="APRSC">
-  APRSC
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="WHRSC">
-  WHRSC
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="ALVRC">
     ALVRC

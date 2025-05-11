@@ -1,3 +1,13 @@
+<template name="Template_ValueMeanPair">
+  <view class="ComponentValueMeanPairBox">
+  
+    <view class="index">{{index}}</view>
+    <view class="colon">:</view>
+    <view class="item">{{item}}</view>
+
+  </view>
+</template>
+
 <view class="componentBox">
 
   <view class="componentBoard">
@@ -26,7 +36,14 @@
           24小时内无数据
         </view>
         <view class="RightTxt_BtmTxtBox_Com RightTxt_BtmTxtBox_Mode1" wx:else>
-          {{UniIOData.LateastRecord.value}}
+          
+          <block wx:if="{{Is_VALUE_MEAN_PAIR_ON}}">
+            {{UniIOData.UniIO_Value_Mean_Pair[UniIOData.LateastRecord.value]}}
+          </block>
+          <block wx:else>
+            {{UniIOData.LateastRecord.value}}
+          </block>
+          
           <view class="RightTxt_BtmTxtBox_Mode1_Unit">
              {{UniIOData.UniIO_Value_Unit}}
           </view>
@@ -36,17 +53,23 @@
 
     </view>
 
-    <view class="ComponentChartBoxBox" wx:if="{{UniIOData.LateastRecord != null}}">
+    <view class="ComponentChartBoxBox" wx:if="{{UniIOData.LateastRecord != null}}" >
     
       <view class="ComponentChartBox">
     
-        <ec-canvas class="ec_canvas" canvas-id="{{ 'myChart_' + UniIOData.UniIO_Id }}" ec="{{ ec }}"></ec-canvas>
+        <ec-canvas class="ec_canvas" canvas-id="{{ 'myChart_' + UniIOData._id }}" ec="{{ ec }}"></ec-canvas>
     
       </view>
     
     </view>
   
+    <view class="ComponentValueMeanPairBoxBox"  wx:if="{{Is_VALUE_MEAN_PAIR_ON}}">
     
+      <block wx:for="{{UniIOData.UniIO_Value_Mean_Pair}}" wx:key="*this">
+        <template is="Template_ValueMeanPair" data="{{item, index}}"/>
+      </block>
+
+    </view>
 
 
   </view>

@@ -1,8 +1,6 @@
 // components/uniIOCard/UniIOCard_Common_1/index.js
 import * as echarts from '../../../components/ec-canvas/echarts';
 
-let UniIOData
-
 Component({
 
   // 组件的属性列表
@@ -10,6 +8,7 @@ Component({
     UniIOData: {
       type: Object,
       value: {
+        UniIO_Id: 'Default_UniIO_Id',
         UniIO_ExternalName: '负水位负水位负水位负水位',
         SmartLinkGroup_Name: '智联组12345678',
         Device_Name: '鱼菜共生智能鱼缸se1promax',
@@ -49,10 +48,12 @@ Component({
   },
   
   async attached() {
-    UniIOData = this.properties.UniIOData
+    const that = this; // 保存 this 的引用
     this.setData({      
       ec: {
-        onInit: this.initChart
+        onInit: function(canvas, width, height, dpr) {
+          return that.initChart(canvas, width, height, dpr);
+        }
       }
     })
   },
@@ -60,6 +61,8 @@ Component({
   // 组件的方法列表
   methods: {
     initChart(canvas, width, height, dpr) {
+      const UniIOData = this.properties.UniIOData;
+
       const chart = echarts.init(canvas, null, { width, height, devicePixelRatio: dpr });
       canvas.setChart(chart);
       const option = {

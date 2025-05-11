@@ -36,12 +36,12 @@
 
     </view>
 
-    <view class="ComponentChartBoxBox">
+    <view class="ComponentChartBoxBox" wx:if="{{UniIOData.LateastRecord != null}}">
     
       <view class="ComponentChartBox">
     
-        <ec-canvas class="ec_canvas" canvas-id="myChart" ec="{{ ec }}"></ec-canvas>
-
+        <ec-canvas class="ec_canvas" canvas-id="{{ 'myChart_' + UniIOData.UniIO_Id }}" ec="{{ ec }}"></ec-canvas>
+    
       </view>
     
     </view>

@@ -103,7 +103,7 @@ Page({
     
     // 处理每个 UniIOData
     const UniIODataList = await Promise.all( resData.UniIODataList.map( async (item, idx, arr) => {
-      // console.log("item 1:", item)
+      console.log("item 1:", item)
 
       let NewItem = {}
 
@@ -127,6 +127,7 @@ Page({
       // 存储已经可用的数据到新介质
       Object.assign(NewItem,
         {
+          UniIO_Id: item.UniIO_Id,
           UniIO_TemplateName: item.UniIO_TemplateName,
           UniIO_ExternalName: item.UniIO_ExternalName,
           SmartLinkGroup_Name: item.SmartLinkGroup_Name,
@@ -141,10 +142,10 @@ Page({
         for (let i = 0; i < item.Records.length; i++) {
 
           // 把20250510T120031Z字符串格式时间转化为 06:00 格式的字符串
-          DataX[i] = TimeStrConvert_ISO8601_To_HHmm(item.Records[i].event_time)
+          DataX[i] = TimeStrConvert_ISO8601_To_HHmm(item.Records[item.Records.length - 1 - i].event_time)
           
           // 转化单独 Y 轴数据到数组
-          DataY[i] = item.Records[i].value          
+          DataY[i] = item.Records[item.Records.length - 1 - i].value          
         }
       } else{
         // 无 Records 不处理
@@ -181,17 +182,6 @@ Page({
 })
 
 function TimeStrConvert_ISO8601_To_HHmm(isoString) {
-
-const date = new Date(isoString);
-
-// 提取本地时间部分
-const hours = date.getHours(); // 根据本地时区计算，如UTC-6则为6
-const minutes = date.getMinutes(); // 0
-
-// 格式化为两位数并拼接
-const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
-console.log('formattedTime:', formattedTime); // 输出本地时间，如 "06:00"（假设本地时区为UTC-6）
-return formattedTime
 
   const [datePart, timePart] = isoString.split("T");
   // console.log("timePart:", timePart)

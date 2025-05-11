@@ -101,28 +101,77 @@ Page({
       }
     }
     
-    // 遍历每个 UniIOData 项，找到其 Records 中最近的一项 Record 并单独存放
+    // 处理每个 UniIOData
     const UniIODataList = await Promise.all( resData.UniIODataList.map( async (item, idx, arr) => {
-      
-      // 找到其 Records 中最近的一项 Record 即 LateastRecord
+      // console.log("item 1:", item)
+
+      let NewItem = {}
+
+      // 遍历每个 UniIOData 项，找到其 Records 中最近的一项 Record 并单独存放
       // 校验 Records
-      let LateastRecord
+      let LateastRecord = null
+      // console.log("item.Records.length:", item.Records.length)
       if(item.Records.length > 0) { // 获取的记录为空时不 reduce()
         LateastRecord = item.Records.reduce( (prev, current) => {
           const prevTime = new Date(prev.event_time).getTime()
           const currentTime = new Date(current.event_time).getTime()
           return currentTime > prevTime ? current : prev
         } )
+        Object.assign(NewItem, {LateastRecord})
+        // console.log("NewItem 1:", NewItem)
       } else{
-        LateastRecord = {}
+        Object.assign(NewItem, {LateastRecord})
+        // console.log("NewItem 2:", NewItem)
       }
-      // console.log("LateastRecord:", LateastRecord)
-      let NewItem = item
-      NewItem['LateastRecord'] = LateastRecord
-      // console.log("NewItem:", NewItem)
+
+      // 存储已经可用的数据到新介质
+      Object.assign(NewItem,
+        {
+          UniIO_TemplateName: item.UniIO_TemplateName,
+          UniIO_ExternalName: item.UniIO_ExternalName,
+          SmartLinkGroup_Name: item.SmartLinkGroup_Name,
+          Device_Name: item.Device_Name,
+          UniIO_Value_Unit: item.UniIO_Value_Unit,
+        })
+        // console.log("NewItem 3:", NewItem)
+
+      // 将部分数据改为适合 echart 的格式
+      let DataX = [], DataY = []
+      if(item.Records.length > 0) {
+        for (let i = 0; i < item.Records.length; i++) {
+
+          // 把20250510T120031Z字符串格式时间转化为 06:00 格式的字符串
+          DataX[i] = TimeStrConvert_ISO8601_To_HHmm(item.Records[i].event_time)
+          
+          // 转化单独 Y 轴数据到数组
+          DataY[i] = item.Records[i].value          
+        }
+      } else{
+        // 无 Records 不处理
+      }
+      // console.log("DataX:", DataX)
+      // console.log("DataY:", DataY)
+      Object.assign(NewItem, {
+        EChartData: {
+          xAxis: {
+            data: DataX,
+          },
+          series: [{  // 可一个表显示多条数据
+            data: DataY,
+          }]
+        }
+      })
+      console.log("NewItem 4:", NewItem)
+
+      // 赋值默认值给暂时没有网络数据的 echart 配置项
+      NewItem.EChartData.series[0].name = NewItem.UniIO_ExternalName
+      NewItem.EChartData.series[0].itemStyle = { color: '#FFEC71' }
 
       return NewItem
     } ) )
+
+    // return
+
     this.setData({
       UniIODataList: UniIODataList,
     })
@@ -130,3 +179,24 @@ Page({
 
 
 })
+
+function TimeStrConvert_ISO8601_To_HHmm(isoString) {
+
+const date = new Date(isoString);
+
+// 提取本地时间部分
+const hours = date.getHours(); // 根据本地时区计算，如UTC-6则为6
+const minutes = date.getMinutes(); // 0
+
+// 格式化为两位数并拼接
+const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+console.log('formattedTime:', formattedTime); // 输出本地时间，如 "06:00"（假设本地时区为UTC-6）
+return formattedTime
+
+  const [datePart, timePart] = isoString.split("T");
+  // console.log("timePart:", timePart)
+  let result = 'TT:SS'
+  result = timePart[0] + timePart[1] + ':' + timePart[2] + timePart[3]
+  // console.log("result:", result)
+  return result
+}

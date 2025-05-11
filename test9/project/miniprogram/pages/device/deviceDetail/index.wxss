@@ -12,7 +12,6 @@
 }
 .page-background-img{
   width: 100%;
-
 }
 
 .page-posterPlaceholder{
@@ -34,4 +33,16 @@
   border-radius: 17px;
   
   padding: 6px 0 0;
+}
+.BtmPatternBox{
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+  height: fit-content;
+}
+.BtmPattern{
+  width: 100%;
+  height: fit-content;
+  min-height: 20px; /* 没有图片时内容高度为0可能，此时作为空白填充块防止卡片被底部手势标识覆盖 */
 }

@@ -1,0 +1,54 @@
+<view class="componentBox">
+
+  <view class="componentBoard">
+  
+    <view class="ComponentTxtBox">
+
+      <view class="TxtBoxLeftBox">
+      
+        <view class="LeftTxt_TopTxtBox">
+          {{UniIOData.Device_Name}}
+        </view>
+
+        <view class="LeftTxt_BtmTxtBox">
+          {{UniIOData.SmartLinkGroup_Name == null ? '无智联组' : UniIOData.SmartLinkGroup_Name}}
+        </view>
+
+      </view>
+    
+      <view class="TxtBoxRightBox">
+      
+        <view class="RightTxt_TopTxtBox">
+          {{UniIOData.UniIO_ExternalName}}
+        </view>
+
+        <view class="RightTxt_BtmTxtBox_Com RightTxt_BtmTxtBox_Mode2" wx:if="{{UniIOData.LateastRecord == null}}">
+          24小时内无数据
+        </view>
+        <view class="RightTxt_BtmTxtBox_Com RightTxt_BtmTxtBox_Mode1" wx:else>
+          {{UniIOData.LateastRecord.value}}
+          <view class="RightTxt_BtmTxtBox_Mode1_Unit">
+             {{UniIOData.UniIO_Value_Unit}}
+          </view>
+        </view>
+
+      </view>
+
+    </view>
+
+    <view class="ComponentChartBoxBox">
+    
+      <view class="ComponentChartBox">
+    
+        <ec-canvas class="ec_canvas" canvas-id="myChart" ec="{{ ec }}"></ec-canvas>
+
+      </view>
+    
+    </view>
+  
+    
+
+
+  </view>
+
+</view>

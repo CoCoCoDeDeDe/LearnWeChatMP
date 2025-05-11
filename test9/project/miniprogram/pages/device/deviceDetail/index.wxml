@@ -1,60 +1,61 @@
 <block>
   <template name="WSD">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  <!-- UniIOData="{{item}}" -->
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="WQSVR">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="SMSVR">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="WT">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="WPVR">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="APRS">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  APRS
   </template>
   <template name="WHRS">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  WHRS
   </template>
   <template name="ISVR">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="ALVR">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="PGLVR">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="FRS">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  FRS
   </template>
   <template name="AT">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="AH">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="WPVRC">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+    <UniIOCard_Com1 UniIOData="{{item}}" ></UniIOCard_Com1>
   </template>
   <template name="APRSC">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  APRSC
   </template>
   <template name="WHRSC">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  WHRSC
   </template>
   <template name="ALVRC">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+    ALVRC
   </template>
   <template name="PGLVRC">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+  PGLVRC
   </template>
   <template name="FTC">
-    <uniIOCard_WSD UniIOData="{{item}}"></uniIOCard_WSD>
+    FTC
   </template>
 </block>
 
@@ -76,6 +77,9 @@
       </block>
 
       <!-- TODO: 底部印花背景图 -->
+      <view class="BtmPatternBox">
+        <image src="" mode="widthFix" class="BtmPattern"/>
+      </view>
     
     </view>
   

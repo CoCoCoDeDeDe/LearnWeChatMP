@@ -18,3 +18,6 @@
 
   </view>
 </view>
+<view class="ec-container">
+  <ec-canvas canvas-id="myChart" ec="{{ ec }}"></ec-canvas>
+</view>

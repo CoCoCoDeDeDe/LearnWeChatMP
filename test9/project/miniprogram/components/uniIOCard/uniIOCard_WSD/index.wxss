@@ -96,3 +96,12 @@ view {
   font-size: 12px;
   color: var(--vice-text-color);
 }
+
+.ec-container {
+  width: 100%;
+  height: 300px;
+}
+ec-canvas {
+  width: 100%;
+  height: 100%;
+}

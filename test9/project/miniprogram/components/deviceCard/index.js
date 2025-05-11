@@ -61,7 +61,7 @@ Component({
         cancelText: '取消',
         confirmColor: '#54c17d',
         confirmText: '提交',
-        // content: '',
+        content: this.data.deviceProfile.name,
         editable: true,
         placeholderText: 'new name',
         showCancel: true,

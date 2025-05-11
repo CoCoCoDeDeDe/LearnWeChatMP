@@ -1,4 +1,5 @@
 // components/uniIOCard/uniIO-WSD/index.js
+import * as echarts from '../../../components/ec-canvas/echarts';
 Component({
 
   /**
@@ -30,7 +31,9 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    ec: {
+      onInit: initChart
+    }
   },
 
   /**
@@ -40,3 +43,17 @@ Component({
 
   }
 })
+
+function initChart(canvas, width, height, dpr) {
+  const chart = echarts.init(canvas, null, { width, height, devicePixelRatio: dpr });
+  canvas.setChart(chart);
+  const option = {
+    // 图表配置项（参考 ECharts 官网）
+    title: { text: '示例图表' },
+    xAxis: { data: ['A', 'B', 'C'] },
+    yAxis: {},
+    series: [{ type: 'bar', data: [5, 20, 36] }]
+  };
+  chart.setOption(option);
+  return chart;
+}

@@ -1,6 +1,5 @@
 {
   "miniprogramRoot": "miniprogram/",
-  "cloudfunctionRoot": "cloudfunctions/",
   "setting": {
     "urlCheck": true,
     "es6": true,
@@ -32,8 +31,13 @@
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
     "userConfirmedBundleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package",
+        "miniprogramNpmDistDir": "/miniprogram"
+      }
+    ],
     "minifyWXSS": true
   },
   "appid": "wxa9c8d9ad5650bdd2",

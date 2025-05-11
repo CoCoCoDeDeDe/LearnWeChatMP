@@ -92,7 +92,7 @@ Page({
           on_laf_token_Invalid()
           return
         default:
-          on_common_error()
+          on_common_error(err)
           return
       }
     }
@@ -110,7 +110,7 @@ Page({
           on_laf_token_Invalid()
           return
         default:
-          on_common_error()
+          on_common_error(err)
           return
       }
     }

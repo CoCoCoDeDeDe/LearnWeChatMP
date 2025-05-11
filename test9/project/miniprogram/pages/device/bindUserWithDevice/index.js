@@ -52,17 +52,8 @@ Page({
         case 'laf_token error':
           on_laf_token_Invalid()
           return
-        case 'request error':
-          on_request_error()
-          return
-        case 'db error':
-          on_db_error()
-          return
-        case 'param error':
-          on_param_error()
-          return
         default:
-          on_common_error()
+          on_common_error(err)
           return
       }
     }

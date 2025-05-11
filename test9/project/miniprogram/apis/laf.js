@@ -319,10 +319,10 @@ export async function on_param_error(title = '参数无效') {
   })
 }
 
-export async function on_common_error(resData) {
+export function on_common_error(err) {
   // 提示
   wx.showToast({
-    title: resData.errMsg,
+    title: err.errMsg,
     duration: 1500,
     icon: 'error',
     mask: true,

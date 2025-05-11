@@ -78,11 +78,19 @@ Component({
     // ec: {
     //   onInit: this.initChart
     // }
-    Cmd_Ipt_Value: null,
+    Cmd_Ipt_Value: undefined,
   },
   
   async attached() {
-    this.RefreshEChart()
+    const UniIOData = this.properties.UniIOData
+    const that = this; // 保存 this 的引用
+    this.setData({
+      ec: {
+        onInit: function(canvas, width, height, dpr) {
+          return that.initChart(canvas, width, height, dpr);
+        }
+      }
+    })
 
     this.throttledOnSendCommand = throttle(this.OnSendCommand, 2000) // 时间单位: ms
   },
@@ -105,7 +113,7 @@ Component({
   methods: {
 
     initChart(canvas, width, height, dpr) {
-      const UniIOData = this.properties.UniIOData
+      const UniIOData = this.properties.UniIOData;
 
       const chart = echarts.init(canvas, null, { width, height, devicePixelRatio: dpr });
       canvas.setChart(chart);
@@ -137,19 +145,23 @@ Component({
         }]
       };
       chart.setOption(option);
+      this.chart = chart; // 保存图表实例
       return chart;
     },
 
     async RefreshEChart(e) {
-      const that = this; // 保存 this 的引用
-      this.setData({
-        ec: {
-          onInit: function(canvas, width, height, dpr) {
-            return that.initChart(canvas, width, height, dpr);
-          }
-        }
-      })
-  
+      const UniIOData = this.properties.UniIOData;
+      if (this.chart) {
+        const option = {
+          xAxis: {
+            data: UniIOData.EChartData.xAxis.data
+          },
+          series: [{
+            data: UniIOData.EChartData.series[0].data
+          }]
+        };
+        this.chart.setOption(option); // 调用调用 initChart 时保存到 Component 的 chart 实例更新图表配置
+      }
     },
 
     OnBindTapCmdBtn(e) {
@@ -158,10 +170,41 @@ Component({
       this.throttledOnSendCommand(CmdValue)
     },
 
-    OnBindTapCmdIptConfirm(e) {
-      // console.log("this.data.Cmd_Ipt_Value:", this.data.Cmd_Ipt_Value)
-      const CmdValue = this.data.Cmd_Ipt_Value
-      this.throttledOnSendCommand(CmdValue)
+    async OnBindTapCmdIptConfirm(e) {
+      let Cmd_Ipt_Value
+      if(typeof this.data.Cmd_Ipt_Value === 'string') { // typeof 获取类型得到的是字符串
+        Cmd_Ipt_Value = this.data.Cmd_Ipt_Value.trim()  // trim() 不修改调用它的字符串，只是返回新字符串
+        if( (Cmd_Ipt_Value === '') || (Cmd_Ipt_Value === ' ') ) {
+          wx.showToast({
+            title: '参数无效',
+            duration: 1500,
+            icon: 'none',
+            mask: false,
+          })
+          return
+        }
+      }
+      Cmd_Ipt_Value = Number(this.data.Cmd_Ipt_Value)
+      // 确认发送后清除输入框
+      await this.setData({
+        Cmd_Ipt_Value: '',
+      }, () => {
+        // console.log("输入框刷新 this.data.Cmd_Ipt_Value:", this.data.Cmd_Ipt_Value)
+      })
+      // console.log("Cmd_Ipt_Value:", Cmd_Ipt_Value)
+      // 双重 校验参数格式 取值范围
+      // NaN === NaN 永远不成立
+      if( (Cmd_Ipt_Value === undefined) || (Cmd_Ipt_Value === null) || (isNaN(Cmd_Ipt_Value)) || (Cmd_Ipt_Value < this.properties.UniIOData.Cmd_Config.Value_Min) || (Cmd_Ipt_Value > this.properties.UniIOData.Cmd_Config.Value_Max) ) {
+        wx.showToast({
+          title: '参数无效',
+          duration: 1500,
+          icon: 'none',
+          mask: false,
+        })
+        return
+      }
+
+      await this.throttledOnSendCommand(Cmd_Ipt_Value)
     },
 
     async OnSendCommand(CmdValue) {
@@ -175,7 +218,7 @@ Component({
       console.log("OnSendCommand Para:", Para)
 
       // 校验参数格式  取值范围
-      if( (Para.uniIO_id === undefined) || (Para.uniIO_id === null) || (Para.uniIO_id.trim().length <= 0) || (Para.value === undefined) || (Para.value === null) || (Para.value < this.properties.UniIOData.Cmd_Config.Value_Min) || (Para.value > this.properties.UniIOData.Cmd_Config.Value_Max) ) {
+      if( (Para.uniIO_id === undefined) || (Para.uniIO_id === null) || (Para.uniIO_id.trim().length <= 0) || (Para.value === undefined) || (Para.value === null) || (Para.value === NaN) || (Para.value < this.properties.UniIOData.Cmd_Config.Value_Min) || (Para.value > this.properties.UniIOData.Cmd_Config.Value_Max) ) {
         wx.showToast({
           title: '参数无效',
           duration: 1500,
@@ -190,12 +233,13 @@ Component({
       try{
         resData = await requestWithLafToken('GET', '/iot2/uniIO/sendCommand', {uniIO_id: Para.uniIO_id, value: Para.value})
       } catch(err) {
+        console.log("API sendCommand err:", err)
         switch(err.runCondition) {
           case 'laf_token error':
             on_laf_token_Invalid()
             return
           default:
-            on_common_error()
+            on_common_error(err)
             return
         }
       }

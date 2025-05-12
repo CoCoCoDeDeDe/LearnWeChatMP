@@ -19,6 +19,8 @@ view {
   flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
+  
+  animation: appear 0.5s ease-out forwards;
 }
 
 /* 下面：顶部文本部分 */

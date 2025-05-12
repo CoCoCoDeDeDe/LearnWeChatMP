@@ -69,14 +69,11 @@ Page({
       mask: false,
     })
 
-    // 跳转到主页面
+    // 登录成功后跳转页面
     setTimeout(() => {
       wx.reLaunch({
-        url: '/pages/index/index'
+        url: '/pages/TabBar/SmartLinkGroup/index'
       })
-      // wx.navigateTo({
-      //   url: '/pages/index/index'
-      // })
     }, 1500)
 
   },

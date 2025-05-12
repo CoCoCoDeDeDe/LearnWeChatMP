@@ -7,6 +7,11 @@ view, image, text, text, scroll-view, input, form {
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
 
+  --box-shadow-3d: 0 4px 6px rgba(50, 50, 93, 0.11),
+  0 1px 3px rgba(0, 0, 0, 0.08),
+  inset 0 -4px 6px rgba(0, 0, 0, 0.05)
+  ,
+  inset 0 -1px 4px rgba(0, 0, 0, 0.1);
   
   /* var(--main-text-color) */
   --main-text-color: #181441;

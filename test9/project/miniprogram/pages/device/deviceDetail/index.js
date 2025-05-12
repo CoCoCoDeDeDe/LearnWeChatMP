@@ -191,7 +191,7 @@ Page({
 
       // 赋值默认值给暂时没有网络数据的 echart 配置项
       NewItem.EChartData.series[0].name = NewItem.UniIO_ExternalName
-      NewItem.EChartData.series[0].itemStyle = { color: '#FFEC71' }
+      NewItem.EChartData.series[0].itemStyle = { color: item.MainColor }
 
       return NewItem
     } ) )

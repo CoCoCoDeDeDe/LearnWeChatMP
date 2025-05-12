@@ -15,6 +15,48 @@
           "scene": null
         },
         {
+          "name": "TabBar-我的页面",
+          "pathName": "pages/TabBar/mine/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "TabBar-智联页",
+          "pathName": "pages/TabBar/smartLink/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "TabBar-产品页",
+          "pathName": "pages/TabBar/product/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "TabBar-智联组",
+          "pathName": "pages/TabBar/SmartLinkGroup/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "index首页",
+          "pathName": "pages/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/test/index",
+          "pathName": "pages/test/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "device/产品列表",
           "pathName": "pages/device/productList/index",
           "query": "product_id=67e22c942902516e866abb29",
@@ -25,34 +67,6 @@
           "name": "device/绑定设备",
           "pathName": "pages/device/bindUserWithDevice/index",
           "query": "product_id=67e22c942902516e866abb29",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "tabBar-首页-智联组",
-          "pathName": "pages/index/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "tabBar-产品页",
-          "pathName": "pages/product/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "tabBar--智联页",
-          "pathName": "pages/smartLink/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "tabBar-我的页面",
-          "pathName": "pages/mine/index",
-          "query": "",
           "launchMode": "default",
           "scene": null
         },

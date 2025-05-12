@@ -1,4 +1,4 @@
-// pages/product/index.js
+// pages/SmartLinkGroup/index.js
 Page({
 
   /**

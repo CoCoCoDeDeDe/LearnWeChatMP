@@ -1,0 +1,137 @@
+.Page{
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+/* 以下是 顶部微信 navigator 装饰 */
+.WxNavigatorDecor{
+  position: relative; /* 使z-index生效 */
+  z-index: 1; /* 设置层级 */
+  flex: 0 0 auto;
+
+  width: 100vw;
+  height: 3px;
+
+  box-shadow: 
+    0 4px 6px rgba(50, 50, 93, 0.11),
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* 以下是 主要内容 盒子 */
+.PurePage{
+  /* box-shadow: inset 1px -4px 4px 2px rgba(0, 0, 0, 1); */
+
+  position: relative; /* 使z-index生效 */
+  z-index: 0; /* 设置层级 */
+  flex: 1 1 auto;
+}
+.PurePageAdapter{
+  width: 100%;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+
+  background-color: #fff;
+}
+
+
+/* 以下是 卡片区 的 卡片 */
+.TxtImgCard_Box{
+  flex: 1 1 auto;
+  /* width: 50%; */
+
+  padding: 8px;
+}
+.TxtImgCard_Box_CustomGroup{
+  flex: 4 4 none;
+  width: 60%;
+}
+.TxtImgCard_Box_CustomUniIO{
+  flex: 1 1 none;
+  width: 28%;
+}
+.TxtImgCard_Board{
+
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: var(--box-shadow-3d);
+
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.TxtImgCard_Board_CustomGroup{
+  /* width: 60%; */
+}
+.TxtImgCard_Board_CustomUniIO{
+  /* width: 30%; */
+}
+
+.TxtImgCard_LeftBox{
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* justify-content: start; */
+  /* align-items: center; */
+  font-weight: 800;
+  color: #4b495e;
+  text-align: start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.TxtImgCard_RightBox{
+  width: min-content;
+  height: min-content;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.TxtImgCard_RightBox_Img{
+  --edge-length: 40px;
+  height: var(--edge-length);
+  width: var(--edge-length);
+}
+.TxtImgCard_RightBox_Img_CustomGroup{
+  --edge-length: 34px;
+  height: var(--edge-length);
+  width: var(--edge-length);
+}
+.TxtImgCard_RightBox_Img_CustomUniIO{
+  --edge-length: 35px;
+  height: var(--edge-length);
+  width: var(--edge-length);
+}
+
+/* 以下是 底部微信 tabbar 装饰 */
+.WxTabbarDecor{
+  position: relative; /* 使z-index生效 */
+  z-index: 1; /* 设置层级 */
+  flex: 0 0 auto;
+
+  width: 100vw;
+  height: 1px;
+
+  box-shadow: 0 -1px 6px 0.4px rgba(0, 0, 0, 0.16);
+}
+
+/* 单行文本 超出显示... */
+.element {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

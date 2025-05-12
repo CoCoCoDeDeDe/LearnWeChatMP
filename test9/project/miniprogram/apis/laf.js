@@ -321,10 +321,12 @@ export async function on_param_error(title = '参数无效') {
 
 export function on_common_error(err) {
   // 提示
+  const iconStr = err.errMsg.length < 8 ? 'error' : 'none'
+
   wx.showToast({
-    title: err.errMsg,
+    title: 'errMsg: ' + err.errMsg,
     duration: 1500,
-    icon: 'error',
+    icon: iconStr,
     mask: true,
   })
 }

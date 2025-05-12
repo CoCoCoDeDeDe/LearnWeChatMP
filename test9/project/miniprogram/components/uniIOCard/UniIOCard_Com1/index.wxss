@@ -10,13 +10,9 @@ view {
   width: 100%;  /* TODO 根据屏幕宽度不同允许一行有不同数量的卡片 */
 
   border-radius: 14px;
-  background-color: #f9f9f9;
-  /* 立体阴影效果 */
-  box-shadow: 
-    0 4px 6px rgba(50, 50, 93, 0.11),
-    0 1px 3px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  
+  box-shadow: var(--box-shadow-3d);
 
   padding: 7px 7px;
   display: flex;
@@ -176,13 +172,8 @@ view {
   padding: 4px 4px;
   text-align: center;
   border-radius: 8px;
-  
-  /* 立体阴影效果 */
-  box-shadow: 
-    0 4px 6px rgba(50, 50, 93, 0.11),
-    0 1px 3px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    
+  box-shadow: var(--box-shadow-3d);
 }
 .Cmd_BtnBox:active{
   top: 1px;
@@ -220,11 +211,7 @@ view {
 
   background-color: #1bbb1b;
   border-radius: 8px;
-  box-shadow: 
-    0 4px 6px rgba(50, 50, 93, 0.11),
-    0 1px 3px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow-3d);
 
   padding: 4px 4px;
   text-align: center;

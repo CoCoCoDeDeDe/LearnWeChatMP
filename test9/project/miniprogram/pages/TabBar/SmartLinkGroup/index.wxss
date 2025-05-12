@@ -232,6 +232,7 @@
 .GroupRow_LeftBox:active{
   background-color: #eee;
   border-radius: 4px;
+  transform: scale(1, 0.97);
 }
 .GroupRow_RightBox{
   display: flex;

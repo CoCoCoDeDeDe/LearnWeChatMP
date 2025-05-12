@@ -47,7 +47,9 @@
             <view class="GroupRow_Box">
               
               <view class="GroupRow_LeftBox" bind:tap="On_BindTap_Read">
-                {{item.SLGroup_Name}}
+                <view class="GroupRow_Left_Tx">
+                  {{item.SLGroup_Name}}
+                </view>
               </view>
 
               <view class="GroupRow_RightBox">

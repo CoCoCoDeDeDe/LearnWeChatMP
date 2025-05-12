@@ -1,0 +1,102 @@
+.page{
+  width: 100vw;
+  height: 100vh;
+
+  background: #f6f6f6;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.NavigatorBox{
+  width: 100%;
+  height: max-content;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+.NavigatorBoard{
+  position: relative;
+  width: 100%;
+  height: max-content;
+
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: var(--box-shadow-3d-shallow);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 10px 13px;
+}
+.NavigatorBoard:active{
+  top: 1px;
+  box-shadow: var(--box-shadow-3d-shallow-active);
+  transform: scale(0.99)
+}
+.Navigator_1Row1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px 4px 4px;
+}
+.Navigator_1Col1{
+  font-size: 19px;
+  font-weight: 800;
+  text-shadow: #eee 2px 4px 2px;
+  color: var(--main-text-color);
+}
+.Navigator_1Col2{
+  /* icon NavigatorForbidden遮罩 盒子 */
+  position: relative;
+}
+.Navigator_1Col2_Img{
+  z-index: 0;
+  --Img-edge-length: 38px;
+  width: var(--Img-edge-length);
+  height: var(--Img-edge-length);
+}
+/* forbidden 遮罩 */
+.NavigatorForbidden_Box{
+  z-index: 1;
+  position: absolute;
+  top: -14px;
+  left: -304px;
+
+  width: 358px;
+  height: 140px;
+
+  border-radius: 20px;
+  background: radial-gradient(circle at center,#2e2e2e44 0, #ffffff00 50%);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.NavigatorForbidden_Txt{
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--vice-text-color);
+}
+
+.Navigator_1Row2{
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  color: var(--vice-text-color);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  padding: 8px;
+}
+

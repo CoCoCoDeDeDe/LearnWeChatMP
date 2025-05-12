@@ -1,12 +1,43 @@
 // pages/SmartLinkGroup/index.js
+import { isValidNonEmptyString } from '../../../utils/common'
+import { requestWithLafToken, on_laf_token_Invalid, on_request_error, on_db_error, on_param_error, on_unknown_error, on_common_error } from '../../../apis/laf'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    GroupCmdBtnList: [
+      {
+        Img_Url: '/static/images/icons/icon_deviceDetail_line_dekBlue@2x.png',
+        FunctionName: '查看',
+        BindTapHandlerName: 'On_BindTap_Read',
+      },
+      {
+        Img_Url: '/static/images/icons/icon_edit_line_darkBlue@2x.png',
+        FunctionName: '修改',
+        BindTapHandlerName: 'On_BindTap_Update',
+      },
+      {
+        Img_Url: '/static/images/icons/icon_delete_line_darkBlue@2x.png',
+        FunctionName: '删除',
+        BindTapHandlerName: 'On_BindTap_Delete',
+      },
+    ],
     Is_GroupCmdCard_Show: true,
-    SmartLinkGroup_ProfileList: [
+
+    PageOption: {
+      SLGroup_Id: 'Default_SLGroup_Id',
+      SLGroupProfile: {
+        SLGroup_Id: 'Default_SLGroup_Id',
+        SLGroup_Name: '默认智联组名称',
+        SLGroup_CreateTime: '',
+        SLGroup_UpdateTime: '',
+      },
+    },
+
+
+    SLGroupProfileList: [
       {
         SLGroup_Id: 'Default_SLGroup_Id',
         SLGroup_Name: '默认智联组名称',
@@ -28,29 +59,34 @@ Page({
         SLGroup_Sequence: 3,
       },
     ],
-    GroupCmdBtnList: [
-      {
-        Img_Url: '/static/images/icons/icon_deviceDetail_line_dekBlue@2x.png',
-        FunctionName: '查看',
-        BindTapHandlerName: 'On_BindTap_Read',
-      },
-      {
-        Img_Url: '/static/images/icons/icon_edit_line_darkBlue@2x.png',
-        FunctionName: '修改',
-        BindTapHandlerName: 'On_BindTap_Update',
-      },
-      {
-        Img_Url: '/static/images/icons/icon_delete_line_darkBlue@2x.png',
-        FunctionName: '删除',
-        BindTapHandlerName: 'On_BindTap_Delete',
-      },
-    ]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
+  async onLoad(options) {
+    // console.log("options:", options)
+
+    // 当前浏览的 SLGroup 默认由页面参数指定, 若无页面参数则默认用智联组表中第一个或者权重第一的或者标为重要的智联组
+    // 获取用户的智联组简介表
+    await this.GetSLGroupProfileList()
+
+    if(options.SLGroupId === undefined || options.SLGroupId === '' || options.SLGroupId === ' ') {
+      console.log("无传入 options.SLGroupId")
+      await this.setData({
+        'PageOption.SLGroup_Id': this.data.SLGroupProfileList[0].SLGroup_Id,
+      })
+    } else{
+      console.log("有传入 options.SLGroupId")
+      await this.setData({
+        'PageOption.SLGroup_Id': options. SLGroupId
+      })
+    }
+
+    // 获取本 SLGroup 的 Profile
+    await this.GetNewSLGroupProfile()
+
+    
 
   },
 
@@ -139,9 +175,77 @@ Page({
     })
   },
 
-  On_BindTap_GoToUniIOCmdPage(e) {
+  async GetSLGroupProfileList(e) {
+    // console.log("GetSLGroupProfileList")
+    let ResData
+    try{
+      ResData = await requestWithLafToken('GET', '/iot2/smartLinkGroup/GetSLGroupProfileList')
+    } catch(err) {
+      switch(err.runCondition) {
+        case 'laf_token error':
+          on_laf_token_Invalid()
+          return
+        default:
+          on_common_error(err)
+          return
+      }
+    }
+    // console.log("ResData:", ResData)
 
-  }
+    // 整理数据
+    let SLGroupProfileList_ToSave = ResData.SLGroupProfileList
+    
+    this.setData({
+      SLGroupProfileList: SLGroupProfileList_ToSave
+    })
+  },
+
+  async GetNewSLGroupProfile(e) {
+    // console.log("GetNewSLGroupProfile")
+    let ResData
+    try{
+      ResData = await requestWithLafToken('GET', '/iot2/smartLinkGroup/GetSmartLinkGroupInfo', {smartLinkGroup_id: this.data.PageOption.SLGroup_Id})
+    } catch(err) {
+      switch(err.runCondition) {
+        case 'laf_token error':
+          on_laf_token_Invalid()
+          return
+        default:
+          on_common_error(err)
+          return
+      }
+    }
+    console.log("ResData:", ResData)
+
+    // 整理数据
+    let SLGroupProfile_ToSave = ResData.SLGroupInfo
+    
+    this.setData({
+      'PageOption.SLGroupProfile': SLGroupProfile_ToSave
+    })
+    // console.log("this.data.PageOption.SLGroupProfile:", this.data.PageOption.SLGroupProfile)
+  },
+
+  On_BindTap_GoTo_UniIOListCmdPage(e) {
+    this.GoTo_UniIOListCmdPage()
+  },
+
+  GoTo_UniIOListCmdPage(e) {
+    const Target_SLGroup_Id = this.data.PageOption.SLGroup_Id
+    // console.log("Target_SLGroup_Id:", Target_SLGroup_Id)
+    const Target_Url = `/pages/SmartLinkGroup/UniIOListCmd/index?SLGroupId=${Target_SLGroup_Id}`
+    console.log("Target_Url:", Target_Url)
+
+    wx.navigateTo({
+      url: Target_Url,
+      events: (e) => {
+        console.log("e:", e)
+      },
+      success: (result) => {},
+      fail: (res) => {},
+      complete: (res) => {},
+    })
+  },
 
   
 

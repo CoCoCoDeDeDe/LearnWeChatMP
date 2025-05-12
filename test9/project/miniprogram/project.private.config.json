@@ -8,6 +8,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "TabBar-智联组",
+          "pathName": "pages/TabBar/SmartLinkGroup/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "智联组/UniIO表管理",
+          "pathName": "pages/SmartLinkGroup/UniIOListCmd/index",
+          "query": "SLGroupId=681ad710ec955cc190f61ae8",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "device/设备详情",
           "pathName": "pages/device/deviceDetail/index",
           "query": "huawei_device_id=AQAQ25032901",
@@ -31,13 +45,6 @@
         {
           "name": "TabBar-产品页",
           "pathName": "pages/TabBar/product/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "TabBar-智联组",
-          "pathName": "pages/TabBar/SmartLinkGroup/index",
           "query": "",
           "launchMode": "default",
           "scene": null

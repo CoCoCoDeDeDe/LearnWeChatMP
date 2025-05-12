@@ -47,5 +47,16 @@ Page({
     
   },
 
+
+  On_BindTap_NavigatorTo(e) {
+    // console.log("e", e)
+    const Rec_PageUrl = e.currentTarget.dataset.pageurl
+    // console.log("Rec_PageUrl:", Rec_PageUrl)
+    setTimeout(() => {
+      wx.reLaunch({
+        url: Rec_PageUrl,
+      })
+    }, 200)
+  }
   
 })

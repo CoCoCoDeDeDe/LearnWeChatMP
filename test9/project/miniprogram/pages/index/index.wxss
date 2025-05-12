@@ -11,6 +11,7 @@
 }
 
 .NavigatorBox{
+  position: relative;
   width: 100%;
   height: max-content;
 
@@ -35,6 +36,25 @@
   align-items: stretch;
   padding: 10px 13px;
 }
+/* Navigator 遮罩 */
+.NavigatorMask_Box{
+  position: absolute;
+  width: 100%;
+  height: 280rpx;
+  /* 毛玻璃核心属性：模糊背景 */
+  backdrop-filter: blur(1px);
+  background-color: rgba(255, 255, 255, 0.2); /* 半透明背景 */
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.NavigatorMask_Txt{
+  font-size: 20px;
+  font-weight: 800;
+  color: rgba(133, 129, 163, 0.87);
+}
 .NavigatorBoard:active{
   top: 1px;
   box-shadow: var(--box-shadow-3d-shallow-active);
@@ -54,7 +74,6 @@
   color: var(--main-text-color);
 }
 .Navigator_1Col2{
-  /* icon NavigatorForbidden遮罩 盒子 */
   position: relative;
 }
 .Navigator_1Col2_Img{
@@ -62,29 +81,6 @@
   --Img-edge-length: 38px;
   width: var(--Img-edge-length);
   height: var(--Img-edge-length);
-}
-/* forbidden 遮罩 */
-.NavigatorForbidden_Box{
-  z-index: 1;
-  position: absolute;
-  top: -14px;
-  left: -304px;
-
-  width: 358px;
-  height: 140px;
-
-  border-radius: 20px;
-  background: radial-gradient(circle at center,#2e2e2e44 0, #ffffff00 50%);
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.NavigatorForbidden_Txt{
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--vice-text-color);
 }
 
 .Navigator_1Row2{

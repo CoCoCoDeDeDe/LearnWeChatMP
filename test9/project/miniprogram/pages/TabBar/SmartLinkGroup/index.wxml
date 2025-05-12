@@ -11,7 +11,7 @@
         <view class="TxtImgCard_Board TxtImgCard_Board_CustomGroup" bind:tap="On_BindTap_SwitchSLGroupCmdCardShow">
         
           <view class="TxtImgCard_LeftBox">
-            {{'很长的智联组的名字示例这里是'}}
+            {{PageOption.SLGroupProfile.SLGroup_Name}}
           </view>
           <view class="TxtImgCard_RightBox">
             <image class="TxtImgCard_RightBox_Img TxtImgCard_RightBox_Img_CustomGroup" src="/static/images/icons/icon_group_line_skyBlue.svg" mode="aspectFit"/>
@@ -22,7 +22,7 @@
 
       <!-- UniIO盒子 -->
       <view class="TxtImgCard_Box TxtImgCard_Box_CustomUniIO">
-        <view class="TxtImgCard_Board TxtImgCard_Board_CustomUniIO" bind:tap="On_BindTap_GoToUniIOCmdPage">
+        <view class="TxtImgCard_Board TxtImgCard_Board_CustomUniIO" bind:tap="On_BindTap_GoTo_UniIOListCmdPage">
         
           <view class="TxtImgCard_LeftBox">UniIO</view>
           <view class="TxtImgCard_RightBox">
@@ -43,7 +43,7 @@
             </view>
           </view>
         
-          <block wx:for="{{SmartLinkGroup_ProfileList}}" wx:key="*this">
+          <block wx:for="{{SLGroupProfileList}}" wx:key="*this">
             <view class="GroupRow_Box">
               
               <view class="GroupRow_LeftBox" bind:tap="On_BindTap_Read">
@@ -60,6 +60,16 @@
                   </view>
                 </block>
               
+              </view>
+
+            </view>
+          </block>
+          <!-- 智联组表为空时显示提示词 -->
+          <block wx:if="{{SLGroupProfileList.length <= 0}}">
+            <view class="GroupRow_Box">
+
+              <view class="GroupRow_EmptyTipBox">
+                —— 暂无智联组 ——
               </view>
 
             </view>
